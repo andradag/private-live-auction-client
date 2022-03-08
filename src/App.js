@@ -1,22 +1,44 @@
-import {Route, Routes} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-import {Home} from "./pages/Home";
-import {Dashboard} from "./pages/Dashboard";
-import {Login} from "./pages/Login";
-import {SignUp} from "./pages/SignUp";
+import { SignUpForm } from "./components/pages/SignUp/index.js";
 
-import "./reset.css";
-import "./styles.css";
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000",
+  credentials: "same-origin",
+});
 
-export const App = () => {
-	return (
-		<>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/dashboard" element={<Dashboard />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/signup" element={<SignUp />} />
-			</Routes>
-		</>
-	);
-};
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+export default function App() {
+  return (
+    <ApolloProvider client={client}>
+      <Router>
+        <>
+          <SignUpForm />
+        </>
+      </Router>
+    </ApolloProvider>
+  );
+}

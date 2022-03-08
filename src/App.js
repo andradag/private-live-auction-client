@@ -1,43 +1,46 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
+	ApolloClient,
+	InMemoryCache,
+	ApolloProvider,
+	createHttpLink,
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import {setContext} from "@apollo/client/link/context";
 
-import { SignUpForm } from "./components/pages/SignUp/index.js";
+import {Navbar} from "./components/Navbar";
+
+import {AppRoutes} from "./AppRoutes.js";
 // import { LoginForm } from "./components/pages/Login/index.js";
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",
-  // credentials: "same-origin",
+	uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",
+	// credentials: "same-origin",
 });
 
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id_token");
+const authLink = setContext((_, {headers}) => {
+	const token = localStorage.getItem("id_token");
 
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
+	return {
+		headers: {
+			...headers,
+			authorization: token ? `Bearer ${token}` : "",
+		},
+	};
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+	link: authLink.concat(httpLink),
+	cache: new InMemoryCache(),
 });
 
-export default function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <SignUpForm />
-      </Router>
-    </ApolloProvider>
-  );
-}
+export const App = () => {
+	return (
+		<ApolloProvider client={client}>
+			<BrowserRouter>
+				<Navbar />
+				<AppRoutes />
+			</BrowserRouter>
+		</ApolloProvider>
+	);
+};

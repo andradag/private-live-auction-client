@@ -55,7 +55,7 @@ export const Navbar = () => {
 						component="div"
 						sx={{mr: 2, display: {xs: "none", md: "flex"}}}
 					>
-						LOGO
+						Auction App
 					</Typography>
 
 					<Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
@@ -88,11 +88,15 @@ export const Navbar = () => {
 							}}
 						>
 							{pages.map((page, i) => (
-								<MenuItem key={i} onClick={handleCloseNavMenu}>
-									<Link textAlign="center" to={page.path}>
+								<Link
+									to={page.path}
+									textAlign="center"
+									className="dropdown-btn"
+								>
+									<MenuItem key={i} onClick={handleCloseNavMenu}>
 										{page.title}
-									</Link>
-								</MenuItem>
+									</MenuItem>
+								</Link>
 							))}
 						</Menu>
 					</Box>
@@ -106,21 +110,22 @@ export const Navbar = () => {
 					</Typography>
 					<Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
 						{pages.map((page, i) => (
-							<Button
-								key={i}
-								onClick={handleCloseNavMenu}
-								sx={{
-									my: 2,
-									color: "white",
-									display: "block",
-									textDecoration: "none",
-								}}
-								className="button"
-							>
-								<Link to={page.path} className="page-btn">
+							<Link to={page.path} className="dropdown-btn">
+								<Button
+									key={i}
+									onClick={handleCloseNavMenu}
+									sx={{
+										my: 2,
+										color: "white",
+										display: "block",
+										margin: "unset",
+										padding: "12px",
+									}}
+									className="button"
+								>
 									{page.title}
-								</Link>
-							</Button>
+								</Button>
+							</Link>
 						))}
 					</Box>
 
@@ -147,13 +152,15 @@ export const Navbar = () => {
 							onClose={handleCloseUserMenu}
 						>
 							{settings.map((setting, i) => (
-								<MenuItem key={i} onClick={handleCloseUserMenu}>
-									<Typography textAlign="center">
-										<Link to={setting.path} className="setting-btn">
-											{setting.title}
-										</Link>
-									</Typography>
-								</MenuItem>
+								<Link to={setting.path} className="dropdown-btn">
+									<MenuItem
+										key={i}
+										onClick={handleCloseUserMenu}
+										textAlign="center"
+									>
+										{setting.title}
+									</MenuItem>
+								</Link>
 							))}
 						</Menu>
 					</Box>

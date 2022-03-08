@@ -10,14 +10,21 @@ export const LOGIN = gql`
         lastName
         username
         email
+        password
       }
     }
   }
 `;
 
 export const SIGNUP = gql`
-  mutation Mutation($input: SignupInput!) {
-    signup(input: $input) {
+  mutation AddUser($userInput: UserInput!) {
+    addUser(userInput: $userInput) {
+      user {
+        username
+        firstName
+        lastName
+        email
+      }
       token
     }
   }

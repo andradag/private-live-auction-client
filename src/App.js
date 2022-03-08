@@ -9,10 +9,11 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import { SignUpForm } from "./components/pages/SignUp/index.js";
+// import { LoginForm } from "./components/pages/Login/index.js";
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000",
-  credentials: "same-origin",
+  uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",
+  // credentials: "same-origin",
 });
 
 const authLink = setContext((_, { headers }) => {

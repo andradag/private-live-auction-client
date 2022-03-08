@@ -32,7 +32,7 @@ export const SignUpForm = () => {
     try {
       const { data } = await executeSignUp({
         variables: {
-          input: {
+          userInput: {
             firstName: firstName.toLowerCase().trim(),
             lastName: lastName.toLowerCase().trim(),
             username: username.toLowerCase().trim(),

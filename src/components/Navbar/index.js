@@ -120,6 +120,7 @@ export const Navbar = () => {
 										display: "block",
 										margin: "unset",
 										padding: "12px",
+										borderRadius: "5px",
 									}}
 									className="button"
 								>

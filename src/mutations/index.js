@@ -22,21 +22,3 @@ export const SIGNUP = gql`
     }
   }
 `;
-
-export const POST_IMAGE = gql`
-  mutation PostImage($input: PostImageInput!) {
-    postImage(input: $input) {
-      id
-      firstName
-      lastName
-      username
-      email
-      images {
-        id
-        title
-        description
-        imageUrl
-      }
-    }
-  }
-`;

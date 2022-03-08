@@ -54,16 +54,24 @@ export const SignUpForm = () => {
     container: {
       backgroundColor: "#fff",
     },
+
     header: {
       paddingTop: 2,
       paddingBottom: 2,
+      backgroundColor: "#F8F8FF",
+      mx: "auto",
+      width: 700,
     },
+
     form: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      mx: "auto",
+      width: 700,
     },
+
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
       marginTop: 2,
@@ -81,10 +89,27 @@ export const SignUpForm = () => {
         align="center"
         sx={styles.header}
       >
-        Sign Up
+        Signup Form
       </Typography>
+
+      <Typography variant="h6" gutterBottom component="h1" align="center">
+        Create an account
+      </Typography>
+
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          margin="normal"
+          id="email"
+          label="Email"
+          name="email"
+          variant="outlined"
+          fullWidth
+          {...register("email", { required: true })}
+          error={!!errors.email}
+          disabled={loading}
+        />
+
         <TextField
           margin="normal"
           id="firstName"
@@ -119,17 +144,6 @@ export const SignUpForm = () => {
           disabled={loading}
         />
         <TextField
-          margin="normal"
-          id="email"
-          label="Email"
-          name="email"
-          variant="outlined"
-          fullWidth
-          {...register("email", { required: true })}
-          error={!!errors.email}
-          disabled={loading}
-        />
-        <TextField
           type="password"
           margin="normal"
           id="password"
@@ -141,6 +155,7 @@ export const SignUpForm = () => {
           error={!!errors.password}
           disabled={loading}
         />
+
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."
@@ -151,7 +166,7 @@ export const SignUpForm = () => {
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >
-          Sign Up
+          Click here to proceed
         </LoadingButton>
 
         <Link

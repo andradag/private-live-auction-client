@@ -8,12 +8,6 @@ export const DASHBOARD = gql`
       lastName
       username
       email
-      images {
-        id
-        title
-        description
-        imageUrl
-      }
     }
   }
 `;

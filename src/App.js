@@ -35,9 +35,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <>
-          <SignUpForm />
-        </>
+        <SignUpForm />
       </Router>
     </ApolloProvider>
   );

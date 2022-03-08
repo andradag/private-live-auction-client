@@ -10,13 +10,11 @@ import "./styles.css";
 
 export const App = () => {
 	return (
-		<>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/dashboard" element={<Dashboard />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/signup" element={<SignUp />} />
-			</Routes>
-		</>
+		<Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/dashboard" element={<Dashboard />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/signup" element={<SignUp />} />
+		</Routes>
 	);
 };

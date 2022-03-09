@@ -7,15 +7,14 @@ import {
 	createHttpLink,
 } from "@apollo/client";
 import {setContext} from "@apollo/client/link/context";
+import {AppProvider} from "./contexts/AppProvider";
 
 import {Navbar} from "./components/Navbar";
 
 import {AppRoutes} from "./AppRoutes.js";
-// import { LoginForm } from "./components/pages/Login/index.js";
 
 const httpLink = createHttpLink({
 	uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",
-	// credentials: "same-origin",
 });
 
 const authLink = setContext((_, {headers}) => {
@@ -37,10 +36,12 @@ const client = new ApolloClient({
 export const App = () => {
 	return (
 		<ApolloProvider client={client}>
-			<BrowserRouter>
-				<Navbar />
-				<AppRoutes />
-			</BrowserRouter>
+			<AppProvider>
+				<BrowserRouter>
+					<Navbar />
+					<AppRoutes />
+				</BrowserRouter>
+			</AppProvider>
 		</ApolloProvider>
 	);
 };

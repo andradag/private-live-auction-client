@@ -1,57 +1,59 @@
-// import { useMutation } from "@apollo/client";
-// import { useForm } from "react-hook-form";
+import {useMutation} from "@apollo/client";
+import {useForm} from "react-hook-form";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-// import ErrorIcon from "@mui/icons-material/Error";
+import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
 
+import {useAuth} from "../../../contexts/AppProvider";
+
 import {LOGIN} from "../../../mutations";
-import Image from "../../../assets/background.jpg.jpg";
 
 export const LoginForm = () => {
-	//   //   const { setIsLoggedIn, setUser } = useAuth();
-	//   const [executeLogin, { loading, error }] = useMutation(LOGIN);
+	const {setIsLoggedIn, setUser} = useAuth();
+	const [executeLogin, {loading, error}] = useMutation(LOGIN);
 
-	//   const {
-	//     register,
-	//     handleSubmit,
-	//     formState: { errors },
-	//   } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: {errors},
+	} = useForm();
 
-	//   const navigate = useNavigate();
+	const navigate = useNavigate();
 
-	//   const onSubmit = async ({ email, password }) => {
-	//     const { data } = await executeLogin({
-	//       variables: {
-	//         input: {
-	//           email: email.toLowerCase().trim(),
-	//           password,
-	//         },
-	//       },
-	//     });
+	const onSubmit = async ({email, password}) => {
+		const {data} = await executeLogin({
+			variables: {
+				input: {
+					email: email.toLowerCase().trim(),
+					password,
+				},
+			},
+		});
 
-	//     if (data) {
-	//       const { token, user } = data.login;
+		if (data) {
+			const {token, user} = data.login;
 
-	//       localStorage.setItem("token", token);
-	//       localStorage.setItem("user", JSON.stringify(user));
+			localStorage.setItem("token", token);
+			localStorage.setItem("user", JSON.stringify(user));
 
-	//       setIsLoggedIn(true);
-	//       setUser({
-	//         id: user.id,
-	//         firstName: user.firstName,
-	//         lastName: user.lastName,
-	//         email: user.email,
-	//         username: user.username,
-	//       });
+			setIsLoggedIn(true);
+			setUser({
+				id: user.id,
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email,
+				username: user.username,
+			});
 
-	//       navigate("/dashboard", { replace: true });
-	//     }
-	//   };
+			navigate("/dashboard", {replace: true});
+		}
+	};
 
 	const styles = {
 		container: {
@@ -84,7 +86,7 @@ export const LoginForm = () => {
 	};
 
 	return (
-		<Box sx={styles.container}>
+		<Box>
 			<Typography
 				variant="h4"
 				gutterBottom
@@ -95,7 +97,7 @@ export const LoginForm = () => {
 				Login
 			</Typography>
 			<Divider />
-			<Box component="form" sx={styles.form}>
+			<Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<TextField
 					margin="normal"
 					id="email"
@@ -103,7 +105,9 @@ export const LoginForm = () => {
 					name="email"
 					variant="outlined"
 					fullWidth
-					//   disabled={loading}
+					{...register("email", {required: true})}
+					error={!!errors.email}
+					disabled={loading}
 				/>
 				<TextField
 					type="password"
@@ -113,40 +117,40 @@ export const LoginForm = () => {
 					name="password"
 					variant="outlined"
 					fullWidth
-					//   {...register("password", { required: true })}
-					//   error={!!errors.password}
-					//   disabled={loading}
+					{...register("password", {required: true})}
+					error={!!errors.password}
+					disabled={loading}
 				/>
 				<LoadingButton
-					//   loading={loading}
+					loading={loading}
 					loadingIndicator="Loading..."
 					variant="contained"
 					fullWidth
 					type="submit"
 					sx={styles.loadingButton}
-					//   startIcon={error && <ErrorIcon />}
-					//   color={error ? "error" : "primary"}
+					startIcon={error && <ErrorIcon />}
+					color={error ? "error" : "primary"}
 				>
 					Login
 				</LoadingButton>
 				<Link
 					component={RouterLink}
-					to="/sign-up"
+					to="/signup"
 					variant="body2"
 					underline="none"
 				>
 					Don't have an account? Sign Up
 				</Link>
-				{/* {error && (
-          <Typography
-            variant="subtitle2"
-            gutterBottom
-            component="div"
-            sx={styles.errorContainer}
-          >
-            Failed to login, please enter valid email address and/or password.
-          </Typography>
-        )} */}
+				{error && (
+					<Typography
+						variant="subtitle2"
+						gutterBottom
+						component="div"
+						sx={styles.errorContainer}
+					>
+						Failed to login, please enter valid email address and/or password.
+					</Typography>
+				)}
 			</Box>
 		</Box>
 	);

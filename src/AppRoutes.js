@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom";
 
-import {Home} from "./pages/Home";
-import {Dashboard} from "./pages/Dashboard";
-import {Login} from "./pages/Login";
+import {Home} from "./components/pages/Home/";
+import {Dashboard} from "./components/pages/Dashboard";
+import {LoginForm} from "./components/pages/Login";
 import {SignUpForm} from "./components/pages/SignUp";
 
 export const AppRoutes = () => {
@@ -10,7 +10,7 @@ export const AppRoutes = () => {
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/dashboard" element={<Dashboard />} />
-			<Route path="/login" element={<Login />} />
+			<Route path="/login" element={<LoginForm />} />
 			<Route path="/signup" element={<SignUpForm />} />
 		</Routes>
 	);

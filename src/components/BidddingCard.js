@@ -9,15 +9,27 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
 import { AppBar, TextField, Button } from "@material-ui/core";
-import { LOGIN } from "../mutations";
+import { CATEGORY, CREATELISTING, LOGIN } from "../mutations";
 import { useMutation, useQuery } from "@apollo/client";
+import { Menu } from "@mui/material";
 
 // import MenuItem from "@mui/material/MenuItem";
 
 export const BiddingCard = () => {
-  // const [getCategories, { loading, error, data: category }] = useQuery(LOGIN);
+  const [categoryId, setCategoryId] = React.useState();
+  const { loading, error, data } = useQuery(CATEGORY);
+  const [
+    executeCreateListing,
+    { loading: loadingListing, error: errorListing },
+  ] = useMutation(CREATELISTING);
+  console.log(data);
 
   const navigate = useNavigate();
+
+  const getTarget = (event) => {
+    console.log(event.currentTarget.id);
+    setCategoryId(event.currentTarget.id);
+  };
 
   const {
     register,
@@ -26,14 +38,17 @@ export const BiddingCard = () => {
   } = useForm();
 
   const onSubmit = async (auction) => {
-    // const { data } = await executeLogin({
-    //   variables: {
-    //     input: {
-    //       email: email.toLowerCase().trim(),
-    //       password,
-    //     },
-    //   },
-    // });
+    const { data } = await executeCreateListing({
+      variables: {
+        listingInput: {
+          title: auction.title,
+          description: auction.description,
+          category: categoryId,
+          reserveAmount: auction.reserveAmount,
+          startingBid: auction.startingBid,
+        },
+      },
+    });
 
     console.log(auction);
 
@@ -112,13 +127,19 @@ export const BiddingCard = () => {
           autoFocus
           // disabled={loading}
         >
-          {/* {category.map((title, index) => {
-            return (
-              <MenuItem key={index} value={title}>
-                {title}
-              </MenuItem>
-            );
-          })} */}
+          {data &&
+            data.getAllCategories.map((category, index) => {
+              return (
+                <MenuItem
+                  onClick={getTarget}
+                  key={index}
+                  value={category._id}
+                  id={category._id}
+                >
+                  {category.title}
+                </MenuItem>
+              );
+            })}{" "}
         </Select>
         {errors.title && "Please select your title"}
       </FormControl>
@@ -128,6 +149,7 @@ export const BiddingCard = () => {
       <TextField
         margin="normal"
         id="reserveAmount"
+        type="number"
         label="Reserve Amount"
         name="reserveAmount"
         variant="outlined"
@@ -142,6 +164,7 @@ export const BiddingCard = () => {
       <TextField
         margin="normal"
         id="startingBid"
+        type="number"
         label="Starting Bid"
         name="startingBid"
         variant="outlined"

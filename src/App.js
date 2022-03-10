@@ -42,8 +42,8 @@ export const App = () => {
         <BrowserRouter>
           <Navbar />
           <BiddingCard />
-          <SignUpForm />
-          <AppRoutes />
+          {/* <SignUpForm /> */}
+          {/* <AppRoutes /> */}
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

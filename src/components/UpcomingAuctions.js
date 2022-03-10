@@ -41,15 +41,14 @@ export default function UpcomingAuctions() {
     <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
       {auctions.map((auction) => (
         <Grid key={auction} item>
-          <Card sx={{ maxWidth: 345 }}>
+          <Card sx={{ width: 345, height: 345 }}>
             <CardMedia
               component="img"
-              height="150"
-              width="150"
+              height="50%"
               // Example of prop usage here would be {auction.image}
               image={auction.image}
             />
-            <CardContent>
+            <CardContent sx={{ height: 80 }}>
               {/* Title */}
               <Typography gutterBottom variant="h5" component="div">
                 {auction.title}

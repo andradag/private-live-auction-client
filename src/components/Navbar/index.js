@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import {Link} from "react-router-dom";
+import {useAuth} from "../../contexts/AppProvider";
 
 const pages = [
 	{title: "Home", path: "/"},
@@ -29,6 +30,8 @@ const settings = [
 export const Navbar = () => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+	const user = useAuth();
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -48,59 +51,68 @@ export const Navbar = () => {
 	return (
 		<AppBar position="static">
 			<Container maxWidth="xl">
-				<Toolbar disableGutters>
+				<Toolbar
+					disableGutters
+					sx={{
+						justifyContent: "space-between",
+					}}
+				>
 					<Typography
 						variant="h6"
 						noWrap
 						component="div"
-						sx={{mr: 2, display: {xs: "none", md: "flex"}}}
+						sx={{
+							mr: 2,
+							display: {xs: "none", md: "flex"},
+						}}
 					>
 						Auction App
 					</Typography>
-
-					<Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
-						<IconButton
-							size="large"
-							aria-label="account of current user"
-							aria-controls="menu-appbar"
-							aria-haspopup="true"
-							onClick={handleOpenNavMenu}
-							color="inherit"
-						>
-							<MenuIcon />
-						</IconButton>
-						<Menu
-							id="menu-appbar"
-							anchorEl={anchorElNav}
-							anchorOrigin={{
-								vertical: "bottom",
-								horizontal: "left",
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: "top",
-								horizontal: "left",
-							}}
-							open={Boolean(anchorElNav)}
-							onClose={handleCloseNavMenu}
-							sx={{
-								display: {xs: "block", md: "none"},
-							}}
-						>
-							{pages.map((page, i) => (
-								<Link
-									key={i}
-									to={page.path}
-									textAlign="center"
-									className="dropdown-btn"
-								>
-									<MenuItem key={i} onClick={handleCloseNavMenu}>
-										{page.title}
-									</MenuItem>
-								</Link>
-							))}
-						</Menu>
-					</Box>
+					{!user.isLoggedIn && (
+						<Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
+							<IconButton
+								size="large"
+								aria-label="account of current user"
+								aria-controls="menu-appbar"
+								aria-haspopup="true"
+								onClick={handleOpenNavMenu}
+								color="inherit"
+							>
+								<MenuIcon />
+							</IconButton>
+							<Menu
+								id="menu-appbar"
+								anchorEl={anchorElNav}
+								anchorOrigin={{
+									vertical: "bottom",
+									horizontal: "left",
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: "top",
+									horizontal: "left",
+								}}
+								open={Boolean(anchorElNav)}
+								onClose={handleCloseNavMenu}
+								sx={{
+									display: {xs: "block", md: "none"},
+								}}
+							>
+								{pages.map((page, i) => (
+									<Link
+										key={i}
+										to={page.path}
+										textAlign="center"
+										className="dropdown-btn"
+									>
+										<MenuItem key={i} onClick={handleCloseNavMenu}>
+											{page.title}
+										</MenuItem>
+									</Link>
+								))}
+							</Menu>
+						</Box>
+					)}
 					<Typography
 						variant="h6"
 						noWrap
@@ -109,69 +121,71 @@ export const Navbar = () => {
 					>
 						Auction App
 					</Typography>
-					<Box
-						sx={{
-							flexGrow: 1,
-							display: {xs: "none", md: "flex"},
-							justifyContent: "flex-end",
-						}}
-					>
-						{pages.map((page, i) => (
-							<Link key={i} to={page.path} className="dropdown-btn">
-								<Button
-									key={i}
-									onClick={handleCloseNavMenu}
-									sx={{
-										my: 2,
-										color: "white",
-										display: "block",
-										margin: "unset",
-										padding: "12px",
-										borderRadius: "5px",
-									}}
-									className="button"
-								>
-									{page.title}
-								</Button>
-							</Link>
-						))}
-					</Box>
-
-					<Box sx={{flexGrow: 0}}>
-						<Tooltip title="Open settings">
-							<IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-								<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-							</IconButton>
-						</Tooltip>
-						<Menu
-							sx={{mt: "45px"}}
-							id="menu-appbar"
-							anchorEl={anchorElUser}
-							anchorOrigin={{
-								vertical: "top",
-								horizontal: "right",
+					{!user.isLoggedIn ? (
+						<Box
+							sx={{
+								flexGrow: 1,
+								display: {xs: "none", md: "flex"},
+								justifyContent: "flex-end",
 							}}
-							keepMounted
-							transformOrigin={{
-								vertical: "top",
-								horizontal: "right",
-							}}
-							open={Boolean(anchorElUser)}
-							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting, i) => (
-								<Link key={i} to={setting.path} className="dropdown-btn">
-									<MenuItem
+							{pages.map((page, i) => (
+								<Link key={i} to={page.path} className="dropdown-btn">
+									<Button
 										key={i}
-										onClick={handleCloseUserMenu}
-										textAlign="center"
+										onClick={handleCloseNavMenu}
+										sx={{
+											my: 2,
+											color: "white",
+											display: "block",
+											margin: "unset",
+											padding: "12px",
+											borderRadius: "5px",
+										}}
+										className="button"
 									>
-										{setting.title}
-									</MenuItem>
+										{page.title}
+									</Button>
 								</Link>
 							))}
-						</Menu>
-					</Box>
+						</Box>
+					) : (
+						<Box sx={{flexGrow: 0}}>
+							<Tooltip title="Open settings">
+								<IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+									<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+								</IconButton>
+							</Tooltip>
+							<Menu
+								sx={{mt: "45px"}}
+								id="menu-appbar"
+								anchorEl={anchorElUser}
+								anchorOrigin={{
+									vertical: "top",
+									horizontal: "right",
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: "top",
+									horizontal: "right",
+								}}
+								open={Boolean(anchorElUser)}
+								onClose={handleCloseUserMenu}
+							>
+								{settings.map((setting, i) => (
+									<Link key={i} to={setting.path} className="dropdown-btn">
+										<MenuItem
+											key={i}
+											onClick={handleCloseUserMenu}
+											textAlign="center"
+										>
+											{setting.title}
+										</MenuItem>
+									</Link>
+								))}
+							</Menu>
+						</Box>
+					)}
 				</Toolbar>
 			</Container>
 		</AppBar>

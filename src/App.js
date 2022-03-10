@@ -9,10 +9,11 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { AppProvider } from "./contexts/AppProvider";
 
-// import { Navbar } from "./components/Navbar";
+import { Navbar } from "./components/Navbar";
 
 import { AppRoutes } from "./AppRoutes.js";
-import { BiddingCard } from "./components/biddingCard";
+import { BiddingCard } from "./components/BidddingCard";
+import { SignUpForm } from "./components/SignUpForm";
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",
@@ -39,9 +40,9 @@ export const App = () => {
     <ApolloProvider client={client}>
       <AppProvider>
         <BrowserRouter>
-          {/* <Navbar /> */}
+          <Navbar />
           <BiddingCard />
-
+          <SignUpForm />
           <AppRoutes />
         </BrowserRouter>
       </AppProvider>

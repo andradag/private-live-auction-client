@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import "./LiveAuction.css";
 
 // Will accept "auction" prop which will inclue title, image etc
-export default function LiveAuctions() {
+export default function LiveAuctions(props) {
   const styles = {
     grid: {
       paddingTop: 3,
@@ -56,7 +56,15 @@ export default function LiveAuctions() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" variant="outlined" className="liveButton">
+              <Button
+                size="small"
+                variant="outlined"
+                className="liveButton"
+                sx={{
+                  border: "none",
+                  cursor: "default",
+                }}
+              >
                 Live
               </Button>
               <Button size="small" variant="contained">

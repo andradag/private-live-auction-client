@@ -9,9 +9,7 @@ export const Dashboard = () => {
     header: {
       paddingTop: 2,
       paddingBottom: 2,
-      backgroundColor: "#F8F8FF",
       mx: "auto",
-      width: 700,
     },
   };
   // Query the DB to get the auctions

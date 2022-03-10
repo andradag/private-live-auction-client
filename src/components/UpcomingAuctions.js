@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 // Will accept "auction" prop which will inclue title, image etc
-export default function AuctionCards() {
+export default function UpcomingAuctions() {
   const styles = {
     grid: {
       paddingTop: 3,

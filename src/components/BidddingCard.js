@@ -10,13 +10,12 @@ import FormControl from "@mui/material/FormControl";
 
 import { AppBar, TextField, Button } from "@material-ui/core";
 import { LOGIN } from "../mutations";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 // import MenuItem from "@mui/material/MenuItem";
 
 export const BiddingCard = () => {
-  const [category, option] = React.useState("");
-  const [executeLogin, { loading, error }] = useMutation(LOGIN);
+  // const [getCategories, { loading, error, data: category }] = useQuery(LOGIN);
 
   const navigate = useNavigate();
 
@@ -26,15 +25,17 @@ export const BiddingCard = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async ({ email, password }) => {
-    const { data } = await executeLogin({
-      variables: {
-        input: {
-          email: email.toLowerCase().trim(),
-          password,
-        },
-      },
-    });
+  const onSubmit = async (auction) => {
+    // const { data } = await executeLogin({
+    //   variables: {
+    //     input: {
+    //       email: email.toLowerCase().trim(),
+    //       password,
+    //     },
+    //   },
+    // });
+
+    console.log(auction);
 
     // if (data) {
     //   const { token, user } = data.login;
@@ -56,7 +57,7 @@ export const BiddingCard = () => {
   };
 
   const handleChange = (event) => {
-    option(event.target.value);
+    // option(event.target.value);
   };
 
   const styles = {
@@ -81,7 +82,7 @@ export const BiddingCard = () => {
         fullWidth
         {...register("title", { required: true })}
         error={!!errors.title}
-        disabled={loading}
+        // disabled={loading}
       />
 
       <br />
@@ -95,41 +96,31 @@ export const BiddingCard = () => {
         fullWidth
         {...register("description", { required: true })}
         error={!!errors.description}
-        disabled={loading}
+        // disabled={loading}
       />
 
       <br />
 
-      <FormControl
-        style={
-          {
-            // width: "230px",
-            // margin: "5px",
-            // minWidth: 120,
-            // marginTop: "10px",
-            // textAlign: "center",
-          }
-        }
-        variant="outlined"
-        fullWidth
-        {...register("category", { required: true })}
-        error={!!errors.category}
-        disabled={loading}
-      >
-        <InputLabel id="demo-simple-select-filled-label">
-          Choose Category
-        </InputLabel>
-
+      <FormControl fullWidth>
+        <InputLabel id="title">Category</InputLabel>
         <Select
           labelId="category"
           id="category"
-          value={category}
-          onChange={handleChange}
+          label="category"
+          {...register("category")}
+          defaultValue=""
+          autoFocus
+          // disabled={loading}
         >
-          <MenuItem value={1}>Option 1</MenuItem>
-          <MenuItem value={2}>Option 2</MenuItem>
-          <MenuItem value={3}>Option 3</MenuItem>
+          {/* {category.map((title, index) => {
+            return (
+              <MenuItem key={index} value={title}>
+                {title}
+              </MenuItem>
+            );
+          })} */}
         </Select>
+        {errors.title && "Please select your title"}
       </FormControl>
 
       <br />
@@ -143,7 +134,7 @@ export const BiddingCard = () => {
         fullWidth
         {...register("reserveAmount", { required: true })}
         error={!!errors.reserveAmount}
-        disabled={loading}
+        // disabled={loading}
       />
 
       <br />
@@ -157,7 +148,7 @@ export const BiddingCard = () => {
         fullWidth
         {...register("startingBid", { required: true })}
         error={!!errors.startingBid}
-        disabled={loading}
+        // disabled={loading}
       />
 
       <br />

@@ -33,13 +33,13 @@ export const BiddingCard = () => {
 
       <br />
 
-      <TextField type="input" label="Description" Variant="outlined" />
+      <TextField type="text" label="Description" Variant="outlined" />
 
       <br />
 
       <FormControl
         style={{
-          width: "250px",
+          width: "230px",
           margin: "5px",
           minWidth: 120,
           marginTop: "10px",
@@ -90,12 +90,6 @@ export const BiddingCard = () => {
 
       <Button variant="contained" color="primary">
         Save and continue
-      </Button>
-
-      <br />
-
-      <Button variant="contained" color="primary">
-        Add another listing
       </Button>
     </Box>
   );

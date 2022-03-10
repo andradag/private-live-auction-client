@@ -11,9 +11,9 @@ import { AppProvider } from "./contexts/AppProvider";
 
 import { Navbar } from "./components/Navbar";
 
-import { AppRoutes } from "./AppRoutes.js";
+// import { AppRoutes } from "./AppRoutes.js";
 import { BiddingCard } from "./components/BidddingCard";
-import { SignUpForm } from "./components/SignUpForm";
+// import { SignUpForm } from "./components/SignUpForm";
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",

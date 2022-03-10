@@ -89,6 +89,7 @@ export const Navbar = () => {
 						>
 							{pages.map((page, i) => (
 								<Link
+									key={i}
 									to={page.path}
 									textAlign="center"
 									className="dropdown-btn"
@@ -108,9 +109,15 @@ export const Navbar = () => {
 					>
 						Auction App
 					</Typography>
-					<Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
+					<Box
+						sx={{
+							flexGrow: 1,
+							display: {xs: "none", md: "flex"},
+							justifyContent: "flex-end",
+						}}
+					>
 						{pages.map((page, i) => (
-							<Link to={page.path} className="dropdown-btn">
+							<Link key={i} to={page.path} className="dropdown-btn">
 								<Button
 									key={i}
 									onClick={handleCloseNavMenu}
@@ -153,7 +160,7 @@ export const Navbar = () => {
 							onClose={handleCloseUserMenu}
 						>
 							{settings.map((setting, i) => (
-								<Link to={setting.path} className="dropdown-btn">
+								<Link key={i} to={setting.path} className="dropdown-btn">
 									<MenuItem
 										key={i}
 										onClick={handleCloseUserMenu}

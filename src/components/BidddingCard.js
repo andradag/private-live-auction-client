@@ -71,7 +71,7 @@ export const BiddingCard = () => {
   };
 
   return (
-    <Box component="form" sx={styles.form}>
+    <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <TextField
         margin="normal"
         id="title"
@@ -177,7 +177,7 @@ export const BiddingCard = () => {
 
       <br />
 
-      <Button variant="contained" color="primary">
+      <Button variant="contained" type="submit" color="primary">
         Save and continue
       </Button>
     </Box>

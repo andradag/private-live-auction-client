@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 
 import Box from "@mui/material/Box";
@@ -7,22 +6,19 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import LoadingButton from "@mui/lab/LoadingButton";
+import ErrorIcon from "@mui/icons-material/Error";
 
-import {AppBar, TextField, Button} from "@material-ui/core";
-import {CATEGORY, CREATELISTING, LOGIN} from "../mutations";
+import {TextField} from "@material-ui/core";
+import {CATEGORY, CREATELISTING} from "../mutations";
 import {useMutation, useQuery} from "@apollo/client";
-import {Menu} from "@mui/material";
-
-// import MenuItem from "@mui/material/MenuItem";
+import {Typography} from "@mui/material";
 
 export const BiddingCard = () => {
 	const [categoryId, setCategoryId] = useState();
 	const {loading, error, data} = useQuery(CATEGORY);
 	const [executeCreateListing, {loading: loadingListing, error: errorListing}] =
 		useMutation(CREATELISTING);
-	console.log(data);
-
-	const navigate = useNavigate();
 
 	const {
 		register,
@@ -31,7 +27,7 @@ export const BiddingCard = () => {
 	} = useForm();
 
 	const onSubmit = async (auction) => {
-		const {data} = await executeCreateListing({
+		await executeCreateListing({
 			variables: {
 				listingInput: {
 					title: auction.title,
@@ -42,30 +38,9 @@ export const BiddingCard = () => {
 				},
 			},
 		});
-
-		console.log(auction);
-
-		// if (data) {
-		//   const { token, user } = data.login;
-
-		//   localStorage.setItem("token", token);
-		//   localStorage.setItem("user", JSON.stringify(user));
-
-		//   setIsLoggedIn(true);
-		//   setUser({
-		//     id: user.id,
-		//     firstName: user.firstName,
-		//     lastName: user.lastName,
-		//     email: user.email,
-		//     username: user.username,
-		//   });
-
-		//   navigate("/dashboard", { replace: true });
-		// }
 	};
 
 	const handleChange = (event) => {
-		console.log(event.target.value);
 		setCategoryId(event.target.value);
 	};
 
@@ -77,6 +52,12 @@ export const BiddingCard = () => {
 			padding: 4,
 			mx: "auto",
 			width: 700,
+		},
+		loadingButton: {marginTop: 3, marginBottom: 2},
+		errorContainer: {
+			marginTop: 2,
+			color: "#d32f2f",
+			textAlign: "center",
 		},
 	};
 
@@ -91,7 +72,7 @@ export const BiddingCard = () => {
 				fullWidth
 				{...register("title", {required: true})}
 				error={!!errors.title}
-				// disabled={loading}
+				disabled={loading}
 			/>
 
 			<br />
@@ -105,38 +86,10 @@ export const BiddingCard = () => {
 				fullWidth
 				{...register("description", {required: true})}
 				error={!!errors.description}
-				// disabled={loading}
+				disabled={loading}
 			/>
 
 			<br />
-
-			{/* <FormControl fullWidth>
-				<InputLabel id="title">Category</InputLabel>
-				<Select
-					labelId="category"
-					id="category"
-					label="category"
-					{...register("category")}
-					defaultValue=""
-					autoFocus
-					// disabled={loading}
-				>
-					{data &&
-						data.getAllCategories.map((category, index) => {
-							return (
-								<MenuItem
-									onClick={getTarget}
-									key={index}
-									value={category._id}
-									id={category._id}
-								>
-									{category.title}
-								</MenuItem>
-							);
-						})}
-				</Select>
-				{errors.title && "Please select your title"}
-			</FormControl> */}
 
 			<FormControl fullWidth>
 				<InputLabel id="category-select">Category</InputLabel>
@@ -170,7 +123,7 @@ export const BiddingCard = () => {
 				fullWidth
 				{...register("reserveAmount", {required: true})}
 				error={!!errors.reserveAmount}
-				// disabled={loading}
+				disabled={loading}
 			/>
 
 			<br />
@@ -185,7 +138,7 @@ export const BiddingCard = () => {
 				fullWidth
 				{...register("startingBid", {required: true})}
 				error={!!errors.startingBid}
-				// disabled={loading}
+				disabled={loading}
 			/>
 
 			<br />
@@ -205,9 +158,27 @@ export const BiddingCard = () => {
 
 			<br />
 
-			<Button variant="contained" type="submit" color="primary">
+			<LoadingButton
+				loading={loadingListing}
+				loadingIndicator="Loading..."
+				variant="contained"
+				type="submit"
+				sx={styles.loadingButton}
+				startIcon={errorListing && <ErrorIcon />}
+				color={errorListing ? "error" : "primary"}
+			>
 				Save and continue
-			</Button>
+			</LoadingButton>
+			{errorListing && (
+				<Typography
+					variant="subtitle2"
+					gutterBottom
+					component="div"
+					sx={styles.errorContainer}
+				>
+					Failed to create listing, please try again later.
+				</Typography>
+			)}
 		</Box>
 	);
 };

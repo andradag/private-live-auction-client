@@ -6,9 +6,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useMutation } from "@apollo/client";
+import { SAVELISTING } from "../mutations";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
+  const [executeSaveListing, { data }] = useMutation(SAVELISTING);
+
   const styles = {
     grid: {
       paddingTop: 3,
@@ -37,6 +41,11 @@ export default function UpcomingAuctions() {
     },
   ];
 
+  const saveListing = async (id) => {
+    await executeSaveListing({ variables: { input: id } });
+    console.log(data);
+  };
+
   return (
     <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
       {auctions.map((auction) => (
@@ -62,7 +71,12 @@ export default function UpcomingAuctions() {
               <Button size="small" variant="outlined">
                 View
               </Button>
-              <Button size="small" variant="contained">
+              <Button
+                onClick={() => saveListing("622a4fb33c448a8fc2d1bd3b")}
+                id="12345"
+                size="small"
+                variant="contained"
+              >
                 Register
               </Button>
             </CardActions>

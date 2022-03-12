@@ -29,3 +29,16 @@ export const SIGNUP = gql`
     }
   }
 `;
+
+export const SAVELISTING = gql`
+  mutation Mutation($input: ID!) {
+    saveAListing(input: $input) {
+      firstName
+      lastName
+      savedListings {
+        _id
+        title
+      }
+    }
+  }
+`;

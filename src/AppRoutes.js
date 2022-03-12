@@ -5,6 +5,7 @@ import {Dashboard} from "./components/pages/Dashboard";
 import {Login} from "./components/pages/Login";
 import {SignUp} from "./components/pages/SignUp";
 import {AuctionPage} from "./components/ViewItem";
+import {BiddingCard} from "./components/BidddingCard";
 
 export const AppRoutes = () => {
 	return (
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
 			<Route path="/login" element={<Login />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/auction/:id" element={<AuctionPage />} />
+			<Route path="/listing" element={<BiddingCard />} />
 		</Routes>
 	);
 };

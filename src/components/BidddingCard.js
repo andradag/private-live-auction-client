@@ -10,7 +10,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 
 import {TextField} from "@material-ui/core";
-import {CATEGORY, CREATELISTING} from "../mutations";
+import {CATEGORY, CREATE_LISTING} from "../mutations";
 import {useMutation, useQuery} from "@apollo/client";
 import {Typography} from "@mui/material";
 
@@ -18,7 +18,7 @@ export const BiddingCard = () => {
 	const [categoryId, setCategoryId] = useState();
 	const {loading, error, data} = useQuery(CATEGORY);
 	const [executeCreateListing, {loading: loadingListing, error: errorListing}] =
-		useMutation(CREATELISTING);
+		useMutation(CREATE_LISTING);
 
 	const {
 		register,

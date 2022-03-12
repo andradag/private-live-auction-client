@@ -4,6 +4,7 @@ import {Home} from "./components/pages/Home/";
 import {Dashboard} from "./components/pages/Dashboard";
 import {Login} from "./components/pages/Login";
 import {SignUp} from "./components/pages/SignUp";
+import {AuctionPage} from "./components/ViewItem";
 
 export const AppRoutes = () => {
 	return (
@@ -12,6 +13,7 @@ export const AppRoutes = () => {
 			<Route path="/dashboard" element={<Dashboard />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/signup" element={<SignUp />} />
+			<Route path="/auction/:id" element={<AuctionPage />} />
 		</Routes>
 	);
 };

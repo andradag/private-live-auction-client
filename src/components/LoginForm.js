@@ -28,13 +28,12 @@ export const LoginForm = () => {
   const onSubmit = async ({ email, password }) => {
     const { data } = await executeLogin({
       variables: {
-        input: {
+        loginInput: {
           email: email.toLowerCase().trim(),
           password,
         },
       },
     });
-
     if (data) {
       const { token, user } = data.login;
 
@@ -58,7 +57,6 @@ export const LoginForm = () => {
     container: {
       backgroundImage: `url(${Image})`,
     },
-
     form: {
       display: "flex",
       flexDirection: "column",
@@ -67,7 +65,6 @@ export const LoginForm = () => {
       mx: "auto",
       width: 700,
     },
-
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
       marginTop: 2,

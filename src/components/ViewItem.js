@@ -5,15 +5,23 @@ import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 
 export const ViewItem = () => {
   const styles = {
     container: {
       display: "flex",
-      flexDirection: "column",
+      flexWrap: "wrap",
       padding: 4,
       mx: "auto",
       width: 700,
+      margin: "20px",
+    },
+
+    buttons: {
+      display: "flex",
+      flexDirection: "column",
     },
   };
 
@@ -39,6 +47,28 @@ export const ViewItem = () => {
             </Typography>
           </CardContent>
         </CardActionArea>
+      </Card>
+
+      <br />
+
+      <Card sx={{ maxWidth: 345 }}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Time left: 20 seconds
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div">
+            Current bid: £500
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <div sx={styles.buttons}>
+            <Button variant="contained">BID £550</Button>
+          </div>
+
+          <div>
+            <Button variant="contained">CUSTOM BID</Button>
+          </div>
+        </CardActions>
       </Card>
     </Box>
   );

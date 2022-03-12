@@ -6,12 +6,18 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { SAVELISTING } from "../mutations";
+import { GET_LISTINGS } from "../queries";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
   const [executeSaveListing, { data }] = useMutation(SAVELISTING);
+  const {
+    data: listingData,
+    loading: listingLoading,
+    error: listingError,
+  } = useQuery(GET_LISTINGS, { variables: { status: "Upcoming" } });
 
   const styles = {
     grid: {
@@ -19,70 +25,55 @@ export default function UpcomingAuctions() {
       paddingBottom: 3,
     },
   };
-  // Example auctions
-  const auctions = [
-    {
-      title: "Audi RS5",
-      description: "New 2020 RS5 Black",
-      image:
-        "https://www.quattrodaily.com/wp-content/uploads/2020/06/Audi-RS5-Carbon-Black-1.jpg",
-    },
-    {
-      title: "Juice",
-      description: "Just a glass of Orange Juice",
-      image:
-        "https://www.collinsdictionary.com/images/thumb/fruitjuice_148446767_250.jpg",
-    },
-    {
-      title: "Macbook Pro",
-      description: "New Macbook Pro",
-      image:
-        "https://i.pcmag.com/imagery/reviews/05POeP7aWhKjIKkZ15YCZa9-21..v1635374572.jpg",
-    },
-  ];
 
   const saveListing = async (id) => {
     await executeSaveListing({ variables: { input: id } });
-    console.log(data);
   };
 
-  return (
-    <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
-      {auctions.map((auction) => (
-        <Grid key={auction} item>
-          <Card sx={{ width: 345, height: 345 }}>
-            <CardMedia
-              component="img"
-              height="50%"
-              // Example of prop usage here would be {auction.image}
-              image={auction.image}
-            />
-            <CardContent sx={{ height: 80 }}>
-              {/* Title */}
-              <Typography gutterBottom variant="h5" component="div">
-                {auction.title}
-              </Typography>
-              {/* Short Description */}
-              <Typography variant="body2" color="text.secondary">
-                {auction.description}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" variant="outlined">
-                View
-              </Button>
-              <Button
-                onClick={() => saveListing("622a4fb33c448a8fc2d1bd3b")}
-                id="12345"
-                size="small"
-                variant="contained"
-              >
-                Register
-              </Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-  );
+  if (listingError && !listingLoading) {
+    return <h1>Error loading listings</h1>;
+  }
+
+  if (listingData?.getListings && !listingLoading) {
+    return (
+      <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
+        {listingData.getListings.map((auction) => (
+          <Grid key={auction} item>
+            <Card sx={{ width: 345, height: 345 }}>
+              <CardMedia
+                component="img"
+                height="50%"
+                // Example of prop usage here would be {auction.image}
+                image={auction.image}
+              />
+              <CardContent sx={{ height: 80 }}>
+                {/* Title */}
+                <Typography gutterBottom variant="h5" component="div">
+                  {auction.title}
+                </Typography>
+                {/* Short Description */}
+                <Typography variant="body2" color="text.secondary">
+                  {auction.description}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" variant="outlined">
+                  View
+                </Button>
+                <Button
+                  onClick={() => saveListing("622a4fb33c448a8fc2d1bd3b")}
+                  id="12345"
+                  size="small"
+                  variant="contained"
+                >
+                  Register
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
+  return <h1>No listings</h1>;
 }

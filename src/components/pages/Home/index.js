@@ -1,3 +1,4 @@
 export const Home = () => {
-	return <h1>Home Page</h1>;
+  // Put auction cards here as well
+  return <h1>Home Page</h1>;
 };

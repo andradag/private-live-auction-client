@@ -1,0 +1,23 @@
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 2px #a80505;
+    color: #a80505;
+  }
+  25% {
+    box-shadow: 0 0 4px #a80505;
+  }
+  50% {
+    box-shadow: 0 0 6px #e81919;
+    color: #e81919;
+  }
+  75% {
+    box-shadow: 0 0 4px #a80505;
+  }
+  100% {
+    box-shadow: 0 0 2px #a80505;
+    color: #a80505;
+  }
+}
+.liveButton {
+  animation: glowing 1100ms infinite;
+}

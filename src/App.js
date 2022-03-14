@@ -13,6 +13,7 @@ import { Navbar } from "./components/Navbar";
 
 import { AppRoutes } from "./AppRoutes.js";
 import { Login } from "./components/pages/Login";
+import { SignUp } from "./components/pages/SignUp";
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",
@@ -39,9 +40,8 @@ export const App = () => {
     <ApolloProvider client={client}>
       <AppProvider>
         <BrowserRouter>
-          <Login />
-          {/* <Navbar />
-          <AppRoutes /> */}
+          <Navbar />
+          <AppRoutes />
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

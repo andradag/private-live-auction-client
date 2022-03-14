@@ -70,6 +70,7 @@ export const SignUpForm = () => {
       padding: 4,
       mx: "auto",
       width: 700,
+      border: "solid",
     },
 
     loadingButton: { marginTop: 3, marginBottom: 2 },
@@ -82,6 +83,9 @@ export const SignUpForm = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant="h5" gutterBottom>
+        SignUp Form
+      </Typography>
       <TextField
         margin="normal"
         id="email"

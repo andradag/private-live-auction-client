@@ -78,6 +78,9 @@ export const Login = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant="h5" gutterBottom>
+        Login Form
+      </Typography>
       <TextField
         margin="normal"
         id="email"

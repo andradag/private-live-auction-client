@@ -51,6 +51,7 @@ export const Login = () => {
     container: {
       backgroundImage: `url(${Image})`,
     },
+
     form: {
       display: "flex",
       flexDirection: "column",
@@ -58,7 +59,9 @@ export const Login = () => {
       padding: 4,
       mx: "auto",
       width: 700,
+      border: "solid",
     },
+
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
       marginTop: 2,
@@ -69,6 +72,9 @@ export const Login = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant="h5" gutterBottom>
+        Login Form
+      </Typography>
       <TextField
         margin="normal"
         id="email"

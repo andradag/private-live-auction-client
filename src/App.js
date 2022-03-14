@@ -38,10 +38,8 @@ export const App = () => {
     <ApolloProvider client={client}>
       <AppProvider>
         <BrowserRouter>
-          <ItemRequest />
-
-          {/* <Navbar />
-					<AppRoutes /> */}
+          <Navbar />
+	  <AppRoutes />
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

@@ -16,6 +16,7 @@ export const AppRoutes = () => {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/auction/:id" element={<AuctionPage />} />
       <Route path="/create-auction" element={<CreateAuctionForm />} />
+      <Route path="*" element={<Home />} />
     </Routes>
   );
 };

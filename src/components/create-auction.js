@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
@@ -28,8 +29,10 @@ export const CreateAuctionForm = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = async (auction) => {
-    await executeCreateListing({
+    const { data: listingData } = await executeCreateListing({
       variables: {
         listingInput: {
           title: auction.title,
@@ -40,6 +43,10 @@ export const CreateAuctionForm = () => {
         },
       },
     });
+
+    if (listingData) {
+      navigate("/dashboard");
+    }
   };
 
   const handleChange = (event) => {

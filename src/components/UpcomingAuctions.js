@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { useMutation, useQuery } from "@apollo/client";
 import { SAVELISTING } from "../mutations";
 import { GET_LISTINGS } from "../queries";
+import { useNavigate } from "react-router-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Will accept "auction" prop which will inclue title, image etc
@@ -22,20 +23,26 @@ export default function UpcomingAuctions() {
     error: listingError,
   } = useQuery(GET_LISTINGS, { variables: { status: "Upcoming" } });
 
-	const styles = {
-		grid: {
-			paddingTop: 3,
-			paddingBottom: 3,
-		},
-	};
+  const styles = {
+    grid: {
+      paddingTop: 3,
+      paddingBottom: 3,
+    },
+  };
 
-	const saveListing = async (id) => {
-		await executeSaveListing({variables: {input: id}});
-	};
+  const navigate = useNavigate();
 
-	if (listingError && !listingLoading) {
-		return <h1>Error loading listings</h1>;
-	}
+  const viewAuction = (auctionID) => {
+    navigate(`/auction/${auctionID}`);
+  };
+
+  const saveListing = async (id) => {
+    await executeSaveListing({ variables: { input: id } });
+  };
+
+  if (listingError && !listingLoading) {
+    return <h1>Error loading listings</h1>;
+  }
 
   if (listingData?.getListings && !listingLoading) {
     return (
@@ -61,11 +68,15 @@ export default function UpcomingAuctions() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="outlined">
+                <Button
+                  onClick={() => viewAuction(auction._id)}
+                  size="small"
+                  variant="outlined"
+                >
                   View
                 </Button>
                 <Button
-                  onClick={() => saveListing("622a4fb33c448a8fc2d1bd3b")}
+                  onClick={() => saveListing(auction._id)}
                   id="12345"
                   size="small"
                   variant="contained"

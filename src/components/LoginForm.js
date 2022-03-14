@@ -102,7 +102,7 @@ export const LoginForm = () => {
         error={!!errors.password}
         disabled={loading}
       />
-      <LoadingButton
+      {/* <LoadingButton
         loading={loading}
         loadingIndicator="Loading..."
         variant="contained"
@@ -113,7 +113,7 @@ export const LoginForm = () => {
         color={error ? "error" : "primary"}
       >
         Login
-      </LoadingButton>
+      </LoadingButton> */}
       <Link
         component={RouterLink}
         to="/signup"

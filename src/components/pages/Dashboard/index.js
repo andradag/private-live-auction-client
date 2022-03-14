@@ -13,12 +13,6 @@ import { useNavigate } from "react-router-dom";
 export const Dashboard = () => {
   const { user } = useAuth();
 
-  const navigate = useNavigate();
-
-  const createAuction = () => {
-    navigate("/auction/1");
-  };
-
   // // Get user admin status
   const {
     data: userData,
@@ -28,9 +22,13 @@ export const Dashboard = () => {
     variables: { userId: user._id },
   });
 
-  console.log(user);
+  const navigate = useNavigate();
 
   if (userError && !userLoading) return <h1>User error</h1>;
+
+  const createAuction = () => {
+    navigate("/create-auction");
+  };
 
   const styles = {
     header: {

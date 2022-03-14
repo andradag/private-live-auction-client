@@ -1,13 +1,23 @@
 import { gql } from "@apollo/client";
 
-export const DASHBOARD = gql`
-  query Query {
-    dashboard {
-      id
+export const GET_USER = gql`
+  query Query($userId: ID!) {
+    getSingleUser(userId: $userId) {
+      isAdmin
+      username
+      _id
       firstName
       lastName
-      username
       email
+      savedListings {
+        _id
+        description
+        title
+        category
+        reserveAmount
+        startingBid
+        status
+      }
     }
   }
 `;

@@ -13,6 +13,8 @@ import { GET_LISTINGS } from "../queries";
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
   const [executeSaveListing, { data }] = useMutation(SAVELISTING);
+
+  // Get upcoming listings
   const {
     data: listingData,
     loading: listingLoading,

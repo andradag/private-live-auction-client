@@ -47,6 +47,7 @@ export const LoginForm = () => {
         lastName: user.lastName,
         email: user.email,
         username: user.username,
+        isAdmin: user.isAdmin,
       });
 
       navigate("/dashboard", { replace: true });

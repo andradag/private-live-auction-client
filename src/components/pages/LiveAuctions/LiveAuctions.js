@@ -18,7 +18,6 @@ export default function LiveAuctions() {
     error: listingError,
   } = useQuery(GET_LISTINGS, { variables: { status: "Live" } });
 
-  console.log(listingData);
   const styles = {
     grid: {
       paddingTop: 3,

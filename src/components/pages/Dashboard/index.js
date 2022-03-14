@@ -1,11 +1,13 @@
 import UpcomingAuctions from "../../UpcomingAuctions";
 import LiveAuctions from "../LiveAuctions/LiveAuctions";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { useAuth } from "../../../contexts/AppProvider";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../../queries";
+import { Stack } from "@mui/material";
 
 export const Dashboard = () => {
   const { user } = useAuth();
@@ -27,13 +29,33 @@ export const Dashboard = () => {
       paddingBottom: 2,
       mx: "auto",
     },
+    stack: {
+      paddingTop: 2,
+      paddingBottom: 2,
+      width: 1,
+    },
   };
   // Query the DB to get the auctions
   // Map the cards below
   if (userData?.getSingleUser && !userLoading) {
     return (
       <>
-        {userData.getSingleUser.isAdmin && <button>Create auction</button>}
+        {/* If user is admin will se "Create auction" button */}
+        {userData.getSingleUser.isAdmin && (
+          <Stack justifycontent="center" alignItems="center" sx={styles.stack}>
+            <Button size="medium" variant="contained">
+              Create auction
+            </Button>
+          </Stack>
+        )}
+        {/* If user is normal user will see "Request auction" */}
+        {userData.getSingleUser.isAdmin == false && (
+          <Stack justifycontent="center" alignItems="center" sx={styles.stack}>
+            <Button size="medium" variant="contained">
+              Request auction
+            </Button>
+          </Stack>
+        )}
         {/* Live Auctions */}
         <Box>
           <LiveAuctions />
@@ -56,6 +78,6 @@ export const Dashboard = () => {
       </>
     );
   } else {
-    return <h1>Unable to retrieve user data</h1>;
+    return <Box></Box>;
   }
 };

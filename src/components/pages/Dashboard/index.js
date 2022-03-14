@@ -12,7 +12,7 @@ import { Stack } from "@mui/material";
 export const Dashboard = () => {
   const { user } = useAuth();
 
-  // Get user admin status
+  // // Get user admin status
   const {
     data: userData,
     loading: userLoading,
@@ -21,7 +21,7 @@ export const Dashboard = () => {
     variables: { userId: user._id },
   });
 
-  if (userError && !userLoading) return console.log("User error");
+  if (userError && !userLoading) return <h1>User error</h1>;
 
   const styles = {
     header: {
@@ -49,7 +49,7 @@ export const Dashboard = () => {
           </Stack>
         )}
         {/* If user is normal user will see "Request auction" */}
-        {userData.getSingleUser.isAdmin == false && (
+        {!userData.getSingleUser.isAdmin && (
           <Stack justifycontent="center" alignItems="center" sx={styles.stack}>
             <Button size="medium" variant="contained">
               Request auction

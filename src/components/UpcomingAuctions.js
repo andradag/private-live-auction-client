@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { useMutation, useQuery } from "@apollo/client";
 import { SAVELISTING } from "../mutations";
 import { GET_LISTINGS } from "../queries";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
@@ -42,6 +43,7 @@ export default function UpcomingAuctions() {
         {listingData.getListings.map((auction) => (
           <Grid key={auction} item>
             <Card sx={{ width: 345, height: 345 }}>
+              {/* <FontAwesomeIcon icon="fa-solid fa-pen" /> */}
               <CardMedia
                 component="img"
                 height="50%"

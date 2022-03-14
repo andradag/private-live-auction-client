@@ -3,19 +3,19 @@ import { gql } from "@apollo/client";
 export const GET_USER = gql`
   query Query($userId: ID!) {
     getSingleUser(userId: $userId) {
-      isAdmin
-      username
       _id
+      username
       firstName
       lastName
       email
+      isAdmin
       savedListings {
         _id
-        description
         title
+        description
         category
-        reserveAmount
         startingBid
+        reserveAmount
         status
       }
     }

@@ -37,12 +37,14 @@ export const LoginForm = () => {
     if (data) {
       const { token, user } = data.login;
 
+      console.log(user);
+
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
       setIsLoggedIn(true);
       setUser({
-        id: user.id,
+        id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,

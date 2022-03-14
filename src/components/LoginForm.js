@@ -41,13 +41,7 @@ export const LoginForm = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       setIsLoggedIn(true);
-      setUser({
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        username: user.username,
-      });
+      setUser(user);
 
       navigate("/dashboard", { replace: true });
     }

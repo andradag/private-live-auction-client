@@ -41,13 +41,7 @@ export const Login = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       setIsLoggedIn(true);
-      setUser({
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        username: user.username,
-      });
+      setUser(user);
 
       navigate("/dashboard", { replace: true });
     }
@@ -92,7 +86,6 @@ export const Login = () => {
         error={!!errors.email}
         disabled={loading}
       />
-
       <TextField
         type="password"
         margin="normal"
@@ -105,7 +98,6 @@ export const Login = () => {
         error={!!errors.password}
         disabled={loading}
       />
-
       <LoadingButton
         loading={loading}
         loadingIndicator="Loading..."

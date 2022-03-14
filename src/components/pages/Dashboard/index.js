@@ -19,11 +19,7 @@ export const Dashboard = () => {
     variables: { userId: user._id },
   });
 
-  if (userLoading) return console.log("Loading user");
-
   if (userError && !userLoading) return console.log("User error");
-
-  const isAdmin = userData.getSingleUser.isAdmin;
 
   const styles = {
     header: {
@@ -34,28 +30,32 @@ export const Dashboard = () => {
   };
   // Query the DB to get the auctions
   // Map the cards below
-  return (
-    <>
-      {isAdmin && <button>Create auction</button>}
-      {/* Live Auctions */}
-      <Box>
-        <LiveAuctions />
-      </Box>
+  if (userData?.getSingleUser && !userLoading) {
+    return (
+      <>
+        {userData.getSingleUser.isAdmin && <button>Create auction</button>}
+        {/* Live Auctions */}
+        <Box>
+          <LiveAuctions />
+        </Box>
 
-      {/* Upcoming Auctions */}
-      <Box>
-        <Typography
-          variant="h4"
-          gutterBottom
-          component="h1"
-          align="center"
-          sx={styles.header}
-        >
-          Upcoming Auctions
-        </Typography>
-        <Divider />
-        <UpcomingAuctions />
-      </Box>
-    </>
-  );
+        {/* Upcoming Auctions */}
+        <Box>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Upcoming Auctions
+          </Typography>
+          <Divider />
+          <UpcomingAuctions />
+        </Box>
+      </>
+    );
+  } else {
+    return <h1>Unable to retrieve user data</h1>;
+  }
 };

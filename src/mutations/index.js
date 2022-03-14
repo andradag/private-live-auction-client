@@ -9,6 +9,7 @@ export const LOGIN = gql`
         firstName
         lastName
         email
+        isAdmin
       }
       token
     }

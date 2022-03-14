@@ -39,7 +39,7 @@ export const App = () => {
       <AppProvider>
         <BrowserRouter>
           <Navbar />
-	  <AppRoutes />
+          <AppRoutes />
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

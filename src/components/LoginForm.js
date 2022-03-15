@@ -34,24 +34,14 @@ export const LoginForm = () => {
         },
       },
     });
-    console.log("Login page data: ", data);
     if (data) {
       const { token, user } = data.login;
-
-      console.log("Login page user: ", user);
 
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
       setIsLoggedIn(true);
-      setUser({
-        id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        username: user.username,
-        isAdmin: user.isAdmin,
-      });
+      setUser(user);
 
       navigate("/dashboard", { replace: true });
     }
@@ -79,6 +69,9 @@ export const LoginForm = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant="h5" gutterBottom>
+        Login Form
+      </Typography>
       <TextField
         margin="normal"
         id="email"
@@ -102,7 +95,7 @@ export const LoginForm = () => {
         error={!!errors.password}
         disabled={loading}
       />
-      {/* <LoadingButton
+      <LoadingButton
         loading={loading}
         loadingIndicator="Loading..."
         variant="contained"
@@ -113,7 +106,7 @@ export const LoginForm = () => {
         color={error ? "error" : "primary"}
       >
         Login
-      </LoadingButton> */}
+      </LoadingButton>
       <Link
         component={RouterLink}
         to="/signup"

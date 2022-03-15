@@ -10,7 +10,8 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 
 import {TextField} from "@material-ui/core";
-import {CATEGORY, CREATE_LISTING} from "../mutations";
+import {CATEGORY} from "../queries";
+import {CREATE_LISTING} from "../mutations";
 import {useMutation, useQuery} from "@apollo/client";
 import {Typography} from "@mui/material";
 

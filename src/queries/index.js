@@ -15,7 +15,7 @@ export const DASHBOARD = gql`
 export const GET_USER = gql`
 	query Query($userId: ID!) {
 		getSingleUser(userId: $userId) {
-			_id
+			id
 			username
 			firstName
 			lastName
@@ -43,6 +43,7 @@ export const GET_LISTINGS = gql`
 			title
 			description
 			category {
+				_id
 				title
 			}
 			reserveAmount
@@ -53,17 +54,26 @@ export const GET_LISTINGS = gql`
 `;
 
 export const GET_SINGLE_LISTING = gql`
-	query GetSingleListing($id: ID!) {
+	query Query($id: ID!) {
 		getSingleListing(_id: $id) {
 			_id
 			title
 			description
-			reserveAmount
 			category {
+				_id
 				title
 			}
+			reserveAmount
 			startingBid
 			status
+			bids {
+				amount
+				user {
+					firstName
+					lastName
+					username
+				}
+			}
 		}
 	}
 `;

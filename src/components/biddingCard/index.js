@@ -13,12 +13,8 @@ import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 
 export const BiddingCard = () => {
-  const styles = {};
-
   return (
     <div className="App">
-      <AppBar></AppBar>
-
       <form>
         <TextField
           style={{ width: "200px", margin: "10px", mt: "30px" }}

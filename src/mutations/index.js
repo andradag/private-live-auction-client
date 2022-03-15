@@ -9,6 +9,7 @@ export const LOGIN = gql`
 				firstName
 				lastName
 				email
+				isAdmin
 			}
 			token
 		}
@@ -45,6 +46,19 @@ export const ADD_BID = gql`
 		addBid(input: $input) {
 			amount
 			user
+		}
+	}
+`;
+
+export const SAVELISTING = gql`
+	mutation Mutation($input: ID!) {
+		saveAListing(input: $input) {
+			firstName
+			lastName
+			savedListings {
+				_id
+				title
+			}
 		}
 	}
 `;

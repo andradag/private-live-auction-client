@@ -4,8 +4,8 @@ import {Home} from "./components/pages/Home/";
 import {Dashboard} from "./components/pages/Dashboard";
 import {Login} from "./components/pages/Login";
 import {SignUp} from "./components/pages/SignUp";
-import {AuctionPage} from "./components/AuctionPage";
-import {BiddingCard} from "./components/BidddingCard";
+import {AuctionPage} from "./components/ViewItem";
+import {CreateAuctionForm} from "./components/create-auction";
 
 export const AppRoutes = () => {
 	return (
@@ -15,7 +15,8 @@ export const AppRoutes = () => {
 			<Route path="/login" element={<Login />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/auction/:id" element={<AuctionPage />} />
-			<Route path="/listing" element={<BiddingCard />} />
+			<Route path="/create-auction" element={<CreateAuctionForm />} />
+			<Route path="*" element={<Home />} />
 		</Routes>
 	);
 };

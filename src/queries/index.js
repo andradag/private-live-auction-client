@@ -55,3 +55,12 @@ export const GET_SINGLE_LISTING = gql`
 		}
 	}
 `;
+
+export const CATEGORY = gql`
+	query Query {
+		getAllCategories {
+			_id
+			title
+		}
+	}
+`;

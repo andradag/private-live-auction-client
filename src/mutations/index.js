@@ -31,6 +31,25 @@ export const SIGNUP = gql`
   }
 `;
 
+export const CATEGORY = gql`
+  query Query {
+    getAllCategories {
+      _id
+      title
+    }
+  }
+`;
+
+export const CREATE_LISTING = gql`
+  mutation Mutation($listingInput: ListingInput!) {
+    addListing(listingInput: $listingInput) {
+      title
+      description
+      startingBid
+    }
+  }
+`;
+
 export const SAVELISTING = gql`
   mutation Mutation($input: ID!) {
     saveAListing(input: $input) {

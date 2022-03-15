@@ -47,7 +47,9 @@ export const GET_SINGLE_LISTING = gql`
 			title
 			description
 			reserveAmount
-			category
+			category {
+				title
+			}
 			startingBid
 			status
 		}

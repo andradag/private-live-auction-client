@@ -8,6 +8,7 @@ import { useAuth } from "../../../contexts/AppProvider";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../../queries";
 import { Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
   const { user } = useAuth();
@@ -21,7 +22,13 @@ export const Dashboard = () => {
     variables: { userId: user._id },
   });
 
+  const navigate = useNavigate();
+
   if (userError && !userLoading) return <h1>User error</h1>;
+
+  const createAuction = () => {
+    navigate("/create-auction");
+  };
 
   const styles = {
     header: {
@@ -43,7 +50,7 @@ export const Dashboard = () => {
         {/* If user is admin will se "Create auction" button */}
         {userData.getSingleUser.isAdmin && (
           <Stack justifycontent="center" alignItems="center" sx={styles.stack}>
-            <Button size="medium" variant="contained">
+            <Button onClick={createAuction} size="medium" variant="contained">
               Create auction
             </Button>
           </Stack>

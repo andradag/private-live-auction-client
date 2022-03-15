@@ -4,7 +4,7 @@ import {Home} from "./components/pages/Home/";
 import {Dashboard} from "./components/pages/Dashboard";
 import {Login} from "./components/pages/Login";
 import {SignUp} from "./components/pages/SignUp";
-import {AuctionPage} from "./components/ViewItem";
+import {AuctionPage} from "./components/AuctionPage";
 import {BiddingCard} from "./components/BidddingCard";
 
 export const AppRoutes = () => {

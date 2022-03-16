@@ -34,15 +34,33 @@ export const AuctionPage = () => {
 		container: {
 			display: "flex",
 			flexWrap: "wrap",
-			padding: 4,
+			padding: 3,
+			margin: 1,
 			mx: "auto",
-			width: 700,
-			margin: "20px",
 		},
-
+		card: {
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "space-evenly",
+			alignItems: "center",
+			boxShadow: 4,
+			width: "50%",
+		},
+		cardContent: {
+			height: 1,
+		},
+		cardArea: {
+			height: 1,
+		},
+		cardAction: {
+			justifyContent: "center",
+			width: 1,
+		},
 		buttons: {
 			display: "flex",
 			flexDirection: "column",
+			width: "40%",
+			height: "50px",
 		},
 	};
 
@@ -54,15 +72,15 @@ export const AuctionPage = () => {
 	return (
 		data && (
 			<Box sx={styles.container}>
-				<Card sx={{maxWidth: 345}}>
-					<CardActionArea>
+				<Card sx={styles.card}>
+					<CardActionArea sx={styles.cardArea}>
 						<CardMedia
 							component="img"
-							height="140"
+							height="200"
 							image="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80"
 							alt="Macbook Air"
 						/>
-						<CardContent>
+						<CardContent sx={styles.cardContent}>
 							<Typography gutterBottom variant="h5" component="div">
 								{data.getSingleListing.title}
 							</Typography>
@@ -78,23 +96,23 @@ export const AuctionPage = () => {
 
 				<br />
 
-				<Card sx={{maxWidth: 345}}>
+				<Card sx={styles.card}>
 					<CardContent>
-						<Typography gutterBottom variant="h5" component="div">
+						<Typography gutterBottom variant="h4" component="div">
 							Time left: 20 seconds
 						</Typography>
-						<Typography gutterBottom variant="h7" component="div">
+						<Typography gutterBottom variant="h6" component="div">
 							Current bid: £500
 						</Typography>
 					</CardContent>
-					<CardActions>
-						<div sx={styles.buttons}>
-							<Button variant="contained">BID £550</Button>
-						</div>
+					<CardActions sx={styles.cardAction}>
+						<Button sx={styles.buttons} variant="contained">
+							BID £550
+						</Button>
 
-						<div>
-							<Button variant="contained">CUSTOM BID</Button>
-						</div>
+						<Button sx={styles.buttons} variant="contained">
+							CUSTOM BID
+						</Button>
 					</CardActions>
 				</Card>
 			</Box>

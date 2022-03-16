@@ -5,14 +5,29 @@ import styles from "./Secondary-Dashboard.css";
 
 import * as React from "react";
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
+
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { fontSize } from "@mui/system";
+
 export const SecondaryDashboardPage = () => {
+  const [open, setOpen] = React.useState(false);
   return (
     <>
       <h1>Live Auction</h1>
@@ -42,6 +57,7 @@ export const SecondaryDashboardPage = () => {
           </div>
         </div>
       </Box>
+
       <Box>
         <Card sx={{ marginTop: 20, width: 345, height: 645 }}>
           <CardMedia
@@ -332,37 +348,286 @@ export const SecondaryDashboardPage = () => {
           </CardActions>
         </Card>
       </Box>
+
       {/* cards with fields from house client form */}
 
       <Box>
-        <Card sx={{ marginTop: 20, width: 845, height: 645 }}>
-          <CardMedia
-            component="img"
-            height="50%"
-            image="https://loveincorporated.blob.core.windows.net/contentimages/gallery/39d5432f-42ac-4851-9003-0233243ecc15-Karl_L_Monaco5.jpg"
-          />
-          <CardContent sx={{ height: 80, marginBottom: 20 }}>
+        <Card sx={{ marginTop: 20, width: 845, height: 1045 }}>
+          <CardContent sx={{ height: 80, marginBottom: 120 }}>
             {/* Title */}
-            <h3>French Riviera Summer Home </h3>
+            <h1>French Riviera Summer Home </h1>
             <Typography
               gutterBottom
               variant="h5"
               component="div"
               textAlign="justify"
             ></Typography>
-            {/* Short Description */}
-            <h5>
-              Built in 1902, the Belle Epoque style of the property makes for
-              particularly impressive environs, with gorgeous wall panelling,
-              columns, and crown moulding throughout the estate.
-            </h5>
-            <h5>
-              With six bedrooms, four bathrooms, two dressing rooms, and a
-              billiards room, there’s certainly plenty of space to go around.
-              Outside, a 2,500 square foot terrace offers a place to soak up the
-              sun and the views of the Mediterranean Sea.
-            </h5>
-            <Typography variant="body2" color="text.secondary"></Typography>
+            {/* Client Form data here */}
+            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+              <TableCell>
+                <IconButton
+                  aria-label="expand row"
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <h2>Location</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                style={{ paddingBottom: 0, paddingTop: 0 }}
+                colSpan={6}
+              >
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 3 }}>
+                    <Table size="small" aria-label="purchases">
+                      <TableHead>
+                        <TableRow style={{ fondSize: 2 }}>
+                          <TableCell>Country</TableCell>
+                          <TableCell>City</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>France</TableCell>
+                          <TableCell>Nice</TableCell>
+                        </TableRow>
+                      </TableHead>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table"></Table>
+            </TableContainer>
+            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+              <TableCell>
+                <IconButton
+                  aria-label="expand row"
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <h2>Price</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                style={{ paddingBottom: 0, paddingTop: 0 }}
+                colSpan={6}
+              >
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 3 }}>
+                    <Table size="small" aria-label="purchases">
+                      <TableRow style={{ fondSize: 2 }}>
+                        <TableCell>$7,356,000</TableCell>
+                      </TableRow>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table"></Table>
+            </TableContainer>
+            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+              <TableCell>
+                <IconButton
+                  aria-label="expand row"
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <h2>Space</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                style={{ paddingBottom: 0, paddingTop: 0 }}
+                colSpan={6}
+              >
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 3 }}>
+                    <Table size="small" aria-label="purchases">
+                      <TableHead>
+                        <TableRow style={{ fondSize: 2 }}>
+                          <TableCell>Bedrooms</TableCell>
+                          <TableCell>Bathrooms</TableCell>
+                          <TableCell>Garden Size</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>10</TableCell>
+                          <TableCell>10</TableCell>
+                          <TableCell>100 m2</TableCell>
+                        </TableRow>
+                      </TableHead>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+
+            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+              <TableCell>
+                <IconButton
+                  aria-label="expand row"
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <h2>Utilities</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                style={{ paddingBottom: 0, paddingTop: 0 }}
+                colSpan={6}
+              >
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 3 }}>
+                    <Table size="small" aria-label="purchases">
+                      <TableHead>
+                        <TableRow style={{ fondSize: 2 }}>
+                          <TableCell>Energy Consumption</TableCell>
+                          <TableCell>Heating Type</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>A*</TableCell>
+                          <TableCell>Electricity and Gas</TableCell>
+                        </TableRow>
+                      </TableHead>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+
+            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+              <TableCell>
+                <IconButton
+                  aria-label="expand row"
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <h2>Property Type</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                style={{ paddingBottom: 0, paddingTop: 0 }}
+                colSpan={6}
+              >
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 3 }}>
+                    <Table size="small" aria-label="purchases">
+                      <TableHead>
+                        <TableRow style={{ fondSize: 2 }}>
+                          <TableCell>Freehold</TableCell>
+                        </TableRow>
+                      </TableHead>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+
+            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+              <TableCell>
+                <IconButton
+                  aria-label="expand row"
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <h2>Amenities</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                style={{ paddingBottom: 0, paddingTop: 0 }}
+                colSpan={6}
+              >
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 3 }}>
+                    <Table size="small" aria-label="purchases">
+                      <TableHead>
+                        <TableRow style={{ fondSize: 2 }}>
+                          <TableCell>Pool</TableCell>
+                          <TableCell>Tennis Court</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>20 m2</TableCell>
+                          <TableCell>Green, 10 m2</TableCell>
+                        </TableRow>
+                      </TableHead>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+
+            <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+              <TableCell>
+                <IconButton
+                  aria-label="expand row"
+                  size="small"
+                  onClick={() => setOpen(!open)}
+                >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </IconButton>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <h2>Description</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                style={{ paddingBottom: 0, paddingTop: 0 }}
+                colSpan={6}
+              >
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 3 }}>
+                    <Table size="small" aria-label="purchases">
+                      <TableHead>
+                        <TableRow style={{ fondSize: 2 }}>
+                          <TableCell>fafhbaekgbuahbgjabdsfbv</TableCell>
+                        </TableRow>
+                      </TableHead>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table"></Table>
+            </TableContainer>
           </CardContent>
           <CardActions>
             <Button
@@ -510,6 +775,7 @@ export const SecondaryDashboardPage = () => {
             </Button>
           </CardActions>
         </Card>
+
         <Card sx={{ marginTop: 10, width: 845, height: 645 }}>
           <CardMedia
             component="img"
@@ -548,6 +814,7 @@ export const SecondaryDashboardPage = () => {
             </Button>
           </CardActions>
         </Card>
+
         <Card sx={{ marginTop: 10, width: 845, height: 645 }}>
           <CardMedia
             component="img"
@@ -584,6 +851,7 @@ export const SecondaryDashboardPage = () => {
             </Button>
           </CardActions>
         </Card>
+
         <Card sx={{ marginTop: 10, width: 845, height: 645 }}>
           <CardMedia
             component="img"

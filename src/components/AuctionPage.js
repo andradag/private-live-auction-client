@@ -146,46 +146,25 @@ export const AuctionPage = () => {
 					Bidding Activity
 				</Typography>
 				<Box sx={{width: "100%"}}>
-					<Stack spacing={2} sx={{alignItems: "center"}}>
-						<Card sx={styles.biddingCard}>
-							<CardContent>
-								<Typography variant="h5" component="div">
-									First Name | Last Name
-								</Typography>
-								<Typography sx={{mb: 1.5}} color="text.secondary">
-									Username
-								</Typography>
-								<Typography variant="h6" sx={{textAlign: "center"}}>
-									Bid Ammount: £500
-								</Typography>
-							</CardContent>
-						</Card>
-						<Card sx={styles.biddingCard}>
-							<CardContent>
-								<Typography variant="h5" component="div">
-									First Name | Last Name
-								</Typography>
-								<Typography sx={{mb: 1.5}} color="text.secondary">
-									Username
-								</Typography>
-								<Typography variant="h6" sx={{textAlign: "center"}}>
-									Bid Ammount: £200
-								</Typography>
-							</CardContent>
-						</Card>
-						<Card sx={styles.biddingCard}>
-							<CardContent>
-								<Typography variant="h5" component="div">
-									First Name | Last Name
-								</Typography>
-								<Typography sx={{mb: 1.5}} color="text.secondary">
-									Username
-								</Typography>
-								<Typography variant="h6" sx={{textAlign: "center"}}>
-									Bid Ammount: £100
-								</Typography>
-							</CardContent>
-						</Card>
+					<Stack
+						spacing={2}
+						sx={{flexDirection: "column-reverse", alignItems: "center"}}
+					>
+						{data.getSingleListing.bids.map((bid) => (
+							<Card sx={styles.biddingCard}>
+								<CardContent>
+									<Typography variant="h5" component="div">
+										{bid.user.firstName} {bid.user.lastName}
+									</Typography>
+									<Typography sx={{mb: 1.5}} color="text.secondary">
+										{bid.user.username}
+									</Typography>
+									<Typography variant="h6" sx={{textAlign: "center"}}>
+										Bid Ammount: £{bid.amount}
+									</Typography>
+								</CardContent>
+							</Card>
+						))}
 					</Stack>
 				</Box>
 			</>

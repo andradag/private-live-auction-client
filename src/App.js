@@ -17,6 +17,7 @@ import {Navbar} from "./components/Navbar";
 import {AppRoutes} from "./AppRoutes.js";
 
 import "./reset.css";
+import "./styles.css";
 
 const httpLink = createHttpLink({
 	uri: process.env.REACT_APP_GRAPHQL_API || "http://localhost:4000/graphql",

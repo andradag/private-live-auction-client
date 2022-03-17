@@ -1,13 +1,15 @@
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export const AUCTION_BID_SUBSCRIPTION = gql`
-	subscription Subscription($listingId: ID!) {
-		auctionBid(listingId: $listingId) {
-			amount
-			user {
-				id
-				username
-			}
-		}
-	}
+  subscription Subscription($listingId: ID!) {
+    auctionBid(listingId: $listingId) {
+      amount
+      user {
+        id
+        username
+        firstName
+        lastName
+      }
+    }
+  }
 `;

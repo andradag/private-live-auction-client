@@ -16,10 +16,17 @@ import Button from "@mui/material/Button";
 
 import {GET_SINGLE_LISTING} from "../queries";
 import {AUCTION_BID_SUBSCRIPTION} from "../subscriptions";
+import {PostBidModal} from "./PostBidModal";
 
 export const AuctionPage = () => {
 	const {id} = useParams();
+
 	const [auctionData, setAuctionData] = useState([]);
+
+	// Modal Function
+	const [modal, setModal] = useState(false);
+	const handleModalOpen = () => setModal(true);
+	const handleModalClose = () => setModal(false);
 
 	const {data, error, loading} = useQuery(GET_SINGLE_LISTING, {
 		variables: {id},
@@ -131,9 +138,14 @@ export const AuctionPage = () => {
 								BID £550
 							</Button>
 
-							<Button sx={styles.buttons} variant="contained">
+							<Button
+								sx={styles.buttons}
+								variant="contained"
+								onClick={handleModalOpen}
+							>
 								CUSTOM BID
 							</Button>
+							<PostBidModal open={modal} onClose={handleModalClose} />
 						</CardActions>
 					</Card>
 				</Box>

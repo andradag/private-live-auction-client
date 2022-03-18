@@ -145,7 +145,11 @@ export const AuctionPage = () => {
 							>
 								CUSTOM BID
 							</Button>
-							<PostBidModal open={modal} onClose={handleModalClose} />
+							<PostBidModal
+								open={modal}
+								onClose={handleModalClose}
+								listingId={id}
+							/>
 						</CardActions>
 					</Card>
 				</Box>

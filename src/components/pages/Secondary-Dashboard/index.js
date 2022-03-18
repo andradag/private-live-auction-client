@@ -72,11 +72,13 @@ export const SecondaryDashboardPage = () => {
         </div>
       </Box>
 
+      <br />
+
       <Box sx={{ width: "100%" }}>
         <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
             <Item>
-              <Card sx={{ marginTop: 20, width: 345, height: 645 }}>
+              <Card sx={{ marginTop: 20, width: 400, height: 645 }}>
                 <CardMedia
                   component="img"
                   height="50%"
@@ -419,25 +421,31 @@ export const SecondaryDashboardPage = () => {
           {/* cards with fields from house client form */}
 
           <Grid item xs={6}>
-            <Item>
-              <Card sx={{ marginTop: 20, width: 845, height: 1500 }}>
-                <CardContent sx={{ height: 80, marginBottom: 120 }}>
-                  {/* Title */}
-                  <h1>French Riviera Summer Home </h1>
-                  <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                    textAlign="justify"
-                  ></Typography>
-                  {/* Client Form data here */}
-                  <Box
-                    sx={{
-                      flexWrap: "nowrap",
-                      justifyContent: "flex-start",
-                      alignItems: "flex-start",
-                    }}
-                  >
+            <Box sx={{ width: "100%" }}>
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
+                <Grid>
+                  <Item>
+                    <CardContent sx={{ marginTop: 10 }}>
+                      <h1>French Riviera Summer Home </h1>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        textAlign="justify"
+                      ></Typography>
+                    </CardContent>
+                  </Item>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <Item>
+                    <TableContainer component={Paper}>
+                      <Table aria-label="collapsible table"></Table>
+                    </TableContainer>
                     <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
                       <TableCell>
                         <IconButton
@@ -480,6 +488,11 @@ export const SecondaryDashboardPage = () => {
                         </Collapse>
                       </TableCell>
                     </TableRow>
+                  </Item>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <Item>
                     <TableContainer component={Paper}>
                       <Table aria-label="collapsible table"></Table>
                     </TableContainer>
@@ -518,10 +531,14 @@ export const SecondaryDashboardPage = () => {
                         </Collapse>
                       </TableCell>
                     </TableRow>
+                  </Item>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <Item>
                     <TableContainer component={Paper}>
                       <Table aria-label="collapsible table"></Table>
                     </TableContainer>
-
                     <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
                       <TableCell>
                         <IconButton
@@ -566,173 +583,201 @@ export const SecondaryDashboardPage = () => {
                         </Collapse>
                       </TableCell>
                     </TableRow>
-                  </Box>
-                  <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                    <TableCell>
-                      <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
+                  </Item>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <Item>
+                    <TableContainer component={Paper}>
+                      <Table aria-label="collapsible table"></Table>
+                    </TableContainer>
+                    <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                      <TableCell>
+                        <IconButton
+                          aria-label="expand row"
+                          size="small"
+                          onClick={() => setOpen(!open)}
+                        >
+                          {open ? (
+                            <KeyboardArrowUpIcon />
+                          ) : (
+                            <KeyboardArrowDownIcon />
+                          )}
+                        </IconButton>
+                      </TableCell>
+
+                      <TableCell component="th" scope="row">
+                        <h2>Utilities</h2>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        style={{ paddingBottom: 0, paddingTop: 0 }}
+                        colSpan={6}
                       >
-                        {open ? (
-                          <KeyboardArrowUpIcon />
-                        ) : (
-                          <KeyboardArrowDownIcon />
-                        )}
-                      </IconButton>
-                    </TableCell>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                          <Box sx={{ margin: 3 }}>
+                            <Table size="small" aria-label="purchases">
+                              <TableHead>
+                                <TableRow style={{ fondSize: 2 }}>
+                                  <TableCell>Energy Consumption</TableCell>
+                                  <TableCell>Heating Type</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                  <TableCell>A*</TableCell>
+                                  <TableCell>Electricity and Gas</TableCell>
+                                </TableRow>
+                              </TableHead>
+                            </Table>
+                          </Box>
+                        </Collapse>
+                      </TableCell>
+                    </TableRow>
+                  </Item>
+                </Grid>
 
-                    <TableCell component="th" scope="row">
-                      <h2>Utilities</h2>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell
-                      style={{ paddingBottom: 0, paddingTop: 0 }}
-                      colSpan={6}
-                    >
-                      <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 3 }}>
-                          <Table size="small" aria-label="purchases">
-                            <TableHead>
-                              <TableRow style={{ fondSize: 2 }}>
-                                <TableCell>Energy Consumption</TableCell>
-                                <TableCell>Heating Type</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell>A*</TableCell>
-                                <TableCell>Electricity and Gas</TableCell>
-                              </TableRow>
-                            </TableHead>
-                          </Table>
-                        </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
+                <Grid item xs={6}>
+                  <Item>
+                    <TableContainer component={Paper}>
+                      <Table aria-label="collapsible table"></Table>
+                    </TableContainer>
+                    <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                      <TableCell>
+                        <IconButton
+                          aria-label="expand row"
+                          size="small"
+                          onClick={() => setOpen(!open)}
+                        >
+                          {open ? (
+                            <KeyboardArrowUpIcon />
+                          ) : (
+                            <KeyboardArrowDownIcon />
+                          )}
+                        </IconButton>
+                      </TableCell>
 
-                  <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                    <TableCell>
-                      <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
+                      <TableCell component="th" scope="row">
+                        <h2>Property Type</h2>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        style={{ paddingBottom: 0, paddingTop: 0 }}
+                        colSpan={6}
                       >
-                        {open ? (
-                          <KeyboardArrowUpIcon />
-                        ) : (
-                          <KeyboardArrowDownIcon />
-                        )}
-                      </IconButton>
-                    </TableCell>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                          <Box sx={{ margin: 3 }}>
+                            <Table size="small" aria-label="purchases">
+                              <TableHead>
+                                <TableRow style={{ fondSize: 2 }}>
+                                  <TableCell>Freehold</TableCell>
+                                </TableRow>
+                              </TableHead>
+                            </Table>
+                          </Box>
+                        </Collapse>
+                      </TableCell>
+                    </TableRow>
+                  </Item>
+                </Grid>
 
-                    <TableCell component="th" scope="row">
-                      <h2>Property Type</h2>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell
-                      style={{ paddingBottom: 0, paddingTop: 0 }}
-                      colSpan={6}
-                    >
-                      <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 3 }}>
-                          <Table size="small" aria-label="purchases">
-                            <TableHead>
-                              <TableRow style={{ fondSize: 2 }}>
-                                <TableCell>Freehold</TableCell>
-                              </TableRow>
-                            </TableHead>
-                          </Table>
-                        </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
+                <Grid item xs={6}>
+                  <Item>
+                    <TableContainer component={Paper}>
+                      <Table aria-label="collapsible table"></Table>
+                    </TableContainer>
+                    <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                      <TableCell>
+                        <IconButton
+                          aria-label="expand row"
+                          size="small"
+                          onClick={() => setOpen(!open)}
+                        >
+                          {open ? (
+                            <KeyboardArrowUpIcon />
+                          ) : (
+                            <KeyboardArrowDownIcon />
+                          )}
+                        </IconButton>
+                      </TableCell>
 
-                  <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                    <TableCell>
-                      <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
+                      <TableCell component="th" scope="row">
+                        <h2>Amenities</h2>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        style={{ paddingBottom: 0, paddingTop: 0 }}
+                        colSpan={6}
                       >
-                        {open ? (
-                          <KeyboardArrowUpIcon />
-                        ) : (
-                          <KeyboardArrowDownIcon />
-                        )}
-                      </IconButton>
-                    </TableCell>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                          <Box sx={{ margin: 3 }}>
+                            <Table size="small" aria-label="purchases">
+                              <TableHead>
+                                <TableRow style={{ fondSize: 2 }}>
+                                  <TableCell>Pool</TableCell>
+                                  <TableCell>Tennis Court</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                  <TableCell>20 m2</TableCell>
+                                  <TableCell>Green, 10 m2</TableCell>
+                                </TableRow>
+                              </TableHead>
+                            </Table>
+                          </Box>
+                        </Collapse>
+                      </TableCell>
+                    </TableRow>
+                  </Item>
+                </Grid>
 
-                    <TableCell component="th" scope="row">
-                      <h2>Amenities</h2>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell
-                      style={{ paddingBottom: 0, paddingTop: 0 }}
-                      colSpan={6}
-                    >
-                      <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 3 }}>
-                          <Table size="small" aria-label="purchases">
-                            <TableHead>
-                              <TableRow style={{ fondSize: 2 }}>
-                                <TableCell>Pool</TableCell>
-                                <TableCell>Tennis Court</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell>20 m2</TableCell>
-                                <TableCell>Green, 10 m2</TableCell>
-                              </TableRow>
-                            </TableHead>
-                          </Table>
-                        </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
+                <Grid item xs={6}>
+                  <Item>
+                    <TableContainer component={Paper}>
+                      <Table aria-label="collapsible table"></Table>
+                    </TableContainer>
+                    <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+                      <TableCell>
+                        <IconButton
+                          aria-label="expand row"
+                          size="small"
+                          onClick={() => setOpen(!open)}
+                        >
+                          {open ? (
+                            <KeyboardArrowUpIcon />
+                          ) : (
+                            <KeyboardArrowDownIcon />
+                          )}
+                        </IconButton>
+                      </TableCell>
 
-                  <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-                    <TableCell>
-                      <IconButton
-                        aria-label="expand row"
-                        size="small"
-                        onClick={() => setOpen(!open)}
+                      <TableCell component="th" scope="row">
+                        <h2>Description</h2>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        style={{ paddingBottom: 0, paddingTop: 0 }}
+                        colSpan={6}
                       >
-                        {open ? (
-                          <KeyboardArrowUpIcon />
-                        ) : (
-                          <KeyboardArrowDownIcon />
-                        )}
-                      </IconButton>
-                    </TableCell>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                          <Box sx={{ margin: 3 }}>
+                            <Table size="small" aria-label="purchases">
+                              <TableHead>
+                                <TableRow style={{ fondSize: 2 }}>
+                                  <TableCell>fafhbaekgbuahbgjabdsfbv</TableCell>
+                                </TableRow>
+                              </TableHead>
+                            </Table>
+                          </Box>
+                        </Collapse>
+                      </TableCell>
+                    </TableRow>
+                  </Item>
+                </Grid>
+              </Grid>
 
-                    <TableCell component="th" scope="row">
-                      <h2>Description</h2>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell
-                      style={{ paddingBottom: 0, paddingTop: 0 }}
-                      colSpan={6}
-                    >
-                      <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 3 }}>
-                          <Table size="small" aria-label="purchases">
-                            <TableHead>
-                              <TableRow style={{ fondSize: 2 }}>
-                                <TableCell>fafhbaekgbuahbgjabdsfbv</TableCell>
-                              </TableRow>
-                            </TableHead>
-                          </Table>
-                        </Box>
-                      </Collapse>
-                    </TableCell>
-                  </TableRow>
-
-                  <TableContainer component={Paper}>
-                    <Table aria-label="collapsible table"></Table>
-                  </TableContainer>
-                </CardContent>
+              <Item>
                 <CardActions>
                   <Button
                     size="small"
@@ -749,8 +794,8 @@ export const SecondaryDashboardPage = () => {
                     Join
                   </Button>
                 </CardActions>
-              </Card>
-            </Item>
+              </Item>
+            </Box>
           </Grid>
         </Grid>
       </Box>

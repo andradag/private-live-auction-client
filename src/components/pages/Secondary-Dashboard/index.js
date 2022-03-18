@@ -74,6 +74,7 @@ export const SecondaryDashboardPage = () => {
 
       <br />
 
+      {/* Left hand side cards */}
       <Box sx={{ width: "100%" }}>
         <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
@@ -275,6 +276,7 @@ export const SecondaryDashboardPage = () => {
                   </Button>
                 </CardActions>
               </Card>
+
               <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
                 <CardMedia
                   component="img"
@@ -319,6 +321,7 @@ export const SecondaryDashboardPage = () => {
                   </Button>
                 </CardActions>
               </Card>
+
               <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
                 <CardMedia
                   component="img"
@@ -362,6 +365,7 @@ export const SecondaryDashboardPage = () => {
                   </Button>
                 </CardActions>
               </Card>
+
               <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
                 <CardMedia
                   component="img"
@@ -411,7 +415,7 @@ export const SecondaryDashboardPage = () => {
             </Item>
           </Grid>
 
-          {/* cards with fields from house client form */}
+          {/* Right hand side component */}
 
           <Grid item xs={6}>
             <Box sx={{ width: "100%" }}>
@@ -771,7 +775,7 @@ export const SecondaryDashboardPage = () => {
                 </Grid>
               </Grid>
 
-              <Item>
+              <Item sx={{ justifyContent: "center" }}>
                 <CardActions>
                   <Button
                     size="small"
@@ -795,6 +799,8 @@ export const SecondaryDashboardPage = () => {
       </Box>
 
       <br />
+
+      {/* Bottom placeholder cards */}
 
       <section>
         <Card sx={{ marginTop: 10, width: 845, height: 645 }}>

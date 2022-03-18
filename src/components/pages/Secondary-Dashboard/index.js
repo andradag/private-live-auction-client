@@ -421,7 +421,7 @@ export const SecondaryDashboardPage = () => {
             <Box sx={{ width: "100%" }}>
               <Grid
                 container
-                rowSpacing={1}
+                rowSpacing={6}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 sx={{ margin: 20, justifyContent: "center" }}
               >
@@ -773,26 +773,25 @@ export const SecondaryDashboardPage = () => {
                     </TableRow>
                   </Item>
                 </Grid>
-              </Grid>
 
-              <Item sx={{ justifyContent: "center" }}>
-                <CardActions>
+                <Box sx={{ margin: 20 }}>
                   <Button
-                    size="small"
-                    variant="outlined"
-                    className="liveButton"
-                    sx={{
-                      border: "none",
-                      cursor: "default",
-                    }}
+                    sx={{ marginRight: "10px", height: "50px", width: "80px" }}
+                    variant="contained"
+                    type="submit"
                   >
                     Live
                   </Button>
-                  <Button size="small" variant="contained">
+
+                  <Button
+                    sx={{ marginLeft: "10px", height: "50px", width: "80px" }}
+                    variant="contained"
+                    type="submit"
+                  >
                     Join
                   </Button>
-                </CardActions>
-              </Item>
+                </Box>
+              </Grid>
             </Box>
           </Grid>
         </Grid>

@@ -72,6 +72,7 @@ export const SignUp = () => {
       mx: "auto",
       width: 700,
       border: "solid",
+      borderRadius: "20px",
     },
 
     loadingButton: { marginTop: 3, marginBottom: 2 },
@@ -84,7 +85,7 @@ export const SignUp = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         SignUp Form
       </Typography>
       <TextField

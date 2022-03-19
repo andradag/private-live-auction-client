@@ -1,17 +1,17 @@
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import {
-	InputAdornment,
-	InputLabel,
-	OutlinedInput,
-	TextField,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import {useMutation} from "@apollo/client";
-import {ADD_BID} from "../mutations";
+import { useMutation } from "@apollo/client";
+import { ADD_BID } from "../mutations";
 import { useState } from "react";
 
 const styles = {
@@ -33,10 +33,15 @@ const styles = {
   // loadingButton: {marginTop: 3, marginBottom: 2},
 };
 
-export const PostBidForm = ({ listingId, currentBid }) => {
+export const PostBidForm = ({
+  listingId,
+  currentBid,
+  startingBid,
+  onClose,
+}) => {
   const [executeAddBid, { loading, error }] = useMutation(ADD_BID);
   const [currentBidAmount, setCurrentBidAmount] = useState(
-    currentBid?.amount || 0
+    currentBid?.amount || startingBid
   );
 
   const {
@@ -59,6 +64,8 @@ export const PostBidForm = ({ listingId, currentBid }) => {
     } else {
       alert("too low");
     }
+
+    onClose();
   };
 
   return (

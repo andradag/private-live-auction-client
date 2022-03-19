@@ -1,48 +1,40 @@
 import * as React from "react";
-import {useState, useEffect} from "react";
-import {useParams} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import {useQuery} from "@apollo/client";
-import {useSubscription} from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { useSubscription } from "@apollo/client";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {CardActionArea, Divider, Paper, Stack, styled} from "@mui/material";
+import { CardActionArea, Divider, Paper, Stack, styled } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 
-import {GET_SINGLE_LISTING} from "../queries";
-import {AUCTION_BID_SUBSCRIPTION} from "../subscriptions";
-import {PostBidModal} from "./PostBidModal";
+import { GET_SINGLE_LISTING } from "../queries";
+import { AUCTION_BID_SUBSCRIPTION } from "../subscriptions";
+import { PostBidModal } from "./PostBidModal";
 
 export const AuctionPage = () => {
   const { id } = useParams();
   const [currentBid, setCurrentBid] = useState({});
   const [auctionData, setAuctionData] = useState([]);
-
-  // Modal Function
-  const [modal, setModal] = useState(false);
-  const handleModalOpen = () => setModal(true);
-  const handleModalClose = () => setModal(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, error, loading } = useQuery(GET_SINGLE_LISTING, {
     variables: { id },
   });
 
-  // console.log(data);
   const { data: subscriptionData, loading: subscriptionLoading } =
     useSubscription(AUCTION_BID_SUBSCRIPTION, {
       variables: {
         listingId: id,
       },
     });
-  // console.log(subscriptionData);
-  // console.log(id);
 
-  //   Use effect to get the new bids and render on page
   useEffect(() => {
     if (data) {
       setAuctionData(data?.getSingleListing?.bids);
@@ -54,8 +46,9 @@ export const AuctionPage = () => {
       setCurrentBid(subscriptionData.auctionBid);
     }
   }, [subscriptionData, data]);
-  // console.log(subscriptionData);
-  // console.log(currentBid);
+
+  const handleModalOpen = () => setIsModalOpen(true);
+  const handleModalClose = () => setIsModalOpen(false);
 
   const styles = {
     container: {
@@ -105,7 +98,7 @@ export const AuctionPage = () => {
   if (error || loading) return <h1>Error</h1>;
 
   return (
-    data && (
+    data?.getSingleListing && (
       <>
         <Box sx={styles.container}>
           <Card sx={styles.card}>
@@ -129,17 +122,16 @@ export const AuctionPage = () => {
               </CardContent>
             </CardActionArea>
           </Card>
-
-          <br />
-
           <Card sx={styles.card}>
             <CardContent>
               <Typography gutterBottom variant="h4" component="div">
                 Time left: 20 seconds
               </Typography>
-              <Typography gutterBottom variant="h6" component="div">
-                Current bid: {currentBid?.amount || "No bids placed"}
-              </Typography>
+              {currentBid && (
+                <Typography gutterBottom variant="h6" component="div">
+                  Current bid: {currentBid?.amount}
+                </Typography>
+              )}
             </CardContent>
             <CardActions sx={styles.cardAction}>
               <Button sx={styles.buttons} variant="contained">
@@ -154,10 +146,11 @@ export const AuctionPage = () => {
                 CUSTOM BID
               </Button>
               <PostBidModal
-                open={modal}
+                open={isModalOpen}
                 onClose={handleModalClose}
                 listingId={id}
                 currentBid={currentBid}
+                startingBid={data.getSingleListing.startingBid}
               />
             </CardActions>
           </Card>

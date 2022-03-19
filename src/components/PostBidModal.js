@@ -1,7 +1,13 @@
 import Modal from "@mui/material/Modal";
-import {PostBidForm} from "./PostBidForm";
+import { PostBidForm } from "./PostBidForm";
 
-export const PostBidModal = ({ open, onClose, listingId, currentBid }) => {
+export const PostBidModal = ({
+  open,
+  onClose,
+  listingId,
+  currentBid,
+  startingBid,
+}) => {
   return (
     <Modal
       open={open}
@@ -9,7 +15,12 @@ export const PostBidModal = ({ open, onClose, listingId, currentBid }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <PostBidForm listingId={listingId} currentBid={currentBid} />
+      <PostBidForm
+        listingId={listingId}
+        currentBid={currentBid}
+        startingBid={startingBid}
+        onClose={onClose}
+      />
     </Modal>
   );
 };

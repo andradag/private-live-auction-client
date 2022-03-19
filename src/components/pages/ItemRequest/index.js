@@ -10,7 +10,8 @@ import Box from "@mui/material/Box";
 
 export const ItemRequest = () => {
   const styles = {
-    container: {
+    form: {
+      backgroundColor: "#FFFFFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -31,7 +32,7 @@ export const ItemRequest = () => {
   };
 
   return (
-    <Box sx={styles.container}>
+    <Box sx={styles.form}>
       <React.Fragment>
         <Typography variant="h4" sx={{ marginBottom: "20px" }} gutterBottom>
           Auction Registration Form

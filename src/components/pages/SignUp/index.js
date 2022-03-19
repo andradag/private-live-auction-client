@@ -59,16 +59,13 @@ export const SignUp = () => {
   };
 
   const styles = {
-    container: {
-      backgroundColor: "#fff",
-    },
-
     form: {
+      backgroundColor: "#FFFFFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
-      marginTop: "20px",
+      marginTop: "30px",
       mx: "auto",
       width: 700,
       border: "solid",

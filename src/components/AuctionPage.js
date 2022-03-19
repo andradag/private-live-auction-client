@@ -31,6 +31,7 @@ export const AuctionPage = () => {
 
   const [auctionData, setAuctionData] = useState([]);
 
+  //   Use effect to get the new bids and render on page
   useEffect(() => {
     if (data) {
       setAuctionData(data?.getSingleListing?.bids);

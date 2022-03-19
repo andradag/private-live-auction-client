@@ -59,18 +59,17 @@ export const SignUp = () => {
   };
 
   const styles = {
-    container: {
-      backgroundColor: "#fff",
-    },
-
     form: {
+      backgroundColor: "#FFFFFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      marginTop: "30px",
       mx: "auto",
       width: 700,
       border: "solid",
+      borderRadius: "20px",
     },
 
     loadingButton: { marginTop: 3, marginBottom: 2 },
@@ -83,8 +82,8 @@ export const SignUp = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <Typography variant="h5" gutterBottom>
-        SignUp Form
+      <Typography variant="h4" gutterBottom>
+        Signup Form
       </Typography>
       <TextField
         margin="normal"
@@ -145,12 +144,12 @@ export const SignUp = () => {
       />
 
       <LoadingButton
+        sx={{ backgroundColor: "#045ee0", width: "250px", margin: "20px" }}
         loading={loading}
         loadingIndicator="Loading..."
         variant="contained"
         fullWidth
         type="submit"
-        sx={styles.loadingButton}
         startIcon={error && <ErrorIcon />}
         color={error ? "error" : "primary"}
       >

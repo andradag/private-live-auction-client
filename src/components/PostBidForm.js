@@ -47,8 +47,8 @@ export const PostBidForm = ({ listingId, currentBid }) => {
 
   const onSubmit = async ({ bidAmount }) => {
     // setCurrentBid(bidAmount);
-    console.log(bidAmount);
-    console.log(currentBidAmount);
+    // console.log(bidAmount);
+    // console.log(currentBidAmount);
     if (+bidAmount > currentBidAmount) {
       const { loading, data, error } = await executeAddBid({
         variables: {

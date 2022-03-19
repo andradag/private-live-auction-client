@@ -55,13 +55,14 @@ export const SAVELISTING = gql`
 `;
 
 export const ADD_BID = gql`
-	mutation Mutation($input: AddBidInput!) {
-		addBid(input: $input) {
-			amount
-			user {
-				id
-				username
-			}
-		}
-	}
+  mutation Mutation($input: AddBidInput!) {
+    addBid(input: $input) {
+      amount
+      #   listingId
+      user {
+        id
+        username
+      }
+    }
+  }
 `;

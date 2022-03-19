@@ -68,6 +68,7 @@ export const GET_SINGLE_LISTING = gql`
       status
       bids {
         amount
+        # listingId
         user {
           firstName
           lastName
@@ -76,6 +77,7 @@ export const GET_SINGLE_LISTING = gql`
       }
       currentBid {
         amount
+        # listingId
         user {
           firstName
           lastName

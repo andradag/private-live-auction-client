@@ -1,45 +1,60 @@
 import * as React from "react";
+import {useState, useEffect} from "react";
+import {useParams} from "react-router-dom";
+
+import {useQuery} from "@apollo/client";
+import {useSubscription} from "@apollo/client";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Divider, Paper, Stack, styled } from "@mui/material";
+import {CardActionArea, Divider, Paper, Stack, styled} from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { GET_SINGLE_LISTING } from "../queries";
-import { useState, useEffect } from "react";
 
-import { useSubscription } from "@apollo/client";
-import { AUCTION_BID_SUBSCRIPTION } from "../subscriptions";
+import {GET_SINGLE_LISTING} from "../queries";
+import {AUCTION_BID_SUBSCRIPTION} from "../subscriptions";
+import {PostBidModal} from "./PostBidModal";
 
 export const AuctionPage = () => {
   const { id } = useParams();
+  const [currentBid, setCurrentBid] = useState({});
+  const [auctionData, setAuctionData] = useState([]);
 
+  // Modal Function
+  const [modal, setModal] = useState(false);
+  const handleModalOpen = () => setModal(true);
+  const handleModalClose = () => setModal(false);
+
+  const { data, error, loading } = useQuery(GET_SINGLE_LISTING, {
+    variables: { id },
+  });
+
+  // console.log(data);
   const { data: subscriptionData, loading: subscriptionLoading } =
     useSubscription(AUCTION_BID_SUBSCRIPTION, {
       variables: {
         listingId: id,
       },
     });
-
-  const { data, error, loading } = useQuery(GET_SINGLE_LISTING, {
-    variables: { id },
-  });
-
-  const [auctionData, setAuctionData] = useState([]);
+  // console.log(subscriptionData);
+  // console.log(id);
 
   useEffect(() => {
     if (data) {
       setAuctionData(data?.getSingleListing?.bids);
+      setCurrentBid(data.getSingleListing.currentBid);
     }
 
     if (subscriptionData) {
       setAuctionData([...auctionData, subscriptionData.auctionBid]);
+      setCurrentBid(subscriptionData.auctionBid);
     }
   }, [subscriptionData, data]);
+  // console.log(subscriptionData);
+  // console.log(currentBid);
 
   const styles = {
     container: {
@@ -88,15 +103,6 @@ export const AuctionPage = () => {
 
   if (error || loading) return <h1>Error</h1>;
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    width: "75%",
-  }));
-
   return (
     data && (
       <>
@@ -131,7 +137,7 @@ export const AuctionPage = () => {
                 Time left: 20 seconds
               </Typography>
               <Typography gutterBottom variant="h6" component="div">
-                Current bid: £500
+                Current bid: {currentBid?.amount || "No bids placed"}
               </Typography>
             </CardContent>
             <CardActions sx={styles.cardAction}>
@@ -139,9 +145,19 @@ export const AuctionPage = () => {
                 BID £550
               </Button>
 
-              <Button sx={styles.buttons} variant="contained">
+              <Button
+                sx={styles.buttons}
+                variant="contained"
+                onClick={handleModalOpen}
+              >
                 CUSTOM BID
               </Button>
+              <PostBidModal
+                open={modal}
+                onClose={handleModalClose}
+                listingId={id}
+                currentBid={currentBid}
+              />
             </CardActions>
           </Card>
         </Box>
@@ -171,7 +187,7 @@ export const AuctionPage = () => {
                       {bid.user.username}
                     </Typography>
                     <Typography variant="h6" sx={{ textAlign: "center" }}>
-                      Bid Ammount: £{bid.amount}
+                      Bid Amount: £{bid.amount}
                     </Typography>
                   </CardContent>
                 </Card>

@@ -4,7 +4,7 @@ export const LOGIN = gql`
 	mutation Mutation($loginInput: LoginInput!) {
 		login(input: $loginInput) {
 			user {
-				_id
+				id
 				username
 				firstName
 				lastName
@@ -21,7 +21,7 @@ export const SIGNUP = gql`
 		addUser(userInput: $userInput) {
 			token
 			user {
-				_id
+				id
 				username
 				firstName
 				lastName
@@ -52,4 +52,17 @@ export const SAVELISTING = gql`
 			}
 		}
 	}
+`;
+
+export const ADD_BID = gql`
+  mutation Mutation($input: AddBidInput!) {
+    addBid(input: $input) {
+      amount
+      #   listingId
+      user {
+        id
+        username
+      }
+    }
+  }
 `;

@@ -42,6 +42,7 @@ export const AuctionPage = () => {
   // console.log(subscriptionData);
   // console.log(id);
 
+  //   Use effect to get the new bids and render on page
   useEffect(() => {
     if (data) {
       setAuctionData(data?.getSingleListing?.bids);

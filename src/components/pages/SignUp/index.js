@@ -68,6 +68,7 @@ export const SignUp = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      marginTop: "20px",
       mx: "auto",
       width: 700,
       border: "solid",
@@ -145,12 +146,12 @@ export const SignUp = () => {
       />
 
       <LoadingButton
+        sx={{ backgroundColor: "#045ee0", width: "250px", margin: "20px" }}
         loading={loading}
         loadingIndicator="Loading..."
         variant="contained"
         fullWidth
         type="submit"
-        sx={styles.loadingButton}
         startIcon={error && <ErrorIcon />}
         color={error ? "error" : "primary"}
       >

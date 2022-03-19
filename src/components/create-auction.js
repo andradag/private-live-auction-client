@@ -9,8 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
-
-import { TextField } from "@material-ui/core";
+import TextField from "@mui/material/TextField";
 import { CATEGORY, CREATE_LISTING } from "../mutations";
 import { useMutation, useQuery } from "@apollo/client";
 import { Typography } from "@mui/material";

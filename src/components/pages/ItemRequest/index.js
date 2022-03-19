@@ -19,7 +19,7 @@ export const ItemRequest = () => {
       width: 700,
       border: "solid",
       borderRadius: "20px",
-      mt: "30px",
+      marginTop: "30px",
     },
 
     loadingButton: { marginTop: 3, marginBottom: 2 },
@@ -33,7 +33,7 @@ export const ItemRequest = () => {
   return (
     <Box sx={styles.container}>
       <React.Fragment>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" sx={{ marginBottom: "20px" }} gutterBottom>
           Auction Registration Form
         </Typography>
         <Grid container spacing={3}>
@@ -189,7 +189,7 @@ export const ItemRequest = () => {
         </Grid>
 
         <LoadingButton
-          sx={{ backgroundColor: "#045ee0", width: "250px", margin: "10px" }}
+          sx={{ backgroundColor: "#045ee0", width: "250px", margin: "20px" }}
           loadingIndicator="Loading..."
           variant="contained"
           type="submit"

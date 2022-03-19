@@ -86,7 +86,7 @@ export const SignUp = () => {
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Typography variant="h4" gutterBottom>
-        SignUp Form
+        Signup Form
       </Typography>
       <TextField
         margin="normal"

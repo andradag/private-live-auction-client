@@ -11,17 +11,17 @@ import ErrorIcon from "@mui/icons-material/Error";
 import { ApolloError, useMutation } from "@apollo/client";
 
 import { SIGNUP } from "../../../mutations";
+import { SingleImageUploader } from "../../SingleImageUploader";
+import { useState } from "react";
 
 export const SignUp = () => {
+  const [uploadedImage, setUploadedImage] = useState();
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP);
-  console.log(error);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const navigate = useNavigate();
 
   const onSubmit = async ({
@@ -39,6 +39,7 @@ export const SignUp = () => {
             lastName: lastName.toLowerCase().trim(),
             username: username.toLowerCase().trim(),
             email: email.toLowerCase().trim(),
+            imageUrl: uploadedImage.src,
             password,
           },
         },
@@ -96,7 +97,6 @@ export const SignUp = () => {
         error={!!errors.email}
         disabled={loading}
       />
-
       <TextField
         margin="normal"
         id="firstName"
@@ -142,7 +142,10 @@ export const SignUp = () => {
         error={!!errors.password}
         disabled={loading}
       />
-
+      <SingleImageUploader
+        uploadedImage={uploadedImage}
+        setUploadedImage={setUploadedImage}
+      />
       <LoadingButton
         sx={{ backgroundColor: "#045ee0", width: "250px", margin: "20px" }}
         loading={loading}

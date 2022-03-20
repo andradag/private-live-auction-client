@@ -1,0 +1,10 @@
+.upcomingCard {
+  position: relative;
+}
+
+.deleteButton {
+  position: absolute;
+  top: -5%;
+  right: 0;
+  transform: scale(1.5);
+}

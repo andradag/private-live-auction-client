@@ -7,10 +7,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useMutation, useQuery } from "@apollo/client";
-import { SAVELISTING } from "../mutations";
-import { GET_LISTINGS } from "../queries";
+import { SAVELISTING } from "../../mutations";
+import { GET_LISTINGS } from "../../queries";
 import { useNavigate } from "react-router-dom";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import "./upcomingAuctions.css";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
@@ -49,14 +51,16 @@ export default function UpcomingAuctions() {
       <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
         {listingData.getListings.map((auction) => (
           <Grid key={auction} item>
-            <Card sx={{ width: 345, height: 345 }}>
-              {/* <FontAwesomeIcon icon="fa-solid fa-pen" /> */}
+            <Card sx={{ width: 345, height: 345 }} className="upcomingCard">
+              <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
               <CardMedia
                 component="img"
                 height="50%"
                 // Example of prop usage here would be {auction.image}
                 image={auction.image}
+                sx={{ position: "relative", zIndex: 1 }}
               />
+
               <CardContent sx={{ height: 80 }}>
                 {/* Title */}
                 <Typography gutterBottom variant="h5" component="div">

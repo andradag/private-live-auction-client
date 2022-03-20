@@ -44,9 +44,7 @@ export const SecondaryDashboardPage = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <>
-      <h1>Live Auction</h1>
-
-      <Box sx={{ bgcolor: "#cfe8fc", height: "30vh", width: "auto" }}>
+      <Box>
         <div class="auction-image">
           <img
             src="https://sothebys-com.brightspotcdn.com/dims4/default/5479944/2147483647/strip/true/crop/2880x660+0+0/resize/1440x330!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F4a%2Fca%2F0058e35745d0877d192e869fa20c%2F22918200-de222x-karl-part-iii-webbanners-2880x660-02.jpg"
@@ -72,14 +70,34 @@ export const SecondaryDashboardPage = () => {
         </div>
       </Box>
 
-      <br />
-
       {/* Left hand side cards */}
-      <Box sx={{ width: "100%" }}>
+      <Box
+        sx={{
+          padding: "20px",
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
         <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
+          <Grid
+            item
+            xs={5}
+            sx={{
+              width: 1500,
+              border: "solid",
+              marginLeft: "50px",
+              padding: "15px",
+              backgroundColor: "white",
+            }}
+          >
             <Item>
-              <Card sx={{ marginTop: 20, width: 500, height: 645 }}>
+              <Card
+                sx={{
+                  margin: 5,
+                  width: 500,
+                  height: 645,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="50%"
@@ -129,7 +147,13 @@ export const SecondaryDashboardPage = () => {
                 </CardActions>
               </Card>
 
-              <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
+              <Card
+                sx={{
+                  margin: 5,
+                  width: 500,
+                  height: 645,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="50%"
@@ -178,7 +202,13 @@ export const SecondaryDashboardPage = () => {
                 </CardActions>
               </Card>
 
-              <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
+              <Card
+                sx={{
+                  margin: 5,
+                  width: 500,
+                  height: 645,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="50%"
@@ -226,7 +256,13 @@ export const SecondaryDashboardPage = () => {
                 </CardActions>
               </Card>
 
-              <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
+              <Card
+                sx={{
+                  margin: 5,
+                  width: 500,
+                  height: 645,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="50%"
@@ -277,7 +313,13 @@ export const SecondaryDashboardPage = () => {
                 </CardActions>
               </Card>
 
-              <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
+              <Card
+                sx={{
+                  margin: 5,
+                  width: 500,
+                  height: 645,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="50%"
@@ -322,7 +364,13 @@ export const SecondaryDashboardPage = () => {
                 </CardActions>
               </Card>
 
-              <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
+              <Card
+                sx={{
+                  margin: 5,
+                  width: 500,
+                  height: 645,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="50%"
@@ -366,7 +414,13 @@ export const SecondaryDashboardPage = () => {
                 </CardActions>
               </Card>
 
-              <Card sx={{ marginTop: 10, width: 500, height: 645 }}>
+              <Card
+                sx={{
+                  margin: 5,
+                  width: 500,
+                  height: 645,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="50%"
@@ -417,13 +471,23 @@ export const SecondaryDashboardPage = () => {
 
           {/* Right hand side component */}
 
-          <Grid item xs={6}>
-            <Box sx={{ width: "100%" }}>
+          <Grid
+            item
+            xs={5}
+            sx={{
+              width: 1500,
+              border: "solid",
+              marginLeft: "50px",
+              padding: "15px",
+              backgroundColor: "white",
+            }}
+          >
+            <Box sx={"100%"}>
               <Grid
                 container
                 rowSpacing={6}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                sx={{ margin: 20, justifyContent: "center" }}
+                sx={{ margin: 5, justifyContent: "center" }}
               >
                 <Grid>
                   <Item>
@@ -796,8 +860,6 @@ export const SecondaryDashboardPage = () => {
           </Grid>
         </Grid>
       </Box>
-
-      <br />
 
       {/* Bottom placeholder cards */}
 

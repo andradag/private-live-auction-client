@@ -16,6 +16,10 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import Carousel from "react-material-ui-carousel";
+<<<<<<< HEAD
+=======
+
+>>>>>>> e09ec2df705e061484fa30d958bce55dd887c05f
 import carousel from "../../Carousel";
 
 import "./Home.css";

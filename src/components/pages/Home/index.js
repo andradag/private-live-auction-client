@@ -15,8 +15,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
+import Carousel from "react-material-ui-carousel";
 
-import Carousel from "../../Carousel";
+import carousel from "../../Carousel";
 
 import "./Home.css";
 

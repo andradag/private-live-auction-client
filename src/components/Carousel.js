@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@mui/material";
 
-export const Example = (props) => {
+export const carousel = (props) => {
   var items = [
     {
       name: "Random Name #1",

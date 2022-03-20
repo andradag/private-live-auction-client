@@ -15,16 +15,17 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
-
-import Carousel from "../../Carousel";
+import Carousel from "react-material-ui-carousel";
+import carousel from "../../Carousel";
 
 import "./Home.css";
 
 export const Home = () => {
   return (
     <>
-      <h1>Home Page</h1>
       <Carousel />
+
+      <h1>Home Page</h1>
 
       <Box sx={{ bgcolor: "#cfe8fc", height: "10vh", width: "auto" }}>
         <div class="auction-image">

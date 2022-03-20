@@ -10,7 +10,8 @@ import Box from "@mui/material/Box";
 
 export const ItemRequest = () => {
   const styles = {
-    container: {
+    form: {
+      backgroundColor: "#FFFFFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -18,7 +19,8 @@ export const ItemRequest = () => {
       mx: "auto",
       width: 700,
       border: "solid",
-      mt: "30px",
+      borderRadius: "20px",
+      marginTop: "30px",
     },
 
     loadingButton: { marginTop: 3, marginBottom: 2 },
@@ -30,9 +32,9 @@ export const ItemRequest = () => {
   };
 
   return (
-    <Box sx={styles.container}>
+    <Box sx={styles.form}>
       <React.Fragment>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h4" sx={{ marginBottom: "20px" }} gutterBottom>
           Auction Registration Form
         </Typography>
         <Grid container spacing={3}>
@@ -44,7 +46,7 @@ export const ItemRequest = () => {
               label="First name"
               fullWidth
               autoComplete="given-name"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -56,7 +58,7 @@ export const ItemRequest = () => {
               label="Last name"
               fullWidth
               autoComplete="family-name"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -68,7 +70,7 @@ export const ItemRequest = () => {
               label="Email"
               fullWidth
               autoComplete="email"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -80,7 +82,7 @@ export const ItemRequest = () => {
               label="Phone"
               fullWidth
               autoComplete="phone"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -92,7 +94,7 @@ export const ItemRequest = () => {
               label="Address line 1"
               fullWidth
               autoComplete="shipping address-line1"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -103,7 +105,7 @@ export const ItemRequest = () => {
               label="Address line 2"
               fullWidth
               autoComplete="shipping address-line2"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -115,7 +117,7 @@ export const ItemRequest = () => {
               label="City"
               fullWidth
               autoComplete="shipping address-level2"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -125,7 +127,7 @@ export const ItemRequest = () => {
               name="state"
               label="State/Province/Region"
               fullWidth
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -137,7 +139,7 @@ export const ItemRequest = () => {
               label="Zip / Postal code"
               fullWidth
               autoComplete="shipping postal-code"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -149,7 +151,7 @@ export const ItemRequest = () => {
               label="Country"
               fullWidth
               autoComplete="shipping country"
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -160,7 +162,7 @@ export const ItemRequest = () => {
               name="item"
               label="Name Of Offering"
               fullWidth
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -171,7 +173,7 @@ export const ItemRequest = () => {
               name="value"
               label="Estimated Value"
               fullWidth
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
 
@@ -182,20 +184,19 @@ export const ItemRequest = () => {
               name="description"
               label="Detailed Description"
               fullWidth
-              variant="standard"
+              variant="outlined"
             />
           </Grid>
-
-          <LoadingButton
-            loadingIndicator="Loading..."
-            variant="contained"
-            fullWidth
-            type="submit"
-            sx={styles.loadingButton}
-          >
-            Register
-          </LoadingButton>
         </Grid>
+
+        <LoadingButton
+          sx={{ backgroundColor: "#045ee0", width: "250px", margin: "20px" }}
+          loadingIndicator="Loading..."
+          variant="contained"
+          type="submit"
+        >
+          Register
+        </LoadingButton>
       </React.Fragment>
     </Box>
   );

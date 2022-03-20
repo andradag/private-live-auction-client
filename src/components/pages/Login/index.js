@@ -48,18 +48,17 @@ export const Login = () => {
   };
 
   const styles = {
-    container: {
-      backgroundImage: `url(${Image})`,
-    },
-
     form: {
+      backgroundColor: "#FFFFFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      marginTop: "30px",
       mx: "auto",
       width: 700,
       border: "solid",
+      borderRadius: "20px",
     },
 
     loadingButton: { marginTop: 3, marginBottom: 2 },
@@ -72,7 +71,7 @@ export const Login = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Login Form
       </Typography>
       <TextField
@@ -86,6 +85,7 @@ export const Login = () => {
         error={!!errors.email}
         disabled={loading}
       />
+
       <TextField
         type="password"
         margin="normal"
@@ -98,13 +98,13 @@ export const Login = () => {
         error={!!errors.password}
         disabled={loading}
       />
+
       <LoadingButton
+        sx={{ backgroundColor: "#045ee0", width: "250px", margin: "20px" }}
         loading={loading}
         loadingIndicator="Loading..."
         variant="contained"
-        fullWidth
         type="submit"
-        sx={styles.loadingButton}
         startIcon={error && <ErrorIcon />}
         color={error ? "error" : "primary"}
       >

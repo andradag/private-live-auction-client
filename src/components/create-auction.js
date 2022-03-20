@@ -9,11 +9,11 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
-
-import { TextField } from "@material-ui/core";
-import { CATEGORY, CREATE_LISTING } from "../mutations";
+import TextField from "@mui/material/TextField";
 import { useMutation, useQuery } from "@apollo/client";
-import { Typography } from "@mui/material";
+import { CREATE_LISTING } from "../mutations";
+import { CATEGORY } from "../queries";
+import Typography from "@mui/material/Typography";
 
 export const CreateAuctionForm = () => {
   const [categoryId, setCategoryId] = useState();

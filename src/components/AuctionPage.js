@@ -1,29 +1,23 @@
-import {useState, useEffect, Fragment} from "react";
+import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
 import {useQuery} from "@apollo/client";
 import {useSubscription} from "@apollo/client";
-import {useAuth} from "../contexts/AppProvider";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 import CardActionArea from "@mui/material/CardActionArea";
 import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 
 import {GET_SINGLE_LISTING} from "../queries";
 import {AUCTION_BID_SUBSCRIPTION} from "../subscriptions";
 import {PostBidModal} from "./PostBidModal";
-import {ListSubheader} from "@mui/material";
+import {BiddingCard} from "./BiddingCard";
 
 export const AuctionPage = () => {
 	const {id} = useParams();
@@ -41,8 +35,6 @@ export const AuctionPage = () => {
 				listingId: id,
 			},
 		});
-
-	const {user} = useAuth();
 
 	useEffect(() => {
 		if (data) {
@@ -106,9 +98,6 @@ export const AuctionPage = () => {
 			textDecoration: "underline",
 			margin: 2,
 		},
-		biddingCard: {
-			width: "50%",
-		},
 	};
 
 	if (error || loading) return <h1>Error</h1>;
@@ -139,13 +128,10 @@ export const AuctionPage = () => {
 						</CardActionArea>
 					</Card>
 					<Card sx={styles.listingCard}>
-						<CardContent>
-							<Typography gutterBottom variant="h4" component="div">
-								Time left: 20 seconds
-							</Typography>
+						<CardContent sx={{p: 0}}>
 							{currentBid && (
-								<Typography gutterBottom variant="h6" component="div">
-									Current bid: {currentBid?.amount}
+								<Typography gutterBottom variant="h4" component="div">
+									Current bid: £{currentBid?.amount}
 								</Typography>
 							)}
 						</CardContent>
@@ -182,38 +168,7 @@ export const AuctionPage = () => {
 				</Typography>
 				<Box sx={styles.biddingContainer}>
 					{/* Data on page load */}
-					{auctionData &&
-						auctionData.map((bid) => (
-							<List
-								sx={{
-									width: "100%",
-									maxWidth: 360,
-									bgcolor: "background.paper",
-								}}
-								subheader={<ListSubheader>13:05</ListSubheader>}
-							>
-								<ListItem sx={{justifyItems: "center", alignItems: "center"}}>
-									<ListItemAvatar>
-										<Avatar alt={user.username} src={user.imageUrl} />
-									</ListItemAvatar>
-									<ListItemText
-										primary={
-											<Fragment>
-												<Typography sx={{display: "inline"}} component="span">
-													{bid.user.firstName} {bid.user.lastName}
-												</Typography>
-												{` (${bid.user.username})`}
-											</Fragment>
-										}
-										secondary={
-											<Typography variant="body2">
-												Placed bid: £{bid.amount}
-											</Typography>
-										}
-									/>
-								</ListItem>
-							</List>
-						))}
+					{auctionData && auctionData.map((bid) => <BiddingCard bid={bid} />)}
 				</Box>
 			</>
 		)

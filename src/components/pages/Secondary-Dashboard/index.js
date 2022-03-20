@@ -44,7 +44,7 @@ export const SecondaryDashboardPage = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <>
-      <Box>
+      <Box sx={{ margin: "15px" }}>
         <div class="auction-image">
           <img
             src="https://sothebys-com.brightspotcdn.com/dims4/default/5479944/2147483647/strip/true/crop/2880x660+0+0/resize/1440x330!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F4a%2Fca%2F0058e35745d0877d192e869fa20c%2F22918200-de222x-karl-part-iii-webbanners-2880x660-02.jpg"
@@ -58,9 +58,9 @@ export const SecondaryDashboardPage = () => {
             <p>26 March 2022</p>
 
             <Fab
+              sx={{ backgroundColor: "#E08604" }}
               variant="extended"
               size="medium"
-              color="primary"
               aria-label="add"
               text="strong"
             >

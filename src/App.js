@@ -13,7 +13,7 @@ import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { AppProvider } from "./contexts/AppProvider";
 
-// import { Navbar } from "./components/Navbar";
+import { Navbar } from "./components/Navbar";
 
 // import { AppRoutes } from "./AppRoutes.js";
 import { SecondaryDashboardPage } from "../src/components/pages/Secondary-Dashboard/index.js";
@@ -66,8 +66,8 @@ export const App = () => {
     <ApolloProvider client={client}>
       <AppProvider>
         <BrowserRouter>
-          {/* <Navbar />
-          <AppRoutes /> */}
+          <Navbar />
+          {/* <AppRoutes /> */}
           <SecondaryDashboardPage />
         </BrowserRouter>
       </AppProvider>

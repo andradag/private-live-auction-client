@@ -12,10 +12,23 @@ import { GET_LISTINGS } from "../../queries";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../contexts/AppProvider";
+import { GET_USER } from "../../queries";
 import "./upcomingAuctions.css";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
+  const { user } = useAuth();
+
+  // // Get user admin status
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError,
+  } = useQuery(GET_USER, {
+    variables: { userId: user.id },
+  });
+
   const [executeSaveListing, { data }] = useMutation(SAVELISTING);
 
   // Get upcoming listings
@@ -50,9 +63,9 @@ export default function UpcomingAuctions() {
     return (
       <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
         {listingData.getListings.map((auction) => (
-          <Grid key={auction} item>
-            <Card sx={{ width: 345, height: 345 }} className="upcomingCard">
-              <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
+          <Grid key={auction} item className="upcomingCard">
+            <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
+            <Card sx={{ width: 345, height: 345 }}>
               <CardMedia
                 component="img"
                 height="50%"
@@ -79,14 +92,22 @@ export default function UpcomingAuctions() {
                 >
                   View
                 </Button>
-                <Button
-                  onClick={() => saveListing(auction._id)}
-                  id="12345"
-                  size="small"
-                  variant="contained"
-                >
-                  Register
-                </Button>
+                {/* If user is admin will se "Create auction" button */}
+                {userData.getSingleUser.isAdmin && (
+                  <Button id="12345" size="small" variant="contained">
+                    Edit
+                  </Button>
+                )}
+                {!userData.getSingleUser.isAdmin && (
+                  <Button
+                    onClick={() => saveListing(auction._id)}
+                    id="12345"
+                    size="small"
+                    variant="contained"
+                  >
+                    Register
+                  </Button>
+                )}
               </CardActions>
             </Card>
           </Grid>

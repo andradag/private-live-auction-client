@@ -51,6 +51,10 @@ export default function UpcomingAuctions() {
     navigate(`/auction/${auctionID}`);
   };
 
+  const deleteListing = async (id) => {
+    console.log(`${id} is to be deleted`);
+  };
+
   const saveListing = async (id) => {
     await executeSaveListing({ variables: { input: id } });
   };
@@ -65,7 +69,12 @@ export default function UpcomingAuctions() {
         {listingData.getListings.map((auction) => (
           <Grid key={auction} item className="upcomingCard">
             {userData.getSingleUser.isAdmin && (
-              <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
+              <div onClick={() => deleteListing(auction._id)}>
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className="deleteButton"
+                />
+              </div>
             )}
             <Card sx={{ width: 345, height: 345 }}>
               <CardMedia

@@ -6,6 +6,7 @@ export const DeleteListingModal = ({ open, onClose, listingId }) => {
     <Modal
       open={open}
       onClose={onClose}
+      listingId={listingId}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >

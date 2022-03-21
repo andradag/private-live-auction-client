@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useMutation } from "@apollo/client";
-import { ADD_BID, DELETE_LISTING } from "../mutations";
+import { DELETE_LISTING } from "../mutations";
 import { useState } from "react";
 
 const styles = {
@@ -34,20 +34,21 @@ const styles = {
 };
 
 export const DeleteListingForm = ({ listingId, onClose }) => {
-  const [executeDeleteListing, { loading, error }] =
-    useMutation(DELETE_LISTING);
+  const [executeDeleteListing] = useMutation(DELETE_LISTING);
+
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async ({ listingId }) => {
-    await executeDeleteListing({
-      variables: {
-        input: listingId,
-      },
-    });
+    console.log(listingId);
+    console.log(`${listingId} to be deleted`);
+    // await executeDeleteListing({
+    //   variables: {
+    //     input: listingId,
+    //   },
+    // });
 
     onClose();
   };

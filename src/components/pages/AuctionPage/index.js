@@ -7,12 +7,13 @@ import {useSubscription} from "@apollo/client";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
 
-import {GET_SINGLE_LISTING} from "../queries";
-import {AUCTION_BID_SUBSCRIPTION} from "../subscriptions";
+import {GET_SINGLE_LISTING} from "../../../queries";
+import {AUCTION_BID_SUBSCRIPTION} from "../../../subscriptions";
 
-import {BiddingCard} from "./BiddingCard";
-import {ListingItem} from "./ListingItem";
+import {BiddingCard} from "../../BiddingCard";
+import {ListingItem} from "../../ListingItem";
 
 export const AuctionPage = () => {
 	const {id} = useParams();
@@ -76,8 +77,19 @@ export const AuctionPage = () => {
 					Bidding Activity
 				</Typography>
 				<Box sx={styles.biddingContainer}>
-					{/* Data on page load */}
-					{auctionData && auctionData.map((bid) => <BiddingCard bid={bid} />)}
+					<List
+						sx={{
+							width: "100%",
+							maxWidth: 550,
+							bgcolor: "background.paper",
+							display: "flex",
+							flexDirection: "column-reverse",
+						}}
+						disablePadding
+					>
+						{/* Data on page load */}
+						{auctionData && auctionData.map((bid) => <BiddingCard bid={bid} />)}
+					</List>
 				</Box>
 			</>
 		)

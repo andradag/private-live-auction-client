@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { BiddingCard } from "../../BidddingCard";
+import { BiddingCard } from "../../biddingCard";
 
 export const Bidding = () => {
   const styles = {

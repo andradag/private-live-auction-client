@@ -1,4 +1,4 @@
-import UpcomingAuctions from "../../UpcomingAuctions";
+import UpcomingAuctions from "../../upcomingAuctions/UpcomingAuctions";
 import LiveAuctions from "../LiveAuctions/LiveAuctions";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -19,7 +19,7 @@ export const Dashboard = () => {
     loading: userLoading,
     error: userError,
   } = useQuery(GET_USER, {
-    variables: { userId: user._id },
+    variables: { userId: user.id },
   });
 
   const navigate = useNavigate();

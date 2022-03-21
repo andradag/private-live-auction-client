@@ -18,37 +18,12 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormGroup from "@mui/material/FormGroup";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { SingleImageUploader } from "../../SingleImageUploader";
 import { useState } from "react";
 import { ApolloError, useMutation } from "@apollo/client";
 import { CREATE_HOUSE } from "../../../mutations";
 import { useNavigate } from "react-router-dom";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const type = ["Flat", "House"];
-const amenities = ["Pool", "Gym", "Game Room", "Rooftop"];
-const heating = ["Boilers", "Electric Heating", "Direct Vent Heating"];
-
-const options = [
-  "Travelling",
-  "Exercise",
-  "Movies",
-  "Dancing",
-  "Cooking",
-  "Outdoors",
-  "Politics",
-  "Pets",
-];
+const options = ["Semi-Detached", "Detached", "Terraced"];
 
 export const HouseForm = () => {
   const [uploadedImage, setUploadedImage] = useState();
@@ -56,15 +31,15 @@ export const HouseForm = () => {
 
   const [executeCreateHouse, { loading, error }] = useMutation(CREATE_HOUSE);
 
-  // const {
-  //   house,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const navigate = useNavigate();
 
-  const handleSubmit = async ({
+  const onSubmit = async ({
     title,
     description,
     propertyType,
@@ -79,20 +54,22 @@ export const HouseForm = () => {
     try {
       const { data } = await executeCreateHouse({
         variables: {
-          userInput: {
+          input: {
             title,
             description,
             propertyType,
-            reserveAmount,
-            startingBid,
-            bedrooms,
-            bathrooms,
+            reserveAmount: parseFloat(reserveAmount),
+            startingBid: parseFloat(startingBid),
+            bedrooms: parseInt(bedrooms),
+            bathrooms: parseInt(bathrooms),
             googleMapUrl,
             keyFeatures,
-            images: uploadedImage.src,
+            images,
           },
         },
       });
+
+      console.log(data);
 
       if (data.addListing) {
         navigate("/dashboard", { replace: true });
@@ -127,23 +104,44 @@ export const HouseForm = () => {
   };
 
   return (
-    <Box sx={styles.container}>
+    <Box
+      sx={styles.container}
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
           House Form
         </Typography>
         <Grid container spacing={3}>
-          {/* <Grid item xs={12} sm={6}>
+          {/* TITLE */}
+          <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="country"
-              name="country"
-              label="Country"
+              id="title"
+              name="title"
+              label="Title"
               fullWidth
-              autoComplete="country"
+              autoComplete="title"
               variant="outlined"
+              {...register("title", { required: true })}
+              error={!!errors.title}
             />
-          </Grid> */}
+          </Grid>
+          {/* PROPERTY TYPE */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="propertyType"
+              name="propertyType"
+              label="propertyType"
+              fullWidth
+              autoComplete="propertyType"
+              variant="outlined"
+              {...register("propertyType", { required: true })}
+              error={!!errors.propertyType}
+            />
+          </Grid>
           {/* <Grid item xs={12} sm={6}>
             <Controller
               control={control}
@@ -182,40 +180,63 @@ export const HouseForm = () => {
               )}
             />
           </Grid> */}
-          {/* <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="city"
-              name="city"
-              label="City"
-              fullWidth
-              autoComplete="city"
-              variant="outlined"
-            />
-          </Grid>
-
+          {/* DESCRIPTION  */}
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="price"
-              name="price"
-              label="Price"
+              id="description"
+              name="description"
+              label="Description"
               fullWidth
-              autoComplete="price"
+              autoComplete="description"
               variant="outlined"
-            />
-          </Grid> */}
-          {/* <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="gardensize"
-              name="gardensize"
-              label="Garden Size"
-              fullWidth
-              autoComplete="gardensize"
-              variant="outlined"
+              {...register("description", { required: true })}
+              error={!!errors.description}
             />
           </Grid>
+          {/* PRICE */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="startingBid"
+              name="startingBid"
+              label="Starting Bid"
+              fullWidth
+              autoComplete="startingBid"
+              variant="outlined"
+              {...register("price", { required: true })}
+              error={!!errors.price}
+            />
+          </Grid>
+          {/* RESERVE AMOUNT */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="reserveAmount"
+              name="reserveAmount"
+              label="Reserve Amount"
+              fullWidth
+              autoComplete="reserveAmount"
+              variant="outlined"
+              {...register("reserveAmount", { required: true })}
+              error={!!errors.reserveAmount}
+            />
+          </Grid>
+          {/* STARTING BID */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="startingBid"
+              name="startingBid"
+              label="Starting Bid"
+              fullWidth
+              autoComplete="startingBid"
+              variant="outlined"
+              {...register("startingBid", { required: true })}
+              error={!!errors.startingBid}
+            />
+          </Grid>
+          {/* BEDROOMS */}
           <Grid item xs={12} sm={6}>
             <TextField
               required
@@ -225,9 +246,12 @@ export const HouseForm = () => {
               fullWidth
               autoComplete="bedrooms"
               variant="outlined"
+              {...register("bedrooms", { required: true })}
+              error={!!errors.bedrooms}
             />
-          </Grid> */}
-          {/* 
+          </Grid>
+
+          {/* BATHROOMS */}
           <Grid item xs={12} sm={6}>
             <TextField
               required
@@ -237,118 +261,57 @@ export const HouseForm = () => {
               fullWidth
               autoComplete="bathrooms"
               variant="outlined"
+              {...register("bathrooms", { required: true })}
+              error={!!errors.bathrooms}
             />
           </Grid>
 
+          {/* GOOGLE MAP URL */}
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="consummation"
-              name="consummation"
-              label="Energy Consummation"
+              id="googleMapUrl"
+              name="googleMapUrl"
+              label="Google Map Url"
+              autoComplete="googleMapUrl"
               fullWidth
               variant="outlined"
-            />
-          </Grid> */}
-          {/* <FormControl sx={{ mt: 3, ml: 3, width: 330 }}>
-            <InputLabel id="demo-multiple-checkbox-label">
-              Property Type
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={propertyType}
-              onChange={handleChange}
-              input={<OutlinedInput label="Property Type" />}
-              renderValue={(selected) => selected.join(", ")}
-              MenuProps={MenuProps}
-            >
-              {type.map((type) => (
-                <MenuItem key={type} value={type}>
-                  <Checkbox checked={propertyType.indexOf(type) > -1} />
-                  <ListItemText primary={type} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
-          {/* <FormControl sx={{ mt: 3, ml: 3, width: 330 }}>
-            <InputLabel id="demo-multiple-checkbox-label">Amenities</InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={propertyAmenities}
-              onChange={handleAmenities}
-              input={<OutlinedInput label="Property Amenities" />}
-              renderValue={(selected) => selected.join(", ")}
-              MenuProps={MenuProps}
-            >
-              {amenities.map((amenities) => (
-                <MenuItem key={amenities} value={amenities}>
-                  <Checkbox
-                    checked={propertyAmenities.indexOf(amenities) > -1}
-                  />
-                  <ListItemText primary={amenities} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-{/*  */}
-          {/* <FormControl sx={{ mt: 3, ml: 3, width: 330 }}>
-            <InputLabel id="demo-multiple-checkbox-label">
-              Heating Type
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={heatingType}
-              onChange={handleHeating}
-              input={<OutlinedInput label="Heating Type" />}
-              renderValue={(selected) => selected.join(", ")}
-              MenuProps={MenuProps}
-            >
-              {heating.map((heating) => (
-                <MenuItem key={heating} value={heating}>
-                  <Checkbox checked={propertyAmenities.indexOf(heating) > -1} />
-                  <ListItemText primary={heating} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>{" "} */}
-
-          {/* <Grid item xs={12}>
-            <TextField
-              required
-              id="description"
-              name="description"
-              label="Detailed Description"
-              fullWidth
-              variant="outlined"
+              {...register("googleMapUrl", { required: true })}
+              error={!!errors.googleMapUrl}
             />
           </Grid>
 
-          <FormGroup sx={{ mt: 3, ml: 2 }}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="EPC (energy performance certificate)"
+          {/* KEY FEATURES */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="keyFeatures"
+              name="keyFeatures"
+              label="Key Features"
+              autoComplete="keyFeatures"
+              fullWidth
+              variant="outlined"
+              {...register("keyFeatures", { required: true })}
+              error={!!errors.keyFeatures}
             />
-          </FormGroup>
-          <FormGroup sx={{ mt: 3, ml: 2 }}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="Leasehold"
-            />
-          </FormGroup>
-          <br />
+          </Grid>
 
-          <FormGroup sx={{ mt: 3, ml: 2 }}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="Freehold"
+          {/* IMAGES */}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="images"
+              name="images"
+              label="Images"
+              autoComplete="images"
+              fullWidth
+              variant="outlined"
+              {...register("images", { required: true })}
+              error={!!errors.images}
             />
-          </FormGroup> */}
+          </Grid>
+
+          {/* SUBMIT BUTTON */}
           <LoadingButton
             loadingIndicator="Loading..."
             loading={loading}
@@ -356,7 +319,6 @@ export const HouseForm = () => {
             fullWidth
             type="submit"
             sx={styles.loadingButton}
-            onClick={handleSubmit}
           >
             Submit
           </LoadingButton>

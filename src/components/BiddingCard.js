@@ -1,10 +1,7 @@
-// import {Fragment} from "react";
 import Avatar from "@mui/material/Avatar";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
 
 import {useAuth} from "../contexts/AppProvider";
@@ -12,29 +9,16 @@ import {useAuth} from "../contexts/AppProvider";
 export const BiddingCard = ({bid}) => {
 	const {user} = useAuth();
 	return (
-		<List
-			sx={{
-				width: "100%",
-				maxWidth: 500,
-				bgcolor: "background.paper",
-			}}
-			subheader={
-				<ListSubheader
-					sx={{
-						pl: 3,
-					}}
-				>
-					13:05
-				</ListSubheader>
-			}
-		>
+		<>
 			<ListItem
 				sx={{
 					justifyItems: "center",
 					alignItems: "center",
-					p: 0,
-					pl: 3,
+					p: 2.5,
 				}}
+				disablePadding
+				divider
+				secondaryAction={<Typography>13:07</Typography>}
 			>
 				<ListItemAvatar>
 					<Avatar alt={user.username} src={user.imageUrl} />
@@ -63,6 +47,6 @@ export const BiddingCard = ({bid}) => {
 					}
 				/>
 			</ListItem>
-		</List>
+		</>
 	);
 };

@@ -495,7 +495,6 @@ export const SecondaryDashboardPage = () => {
                 <Grid item xs={8} sx={{ justifyContent: "center" }}>
                   <Item>
                     <CardContent>
-                      <FontAwesomeIcon icon="fa-regular fa-rectangle-xmark" />
                       <h1>French Riviera Summer Home </h1>
                       <Typography
                         gutterBottom

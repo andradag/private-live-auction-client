@@ -33,7 +33,7 @@ const styles = {
   // loadingButton: {marginTop: 3, marginBottom: 2},
 };
 
-export const DeleteListingForm = ({ listingId, onClose }) => {
+export const DeleteListingForm = ({ deleteAuctionId, onClose }) => {
   const [executeDeleteListing] = useMutation(DELETE_LISTING);
 
   const {
@@ -42,13 +42,11 @@ export const DeleteListingForm = ({ listingId, onClose }) => {
   } = useForm();
 
   const onSubmit = async ({ listingId }) => {
-    console.log(listingId);
-    console.log(`${listingId} to be deleted`);
-    // await executeDeleteListing({
-    //   variables: {
-    //     input: listingId,
-    //   },
-    // });
+    await executeDeleteListing({
+      variables: {
+        input: deleteAuctionId,
+      },
+    });
 
     onClose();
   };

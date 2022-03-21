@@ -10,7 +10,7 @@ export const DeleteListingModal = ({ open, onClose, listingId }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <DeleteListingForm listingId={listingId} onClose={onClose} />
+      <DeleteListingForm deleteAuctionId={listingId} onClose={onClose} />
     </Modal>
   );
 };

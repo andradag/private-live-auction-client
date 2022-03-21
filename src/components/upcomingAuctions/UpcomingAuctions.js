@@ -7,7 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useMutation, useQuery } from "@apollo/client";
-import { SAVELISTING, DELETE_AUCTION } from "../../mutations";
+import { SAVELISTING, DELETE_LISTING } from "../../mutations";
 import { GET_LISTINGS } from "../../queries";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -53,10 +53,6 @@ export default function UpcomingAuctions() {
     navigate(`/auction/${auctionID}`);
   };
 
-  const deleteListing = async (id) => {
-    console.log(`${id} is to be deleted`);
-  };
-
   const saveListing = async (id) => {
     await executeSaveListing({ variables: { input: id } });
   };
@@ -84,7 +80,7 @@ export default function UpcomingAuctions() {
             <DeleteListingModal
               open={isModalOpen}
               onClose={handleModalClose}
-              listingId={auction.id}
+              listingId={auction._id}
             />
             <Card sx={{ width: 345, height: 345 }}>
               <CardMedia

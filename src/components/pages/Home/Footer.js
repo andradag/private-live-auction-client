@@ -7,53 +7,54 @@ export default function Footer() {
   return (
     <footer>
       <Box
-      // px={{ xs: 3, sm: 10 }}
-      // py={{ xs: 3, sm: 10 }}
-      // bgcolor="text.Secondary"
-      // color="white"
+        px={{ xs: 3, sm: 10 }}
+        s
+        py={{ xs: 3, sm: 10 }}
+        bgcolor="text.Secondary"
+        color="purple"
       >
         <Container maxWidth="lg">
           <Grid container spacing={5}>
             <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Help</Box>
+              <Box borderBottom={1}>Contact</Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Contact
+                  Phone
                 </Link>
               </Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Support
-                </Link>
-              </Box>
-
-              <Box>
-                <Link href="/" color="inherit">
-                  Privacy
-                </Link>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Help</Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Contact
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Support
+                  Email
                 </Link>
               </Box>
 
               <Box>
                 <Link href="/" color="inherit">
-                  Privacy
+                  LinkedIn
                 </Link>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Account</Box>
+              <Box borderBottom={1}>About</Box>
+              <Box>
+                <Link href="/" color="inherit">
+                  Privacy
+                </Link>
+              </Box>
+              <Box>
+                <Link href="/" color="inherit">
+                  Cookies
+                </Link>
+              </Box>
+
+              <Box>
+                <Link href="/" color="inherit">
+                  Terms of Business
+                </Link>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Box borderBottom={1}>Profile</Box>
               <Box>
                 <Link href="/" color="inherit">
                   Login
@@ -61,13 +62,13 @@ export default function Footer() {
               </Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Register
+                  Logout
                 </Link>
               </Box>
 
               <Box>
                 <Link href="/" color="inherit">
-                  Privacy
+                  Register
                 </Link>
               </Box>
             </Grid>

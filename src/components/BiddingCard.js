@@ -18,7 +18,7 @@ export const BiddingCard = ({bid}) => {
 				}}
 				disablePadding
 				divider
-				secondaryAction={<Typography>13:07</Typography>}
+				secondaryAction={<Typography>{bid.bidTime}</Typography>}
 			>
 				<ListItemAvatar>
 					<Avatar alt={user.username} src={user.imageUrl} />

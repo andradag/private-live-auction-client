@@ -64,7 +64,9 @@ export default function UpcomingAuctions() {
       <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
         {listingData.getListings.map((auction) => (
           <Grid key={auction} item className="upcomingCard">
-            <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
+            {userData.getSingleUser.isAdmin && (
+              <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
+            )}
             <Card sx={{ width: 345, height: 345 }}>
               <CardMedia
                 component="img"

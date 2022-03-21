@@ -1,6 +1,8 @@
 import * as React from "react";
+import { Controller, useForm } from "react-hook-form";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -14,6 +16,8 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormGroup from "@mui/material/FormGroup";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -30,7 +34,20 @@ const type = ["Flat", "House"];
 const amenities = ["Pool", "Gym", "Game Room", "Rooftop"];
 const heating = ["Boilers", "Electric Heating", "Direct Vent Heating"];
 
+const options = [
+  "Travelling",
+  "Exercise",
+  "Movies",
+  "Dancing",
+  "Cooking",
+  "Outdoors",
+  "Politics",
+  "Pets",
+];
+
 export const HouseForm = () => {
+  const { control } = useForm();
+
   const [propertyType, setPropertyType] = React.useState([]);
 
   const handleAmenities = (event) => {
@@ -100,6 +117,44 @@ export const HouseForm = () => {
               fullWidth
               autoComplete="country"
               variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              control={control}
+              name="propertyType"
+              render={({ field: { onChange, value } }) => (
+                <Autocomplete
+                  multiple
+                  fullWidth
+                  options={options}
+                  disableCloseOnSelect
+                  getOptionLabel={(option) => option}
+                  renderOption={(props, option, { selected }) => (
+                    <li {...props}>
+                      <Checkbox
+                        icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                        checkedIcon={<CheckBoxIcon fontSize="small" />}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option}
+                    </li>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Property Type"
+                      margin="normal"
+                      variant="outlined"
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                  onChange={(event, values, reason) => onChange(values)}
+                  value={value || []}
+                />
+              )}
             />
           </Grid>
 

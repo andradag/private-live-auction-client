@@ -1,17 +1,90 @@
-import AuctionCard from "../../AuctionCard";
+import UpcomingAuctions from "../../upcomingAuctions/UpcomingAuctions";
+import LiveAuctions from "../LiveAuctions/LiveAuctions";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import { useAuth } from "../../../contexts/AppProvider";
+import { useQuery } from "@apollo/client";
+import { GET_USER } from "../../../queries";
+import { Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
+  const { user } = useAuth();
+
+  // // Get user admin status
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError,
+  } = useQuery(GET_USER, {
+    variables: { userId: user.id },
+  });
+
+  const navigate = useNavigate();
+
+  if (userError && !userLoading) return <h1>User error</h1>;
+
+  const createAuction = () => {
+    navigate("/create-auction");
+  };
+
+  const styles = {
+    header: {
+      paddingTop: 2,
+      paddingBottom: 2,
+      mx: "auto",
+    },
+    stack: {
+      paddingTop: 2,
+      paddingBottom: 2,
+      width: 1,
+    },
+  };
   // Query the DB to get the auctions
   // Map the cards below
-  return (
-    <>
-      <h1>Dashboard Page</h1>
-      {/* AuctionCard will accept props based on data (auction1/2/3) */}
-      {/* Auction data will be mapped accordingly */}
-      {/* Put in a grid container */}
-      <AuctionCard />
-      <AuctionCard />
-      <AuctionCard />
-    </>
-  );
+  if (userData?.getSingleUser && !userLoading) {
+    return (
+      <>
+        {/* If user is admin will se "Create auction" button */}
+        {userData.getSingleUser.isAdmin && (
+          <Stack justifycontent="center" alignItems="center" sx={styles.stack}>
+            <Button onClick={createAuction} size="medium" variant="contained">
+              Create auction
+            </Button>
+          </Stack>
+        )}
+        {/* If user is normal user will see "Request auction" */}
+        {!userData.getSingleUser.isAdmin && (
+          <Stack justifycontent="center" alignItems="center" sx={styles.stack}>
+            <Button size="medium" variant="contained">
+              Request auction
+            </Button>
+          </Stack>
+        )}
+        {/* Live Auctions */}
+        <Box>
+          <LiveAuctions />
+        </Box>
+
+        {/* Upcoming Auctions */}
+        <Box>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Upcoming Auctions
+          </Typography>
+          <Divider />
+          <UpcomingAuctions />
+        </Box>
+      </>
+    );
+  } else {
+    return <Box></Box>;
+  }
 };

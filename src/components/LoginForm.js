@@ -41,13 +41,7 @@ export const LoginForm = () => {
       localStorage.setItem("user", JSON.stringify(user));
 
       setIsLoggedIn(true);
-      setUser({
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        username: user.username,
-      });
+      setUser(user);
 
       navigate("/dashboard", { replace: true });
     }
@@ -75,6 +69,9 @@ export const LoginForm = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant="h5" gutterBottom>
+        Login Form
+      </Typography>
       <TextField
         margin="normal"
         id="email"

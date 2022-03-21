@@ -10,9 +10,20 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 import {PostBidModal} from "./PostBidModal";
+import {useQuery} from "@apollo/client";
+import {GET_SINGLE_LISTING} from "../queries";
+import {useAuth} from "../contexts/AppProvider";
 
 export const ListingItem = ({listingId, data, currentBid}) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const {
+		data: listingData,
+		loading: listingLoading,
+		error: listingError,
+	} = useQuery(GET_SINGLE_LISTING, {variables: {id: listingId}});
+
+	const {user} = useAuth();
 
 	const handleModalOpen = () => setIsModalOpen(true);
 	const handleModalClose = () => setIsModalOpen(false);
@@ -75,33 +86,54 @@ export const ListingItem = ({listingId, data, currentBid}) => {
 			</Card>
 			<Card sx={styles.listingCard}>
 				<CardContent sx={{display: "inline-flex", alignItems: "center", p: 0}}>
-					{currentBid && (
+					{listingData.getSingleListing.status === "Live" ? (
 						<>
 							<Typography variant="h6" component="div" sx={{mr: 2}}>
 								Current bid:
 							</Typography>
-							<Typography variant="h5" component="div">
-								£{currentBid?.amount}
-							</Typography>
+							{!currentBid ? (
+								<Typography variant="h6" component="div">
+									No Bids
+								</Typography>
+							) : (
+								<Typography variant="h5" component="div">
+									£{currentBid?.amount}
+								</Typography>
+							)}
 						</>
+					) : (
+						<Typography variant="h6" component="div" sx={{mr: 2}}>
+							Bidding has not started
+						</Typography>
 					)}
 				</CardContent>
-				<CardActions sx={styles.listingCardAction}>
-					<Button
-						sx={styles.listingButtons}
-						variant="contained"
-						onClick={handleModalOpen}
-					>
-						Place A Bid
-					</Button>
-					<PostBidModal
-						open={isModalOpen}
-						onClose={handleModalClose}
-						listingId={listingId}
-						currentBid={currentBid}
-						startingBid={data.getSingleListing.startingBid}
-					/>
-				</CardActions>
+				{listingData.getSingleListing.status === "Live" && (
+					<CardActions sx={styles.listingCardAction}>
+						{user.isAdmin ? (
+							<Button sx={styles.listingButtons} variant="contained">
+								Stop Bidding
+							</Button>
+						) : (
+							<>
+								{" "}
+								<Button
+									sx={styles.listingButtons}
+									variant="contained"
+									onClick={handleModalOpen}
+								>
+									Place A Bid
+								</Button>
+								<PostBidModal
+									open={isModalOpen}
+									onClose={handleModalClose}
+									listingId={listingId}
+									currentBid={currentBid}
+									startingBid={data.getSingleListing.startingBid}
+								/>
+							</>
+						)}
+					</CardActions>
+				)}
 			</Card>
 		</Box>
 	);

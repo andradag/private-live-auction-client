@@ -29,16 +29,15 @@ export const ListingItem = ({listingId, data, currentBid}) => {
 		listingCard: {
 			display: "flex",
 			flexDirection: "column",
-			justifyContent: "space-evenly",
+			justifyContent: "center",
 			alignItems: "center",
 			boxShadow: 4,
 			width: "50%",
+			gap: "1rem",
 		},
 		listingCardArea: {
 			height: 1,
 		},
-		listingCardContent: {},
-
 		listingCardAction: {
 			justifyContent: "center",
 			width: 1,
@@ -46,7 +45,7 @@ export const ListingItem = ({listingId, data, currentBid}) => {
 		listingButtons: {
 			display: "flex",
 			flexDirection: "column",
-			width: "40%",
+			width: "150px",
 			height: "50px",
 		},
 	};
@@ -75,24 +74,25 @@ export const ListingItem = ({listingId, data, currentBid}) => {
 				</CardActionArea>
 			</Card>
 			<Card sx={styles.listingCard}>
-				<CardContent sx={{p: 0}}>
+				<CardContent sx={{display: "inline-flex", alignItems: "center", p: 0}}>
 					{currentBid && (
-						<Typography gutterBottom variant="h4" component="div">
-							Current bid: £{currentBid?.amount}
-						</Typography>
+						<>
+							<Typography variant="h6" component="div" sx={{mr: 2}}>
+								Current bid:
+							</Typography>
+							<Typography variant="h5" component="div">
+								£{currentBid?.amount}
+							</Typography>
+						</>
 					)}
 				</CardContent>
 				<CardActions sx={styles.listingCardAction}>
-					<Button sx={styles.listingButtons} variant="contained">
-						BID £550
-					</Button>
-
 					<Button
 						sx={styles.listingButtons}
 						variant="contained"
 						onClick={handleModalOpen}
 					>
-						CUSTOM BID
+						Place A Bid
 					</Button>
 					<PostBidModal
 						open={isModalOpen}

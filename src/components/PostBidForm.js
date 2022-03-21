@@ -99,7 +99,7 @@ export const PostBidForm = ({listingId, currentBid, startingBid, onClose}) => {
 					// color={error ? "error" : "primary"}
 					onClick={handleSubmit(onSubmit)}
 				>
-					Make Bid
+					Submit Bid
 				</LoadingButton>
 			</FormControl>
 		</Box>

@@ -15,6 +15,7 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../contexts/AppProvider";
 import { GET_USER } from "../../queries";
 import "./upcomingAuctions.css";
+import { DeleteListingModal } from "../DeleteListingModal";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
@@ -28,6 +29,7 @@ export default function UpcomingAuctions() {
   } = useQuery(GET_USER, {
     variables: { userId: user.id },
   });
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const [executeSaveListing, { data }] = useMutation(SAVELISTING);
 
@@ -51,9 +53,16 @@ export default function UpcomingAuctions() {
     navigate(`/auction/${auctionID}`);
   };
 
+  const deleteListing = async (id) => {
+    console.log(`${id} is to be deleted`);
+  };
+
   const saveListing = async (id) => {
     await executeSaveListing({ variables: { input: id } });
   };
+  const handleModalOpen = () => setIsModalOpen(true);
+
+  const handleModalClose = () => setIsModalOpen(false);
 
   if (listingError && !listingLoading) {
     return <h1>Error loading listings</h1>;
@@ -64,7 +73,19 @@ export default function UpcomingAuctions() {
       <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
         {listingData.getListings.map((auction) => (
           <Grid key={auction} item className="upcomingCard">
-            <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
+            {userData.getSingleUser.isAdmin && (
+              <div onClick={handleModalOpen}>
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className="deleteButton"
+                />
+              </div>
+            )}
+            <DeleteListingModal
+              open={isModalOpen}
+              onClose={handleModalClose}
+              listingId={auction.id}
+            />
             <Card sx={{ width: 345, height: 345 }}>
               <CardMedia
                 component="img"

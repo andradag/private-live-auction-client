@@ -16,6 +16,8 @@ import { CREATE_HOUSE } from "../../../mutations";
 import { useNavigate } from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
 import HelpIcon from "@mui/icons-material/Help";
+import "./houseForm.css";
+import Popover from "@mui/material/Popover";
 
 export const HouseForm = () => {
   const [uploadedImage, setUploadedImage] = useState();
@@ -35,9 +37,18 @@ export const HouseForm = () => {
     setBathrooms(event.target.value);
   };
 
-  const handleAddKeyFeature = () => {
-    console.log("hi");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const [executeCreateHouse, { loading, error }] = useMutation(CREATE_HOUSE);
 
@@ -172,8 +183,24 @@ export const HouseForm = () => {
             />
           </Grid>
           {/* STARTING BID */}
-          <Grid item xs={12} sm={6}>
-            <HelpIcon />
+          <Grid item xs={12} sm={6} className="relativeForm">
+            <HelpIcon className="helperIcon" onClick={handleClick} />
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+            >
+              <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+            </Popover>
             <FormControl fullWidth>
               <InputLabel htmlFor="outlined-adornment-amount">
                 Starting Bid

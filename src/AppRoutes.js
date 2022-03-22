@@ -7,7 +7,7 @@ import {SignUp} from "./pages/SignUp";
 import {AuctionPage} from "./pages/AuctionPage";
 import {CreateAuctionForm} from "./pages/CreateAuction";
 import {SecondaryDashboardPage} from "./pages/SecondaryDashboard";
-import {HowToBid} from "./components/pages/HowToBid";
+import {HowToBid} from "./pages/HowToBid";
 
 export const AppRoutes = () => {
 	return (

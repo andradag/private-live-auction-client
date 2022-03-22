@@ -54,28 +54,38 @@ export const GET_LISTINGS = gql`
 `;
 
 export const GET_SINGLE_LISTING = gql`
-	query Query($id: ID!) {
-		getSingleListing(_id: $id) {
-			_id
-			title
-			description
-			category {
-				_id
-				title
-			}
-			reserveAmount
-			startingBid
-			status
-			bids {
-				amount
-				user {
-					firstName
-					lastName
-					username
-				}
-			}
-		}
-	}
+  query Query($id: ID!) {
+    getSingleListing(_id: $id) {
+      _id
+      title
+      description
+      category {
+        _id
+        title
+      }
+      reserveAmount
+      startingBid
+      status
+      bids {
+        amount
+        # listingId
+        user {
+          firstName
+          lastName
+          username
+        }
+      }
+      currentBid {
+        amount
+        # listingId
+        user {
+          firstName
+          lastName
+          username
+        }
+      }
+    }
+  }
 `;
 
 export const CATEGORY = gql`

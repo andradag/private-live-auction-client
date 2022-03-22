@@ -25,9 +25,6 @@ export const GET_USER = gql`
 				_id
 				title
 				description
-				category {
-					title
-				}
 				startingBid
 				reserveAmount
 				status
@@ -42,10 +39,6 @@ export const GET_LISTINGS = gql`
 			_id
 			title
 			description
-			category {
-				_id
-				title
-			}
 			reserveAmount
 			startingBid
 			status
@@ -59,16 +52,12 @@ export const GET_SINGLE_LISTING = gql`
 			_id
 			title
 			description
-			category {
-				_id
-				title
-			}
 			reserveAmount
 			startingBid
 			status
 			bids {
 				amount
-				bidTime
+				# listingId
 				user {
 					firstName
 					lastName
@@ -77,6 +66,7 @@ export const GET_SINGLE_LISTING = gql`
 			}
 			currentBid {
 				amount
+				# listingId
 				user {
 					firstName
 					lastName

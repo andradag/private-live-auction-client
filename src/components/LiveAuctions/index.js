@@ -13,9 +13,23 @@ import Typography from "@mui/material/Typography";
 import {GET_LISTINGS} from "../../queries";
 
 import "./LiveAuction.css";
+import {GET_LISTINGS, GET_USER} from "../../../queries";
+import {useQuery} from "@apollo/client";
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../../contexts/AppProvider";
 
 // Will accept "auction" prop which will inclue title, image etc
 export const LiveAuctions = () => {
+	const {user} = useAuth();
+
+	const {
+		data: userData,
+		loading: userLoading,
+		error: userError,
+	} = useQuery(GET_USER, {
+		variables: {userId: user.id},
+	});
+
 	const {
 		data: listingData,
 		loading: listingLoading,
@@ -62,17 +76,34 @@ export const LiveAuctions = () => {
 								</Typography>
 							</CardContent>
 							<CardActions>
-								<Button
-									size="small"
-									variant="outlined"
-									className="liveButton"
-									sx={{
-										border: "none",
-										cursor: "default",
-									}}
-								>
-									Live
-								</Button>
+								{/* if user admin, live button should allow toggle */}
+								{userData.getSingleUser.isAdmin && (
+									<Button
+										size="small"
+										variant="outlined"
+										className="liveButton"
+										sx={{
+											border: "none",
+											cursor: "default",
+										}}
+									>
+										TOGGLE
+									</Button>
+								)}
+								{!userData.getSingleUser.isAdmin && (
+									<Button
+										size="small"
+										variant="outlined"
+										className="liveButton"
+										sx={{
+											border: "none",
+											cursor: "default",
+										}}
+									>
+										Live
+									</Button>
+								)}
+
 								<Button
 									size="small"
 									variant="contained"

@@ -14,7 +14,9 @@ import { createClient } from "graphql-ws";
 import { AppProvider } from "./contexts/AppProvider";
 
 import { Navbar } from "./components/Navbar";
-import { AppRoutes } from "./AppRoutes.js";
+
+// import { AppRoutes } from "./AppRoutes.js";
+import { SecondaryDashboardPage } from "../src/components/pages/Secondary-Dashboard/index.js";
 
 import "./reset.css";
 import "./styles.css";
@@ -65,7 +67,8 @@ export const App = () => {
       <AppProvider>
         <BrowserRouter>
           <Navbar />
-          <AppRoutes />
+          {/* <AppRoutes /> */}
+          <SecondaryDashboardPage />
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

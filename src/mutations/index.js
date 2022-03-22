@@ -67,3 +67,4 @@ export const ADD_BID = gql`
     }
   }
 `;
+

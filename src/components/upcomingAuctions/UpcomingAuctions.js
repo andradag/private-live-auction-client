@@ -7,13 +7,28 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useMutation, useQuery } from "@apollo/client";
-import { SAVELISTING } from "../mutations";
-import { GET_LISTINGS } from "../queries";
+import { SAVELISTING } from "../../mutations";
+import { GET_LISTINGS } from "../../queries";
 import { useNavigate } from "react-router-dom";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../contexts/AppProvider";
+import { GET_USER } from "../../queries";
+import "./upcomingAuctions.css";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
+  const { user } = useAuth();
+
+  // // Get user admin status
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError,
+  } = useQuery(GET_USER, {
+    variables: { userId: user.id },
+  });
+
   const [executeSaveListing, { data }] = useMutation(SAVELISTING);
 
   // Get upcoming listings
@@ -48,15 +63,17 @@ export default function UpcomingAuctions() {
     return (
       <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
         {listingData.getListings.map((auction) => (
-          <Grid key={auction} item>
+          <Grid key={auction} item className="upcomingCard">
+            <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
             <Card sx={{ width: 345, height: 345 }}>
-              {/* <FontAwesomeIcon icon="fa-solid fa-pen" /> */}
               <CardMedia
                 component="img"
                 height="50%"
                 // Example of prop usage here would be {auction.image}
                 image={auction.image}
+                sx={{ position: "relative", zIndex: 1 }}
               />
+
               <CardContent sx={{ height: 80 }}>
                 {/* Title */}
                 <Typography gutterBottom variant="h5" component="div">
@@ -75,14 +92,22 @@ export default function UpcomingAuctions() {
                 >
                   View
                 </Button>
-                <Button
-                  onClick={() => saveListing(auction._id)}
-                  id="12345"
-                  size="small"
-                  variant="contained"
-                >
-                  Register
-                </Button>
+                {/* If user is admin will se "Create auction" button */}
+                {userData.getSingleUser.isAdmin && (
+                  <Button id="12345" size="small" variant="contained">
+                    Edit
+                  </Button>
+                )}
+                {!userData.getSingleUser.isAdmin && (
+                  <Button
+                    onClick={() => saveListing(auction._id)}
+                    id="12345"
+                    size="small"
+                    variant="contained"
+                  >
+                    Register
+                  </Button>
+                )}
               </CardActions>
             </Card>
           </Grid>

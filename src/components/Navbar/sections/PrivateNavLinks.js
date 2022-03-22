@@ -1,14 +1,22 @@
 import {Link} from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import {useAuth} from "../../../contexts/AppProvider";
 
 const privateRoutes = [
-	{title: "Home", path: "/"},
-	{title: "Dashboard", path: "dashboard"},
-	{title: "Create Listing", path: "create-auction"},
+	{id: "home", title: "Home", path: "/"},
+	{id: "dashboard", title: "Dashboard", path: "dashboard"},
+	{id: "logout", title: "Logout", path: "/"},
 ];
 
-export const PrivateNavLinks = () => {
+const adminRoutes = [
+	{id: "createListing", title: "Create Listing", path: "create-auction"},
+];
+
+export const PrivateNavLinks = ({handleLogout}) => {
+	const {user} = useAuth();
+
 	return (
 		<Box
 			sx={{
@@ -20,7 +28,7 @@ export const PrivateNavLinks = () => {
 			{privateRoutes.map((page, i) => (
 				<Link key={i} to={page.path} className="page-btn">
 					<Button
-						key={i}
+						id={page.id}
 						sx={{
 							my: 2,
 							color: "white",
@@ -30,11 +38,31 @@ export const PrivateNavLinks = () => {
 							borderRadius: "5px",
 						}}
 						className="button"
+						onClick={handleLogout}
 					>
 						{page.title}
 					</Button>
 				</Link>
 			))}
+			{user?.isAdmin &&
+				adminRoutes.map((page, i) => (
+					<Link key={i} to={page.path} className="page-btn">
+						<Button
+							id={page.id}
+							sx={{
+								my: 2,
+								color: "white",
+								display: "block",
+								margin: "unset",
+								padding: "12px",
+								borderRadius: "5px",
+							}}
+							className="button"
+						>
+							{page.title}
+						</Button>
+					</Link>
+				))}
 		</Box>
 	);
 };

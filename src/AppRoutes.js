@@ -1,11 +1,11 @@
 import {Route, Routes} from "react-router-dom";
 
-import {Home} from "./components/pages/Home/";
-import {Dashboard} from "./components/pages/Dashboard";
-import {Login} from "./components/pages/Login";
-import {SignUp} from "./components/pages/SignUp";
-import {AuctionPage} from "./components/AuctionPage";
-import {CreateAuctionForm} from "./components/create-auction";
+import {Home} from "./pages/Home/";
+import {Dashboard} from "./pages/Dashboard";
+import {Login} from "./pages/Login";
+import {SignUp} from "./pages/SignUp";
+import {AuctionPage} from "./pages/AuctionPage";
+import {CreateAuctionForm} from "./pages/CreateAuction";
 
 export const AppRoutes = () => {
 	return (

@@ -10,13 +10,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import {GET_LISTINGS} from "../../queries";
+import {GET_LISTINGS, GET_USER} from "../../queries";
 
 import "./LiveAuction.css";
-import {GET_LISTINGS, GET_USER} from "../../../queries";
-import {useQuery} from "@apollo/client";
-import {useNavigate} from "react-router-dom";
-import {useAuth} from "../../../contexts/AppProvider";
+
+import {useAuth} from "../../contexts/AppProvider";
 
 // Will accept "auction" prop which will inclue title, image etc
 export const LiveAuctions = () => {

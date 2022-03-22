@@ -1,33 +1,43 @@
 import * as React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import LoadingButton from "@mui/lab/LoadingButton";
-import ErrorIcon from "@mui/icons-material/Error";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import FormGroup from "@mui/material/FormGroup";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { useState } from "react";
 import { ApolloError, useMutation } from "@apollo/client";
 import { CREATE_HOUSE } from "../../../mutations";
 import { useNavigate } from "react-router-dom";
-
-const options = ["Semi-Detached", "Detached", "Terraced"];
+import InputAdornment from "@mui/material/InputAdornment";
+import { Button } from "@mui/material";
 
 export const HouseForm = () => {
   const [uploadedImage, setUploadedImage] = useState();
-  const { control } = useForm();
+  const [propType, setPropType] = useState();
+
+  const handlePropTypeChange = (event) => {
+    setPropType(event.target.value);
+  };
+
+  const [bedrooms, setBedrooms] = useState();
+  const handleBedroomsChange = (event) => {
+    setBedrooms(event.target.value);
+  };
+
+  const [bathrooms, setBathrooms] = useState();
+  const handleBathroomsChange = (event) => {
+    setBathrooms(event.target.value);
+  };
+
+  const handleAddKeyFeature = () => {
+    console.log("hi");
+  };
 
   const [executeCreateHouse, { loading, error }] = useMutation(CREATE_HOUSE);
 
@@ -130,144 +140,125 @@ export const HouseForm = () => {
           </Grid>
           {/* PROPERTY TYPE */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="propertyType"
-              name="propertyType"
-              label="propertyType"
-              fullWidth
-              autoComplete="propertyType"
-              variant="outlined"
-              {...register("propertyType", { required: true })}
-              error={!!errors.propertyType}
-            />
+            <FormControl fullWidth>
+              <InputLabel id="propertyType">Property Type</InputLabel>
+              <Select
+                labelId="propertyTypeLabelId"
+                id="propertyTypeId"
+                value={propType}
+                defaultValue=""
+                label="Property Type"
+                onChange={handlePropTypeChange}
+                {...register("propertyType", { required: true })}
+                error={!!errors.propertyType}
+              >
+                <MenuItem value={"Detached"}>Detached</MenuItem>
+                <MenuItem value={"Semi-Detached"}>Semi-Detached</MenuItem>
+                <MenuItem value={"Terraced"}>Terraced</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
-          {/* <Grid item xs={12} sm={6}>
-            <Controller
-              control={control}
-              name="propertyType"
-              render={({ field: { onChange, value } }) => (
-                <Autocomplete
-                  multiple
-                  fullWidth
-                  options={options}
-                  disableCloseOnSelect
-                  getOptionLabel={(option) => option}
-                  renderOption={(props, option, { selected }) => (
-                    <li {...props}>
-                      <Checkbox
-                        icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-                        checkedIcon={<CheckBoxIcon fontSize="small" />}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {option}
-                    </li>
-                  )}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Property Type"
-                      margin="normal"
-                      variant="outlined"
-                      onChange={onChange}
-                      value={value}
-                    />
-                  )}
-                  onChange={(event, values, reason) => onChange(values)}
-                  value={value || []}
-                />
-              )}
-            />
-          </Grid> */}
           {/* DESCRIPTION  */}
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
-              id="description"
-              name="description"
-              label="Description"
               fullWidth
-              autoComplete="description"
-              variant="outlined"
+              id="description"
+              label="Description"
+              multiline
+              rows={5}
               {...register("description", { required: true })}
               error={!!errors.description}
             />
           </Grid>
-          {/* PRICE */}
+          {/* STARTING BID */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="startingBid"
-              name="startingBid"
-              label="Starting Bid"
-              fullWidth
-              autoComplete="startingBid"
-              variant="outlined"
-              {...register("price", { required: true })}
-              error={!!errors.price}
-            />
+            <FormControl fullWidth>
+              <InputLabel htmlFor="outlined-adornment-amount">
+                Starting Bid
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-amount"
+                startAdornment={
+                  <InputAdornment position="start">£</InputAdornment>
+                }
+                label="Starting Bid"
+                {...register("startingBid", { required: true })}
+                error={!!errors.startingBid}
+              />
+            </FormControl>
           </Grid>
           {/* RESERVE AMOUNT */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="reserveAmount"
-              name="reserveAmount"
-              label="Reserve Amount"
-              fullWidth
-              autoComplete="reserveAmount"
-              variant="outlined"
-              {...register("reserveAmount", { required: true })}
-              error={!!errors.reserveAmount}
-            />
-          </Grid>
-          {/* STARTING BID */}
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="startingBid"
-              name="startingBid"
-              label="Starting Bid"
-              fullWidth
-              autoComplete="startingBid"
-              variant="outlined"
-              {...register("startingBid", { required: true })}
-              error={!!errors.startingBid}
-            />
+            <FormControl fullWidth>
+              <InputLabel htmlFor="outlined-adornment-amount">
+                Reserve Amount
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-amount"
+                startAdornment={
+                  <InputAdornment position="start">£</InputAdornment>
+                }
+                label="Reserve Bid"
+                {...register("reserveAmount", { required: true })}
+                error={!!errors.reserveAmount}
+              />
+            </FormControl>
           </Grid>
           {/* BEDROOMS */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="bedrooms"
-              name="bedrooms"
-              label="Bedrooms"
-              fullWidth
-              autoComplete="bedrooms"
-              variant="outlined"
-              {...register("bedrooms", { required: true })}
-              error={!!errors.bedrooms}
-            />
+            <FormControl fullWidth>
+              <InputLabel id="bedrooms">Bedrooms</InputLabel>
+              <Select
+                id="propertyTypeId"
+                value={bedrooms}
+                label="Bedrooms"
+                defaultValue=""
+                onChange={handleBedroomsChange}
+                {...register("bedrooms", { required: true })}
+                error={!!errors.bedrooms}
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={6}>6</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={9}>9</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
 
           {/* BATHROOMS */}
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="bathrooms"
-              name="bathrooms"
-              label="Bathrooms"
-              fullWidth
-              autoComplete="bathrooms"
-              variant="outlined"
-              {...register("bathrooms", { required: true })}
-              error={!!errors.bathrooms}
-            />
+            <FormControl fullWidth>
+              <InputLabel id="bathrooms">Bathrooms</InputLabel>
+              <Select
+                id="propertyTypeId"
+                value={bathrooms}
+                label="bathrooms"
+                defaultValue=""
+                onChange={handleBathroomsChange}
+                {...register("bathrooms", { required: true })}
+                error={!!errors.bathrooms}
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={6}>6</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
+                <MenuItem value={8}>8</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
 
           {/* GOOGLE MAP URL */}
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               id="googleMapUrl"
@@ -282,12 +273,13 @@ export const HouseForm = () => {
           </Grid>
 
           {/* KEY FEATURES */}
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               id="keyFeatures"
               name="keyFeatures"
               label="Key Features"
+              helperText="Separate key features with a comma (i.e: Garden, Parking, Large Bedrooms)"
               autoComplete="keyFeatures"
               fullWidth
               variant="outlined"
@@ -297,7 +289,7 @@ export const HouseForm = () => {
           </Grid>
 
           {/* IMAGES */}
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12}>
             <TextField
               required
               id="images"
@@ -311,17 +303,19 @@ export const HouseForm = () => {
             />
           </Grid>
 
-          {/* SUBMIT BUTTON */}
-          <LoadingButton
-            loadingIndicator="Loading..."
-            loading={loading}
-            variant="contained"
-            fullWidth
-            type="submit"
-            sx={styles.loadingButton}
-          >
-            Submit
-          </LoadingButton>
+          <Grid item xs={12} sm={12}>
+            {/* SUBMIT BUTTON */}
+            <LoadingButton
+              loadingIndicator="Loading..."
+              loading={loading}
+              variant="contained"
+              fullWidth
+              type="submit"
+              sx={styles.loadingButton}
+            >
+              Submit
+            </LoadingButton>
+          </Grid>
         </Grid>
       </React.Fragment>
     </Box>

@@ -7,6 +7,7 @@ import {SignUp} from "./pages/SignUp";
 import {AuctionPage} from "./pages/AuctionPage";
 import {CreateAuctionForm} from "./pages/CreateAuction";
 import {SecondaryDashboardPage} from "./pages/SecondaryDashboard";
+import {HowToBid} from "./components/pages/HowToBid";
 
 export const AppRoutes = () => {
 	return (
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
 			<Route path="/login" element={<Login />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/auction/:id" element={<AuctionPage />} />
+			<Route path="/how-to-bid" element={<HowToBid />} />
 			<Route path="/create-auction" element={<CreateAuctionForm />} />
 			<Route path="*" element={<Home />} />
 		</Routes>

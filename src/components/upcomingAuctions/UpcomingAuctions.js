@@ -7,7 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useMutation, useQuery } from "@apollo/client";
-import { SAVELISTING } from "../../mutations";
+import { SAVELISTING, DELETE_LISTING } from "../../mutations";
 import { GET_LISTINGS } from "../../queries";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +15,7 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../contexts/AppProvider";
 import { GET_USER } from "../../queries";
 import "./upcomingAuctions.css";
+import { DeleteListingModal } from "../DeleteListingModal";
 
 // Will accept "auction" prop which will inclue title, image etc
 export default function UpcomingAuctions() {
@@ -28,6 +29,8 @@ export default function UpcomingAuctions() {
   } = useQuery(GET_USER, {
     variables: { userId: user.id },
   });
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [modalAuctionId, setModalAuctionId] = React.useState(null);
 
   const [executeSaveListing, { data }] = useMutation(SAVELISTING);
 
@@ -61,58 +64,74 @@ export default function UpcomingAuctions() {
 
   if (listingData?.getListings && !listingLoading) {
     return (
-      <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
-        {listingData.getListings.map((auction) => (
-          <Grid key={auction} item className="upcomingCard">
-            <FontAwesomeIcon icon={faCircleXmark} className="deleteButton" />
-            <Card sx={{ width: 345, height: 345 }}>
-              <CardMedia
-                component="img"
-                height="50%"
-                // Example of prop usage here would be {auction.image}
-                image={auction.image}
-                sx={{ position: "relative", zIndex: 1 }}
-              />
+      <>
+        <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
+          {listingData.getListings.map((auction) => (
+            <Grid key={auction} item className="upcomingCard">
+              {userData.getSingleUser.isAdmin && (
+                <FontAwesomeIcon
+                  onClick={() => {
+                    setIsModalOpen(true);
+                    setModalAuctionId(auction._id);
+                  }}
+                  icon={faCircleXmark}
+                  className="deleteButton"
+                />
+              )}
+              <Card sx={{ width: 345, height: 345 }}>
+                <CardMedia
+                  component="img"
+                  height="50%"
+                  // Example of prop usage here would be {auction.image}
+                  image={auction.image}
+                  sx={{ position: "relative", zIndex: 1 }}
+                />
 
-              <CardContent sx={{ height: 80 }}>
-                {/* Title */}
-                <Typography gutterBottom variant="h5" component="div">
-                  {auction.title}
-                </Typography>
-                {/* Short Description */}
-                <Typography variant="body2" color="text.secondary">
-                  {auction.description}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button
-                  onClick={() => viewAuction(auction._id)}
-                  size="small"
-                  variant="outlined"
-                >
-                  View
-                </Button>
-                {/* If user is admin will se "Create auction" button */}
-                {userData.getSingleUser.isAdmin && (
-                  <Button id="12345" size="small" variant="contained">
-                    Edit
-                  </Button>
-                )}
-                {!userData.getSingleUser.isAdmin && (
+                <CardContent sx={{ height: 80 }}>
+                  {/* Title */}
+                  <Typography gutterBottom variant="h5" component="div">
+                    {auction.title}
+                  </Typography>
+                  {/* Short Description */}
+                  <Typography variant="body2" color="text.secondary">
+                    {auction.description}
+                  </Typography>
+                </CardContent>
+                <CardActions>
                   <Button
-                    onClick={() => saveListing(auction._id)}
-                    id="12345"
+                    onClick={() => viewAuction(auction._id)}
                     size="small"
-                    variant="contained"
+                    variant="outlined"
                   >
-                    Register
+                    View
                   </Button>
-                )}
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                  {/* If user is admin will se "Create auction" button */}
+                  {userData.getSingleUser.isAdmin && (
+                    <Button id="12345" size="small" variant="contained">
+                      Edit
+                    </Button>
+                  )}
+                  {!userData.getSingleUser.isAdmin && (
+                    <Button
+                      onClick={() => saveListing(auction._id)}
+                      id="12345"
+                      size="small"
+                      variant="contained"
+                    >
+                      Register
+                    </Button>
+                  )}
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+        <DeleteListingModal
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          deleteAuctionId={modalAuctionId}
+        />
+      </>
     );
   }
   return <h1>No listings</h1>;

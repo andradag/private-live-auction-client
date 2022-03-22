@@ -85,6 +85,12 @@ export const SAVELISTING = gql`
   }
 `;
 
+export const DELETE_LISTING = gql`
+  mutation Mutation($input: ID!) {
+    deleteListing(input: $input)
+  }
+`;
+
 export const ADD_BID = gql`
   mutation Mutation($input: AddBidInput!) {
     addBid(input: $input) {

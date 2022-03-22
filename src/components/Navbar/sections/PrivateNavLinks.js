@@ -7,7 +7,6 @@ import {useAuth} from "../../../contexts/AppProvider";
 const privateRoutes = [
 	{id: "home", title: "Home", path: "/"},
 	{id: "dashboard", title: "Dashboard", path: "dashboard"},
-	{id: "logout", title: "Logout", path: "/"},
 ];
 
 const adminRoutes = [

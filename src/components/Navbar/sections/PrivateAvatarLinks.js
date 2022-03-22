@@ -10,14 +10,22 @@ import MenuItem from "@mui/material/MenuItem";
 
 import {useAuth} from "../../../contexts/AppProvider";
 
-const privateRoutes = [
+const privateRoutesXs = [
 	{id: "home", title: "Home", path: "/"},
 	{id: "dashboard", title: "Dashboard", path: "dashboard"},
 	{id: "profile", title: "Profile", path: "profile"},
 	{id: "logout", title: "Logout", path: "/"},
 ];
 
-const adminRoutes = [{id: "logout", title: "Logout", path: "logout"}];
+const privateRoutesMd = [{id: "logout", title: "Logout", path: "/"}];
+
+const adminRoutesXs = [
+	{id: "home", title: "Home", path: "/"},
+	{id: "dashboard", title: "Dashboard", path: "dashboard"},
+	{id: "createListing", title: "Create Listing", path: "create-auction"},
+	{id: "logout", title: "Logout", path: "/"},
+];
+const adminRoutesMd = [{id: "logout", title: "Logout", path: "/"}];
 
 export const PrivateAvatarLinks = ({handleLogout}) => {
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -39,74 +47,144 @@ export const PrivateAvatarLinks = ({handleLogout}) => {
 					<Avatar alt={user?.firstName} src={user?.imageUrl} />
 				</IconButton>
 			</Tooltip>
-			{user.isAdmin ? (
-				<Menu
-					sx={{mt: "45px", display: {xs: "none", md: "flex"}}}
-					id="menu-appbar"
-					anchorEl={anchorElUser}
-					anchorOrigin={{
-						vertical: "top",
-						horizontal: "right",
-					}}
-					keepMounted
-					transformOrigin={{
-						vertical: "top",
-						horizontal: "right",
-					}}
-					open={Boolean(anchorElUser)}
-					onClose={handleCloseUserMenu}
-				>
-					{adminRoutes.map((setting, i) => (
-						<Link
-							key={i}
-							to={setting.path}
-							className="dropdown-btn"
-							onClick={handleCloseUserMenu}
-						>
-							<MenuItem
-								id={setting.id}
-								onClick={handleLogout}
-								textAlign="center"
+			{user?.isAdmin ? (
+				<>
+					<Menu
+						sx={{mt: "45px", display: {xs: "none", md: "flex"}}}
+						id="menu-appbar"
+						anchorEl={anchorElUser}
+						anchorOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						keepMounted
+						transformOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						open={Boolean(anchorElUser)}
+						onClose={handleCloseUserMenu}
+					>
+						{adminRoutesMd.map((setting, i) => (
+							<Link
+								key={i}
+								to={setting.path}
+								className="dropdown-btn"
+								onClick={handleCloseUserMenu}
 							>
-								{setting.title}
-							</MenuItem>
-						</Link>
-					))}
-				</Menu>
+								<MenuItem
+									id={setting.id}
+									onClick={handleLogout}
+									textAlign="center"
+								>
+									{setting.title}
+								</MenuItem>
+							</Link>
+						))}
+					</Menu>
+					<Menu
+						sx={{mt: "45px", display: {xs: "flex", md: "none"}}}
+						id="menu-appbar"
+						anchorEl={anchorElUser}
+						anchorOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						keepMounted
+						transformOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						open={Boolean(anchorElUser)}
+						onClose={handleCloseUserMenu}
+					>
+						{adminRoutesXs.map((setting, i) => (
+							<Link
+								key={i}
+								to={setting.path}
+								className="dropdown-btn"
+								onClick={handleCloseUserMenu}
+							>
+								<MenuItem
+									id={setting.id}
+									onClick={handleLogout}
+									textAlign="center"
+								>
+									{setting.title}
+								</MenuItem>
+							</Link>
+						))}
+					</Menu>
+				</>
 			) : (
-				<Menu
-					sx={{mt: "45px", display: {xs: "flex", md: "none"}}}
-					id="menu-appbar"
-					anchorEl={anchorElUser}
-					anchorOrigin={{
-						vertical: "top",
-						horizontal: "right",
-					}}
-					keepMounted
-					transformOrigin={{
-						vertical: "top",
-						horizontal: "right",
-					}}
-					open={Boolean(anchorElUser)}
-					onClose={handleCloseUserMenu}
-				>
-					{privateRoutes.map((setting, i) => (
-						<Link
-							key={i}
-							to={setting.path}
-							className="dropdown-btn"
-							onClick={handleCloseUserMenu}
-						>
-							<MenuItem
-								id={setting.id}
-								onClick={handleLogout}
-								textAlign="center"
+				<>
+					<Menu
+						sx={{mt: "45px", display: {xs: "none", md: "flex"}}}
+						id="menu-appbar"
+						anchorEl={anchorElUser}
+						anchorOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						keepMounted
+						transformOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						open={Boolean(anchorElUser)}
+						onClose={handleCloseUserMenu}
+					>
+						{privateRoutesMd.map((setting, i) => (
+							<Link
+								key={i}
+								to={setting.path}
+								className="dropdown-btn"
+								onClick={handleCloseUserMenu}
 							>
-								{setting.title}
-							</MenuItem>
-						</Link>
-					))}
-				</Menu>
+								<MenuItem
+									id={setting.id}
+									onClick={handleLogout}
+									textAlign="center"
+								>
+									{setting.title}
+								</MenuItem>
+							</Link>
+						))}
+					</Menu>
+					<Menu
+						sx={{mt: "45px", display: {xs: "flex", md: "none"}}}
+						id="menu-appbar"
+						anchorEl={anchorElUser}
+						anchorOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						keepMounted
+						transformOrigin={{
+							vertical: "top",
+							horizontal: "right",
+						}}
+						open={Boolean(anchorElUser)}
+						onClose={handleCloseUserMenu}
+					>
+						{privateRoutesXs.map((setting, i) => (
+							<Link
+								key={i}
+								to={setting.path}
+								className="dropdown-btn"
+								onClick={handleCloseUserMenu}
+							>
+								<MenuItem
+									id={setting.id}
+									onClick={handleLogout}
+									textAlign="center"
+								>
+									{setting.title}
+								</MenuItem>
+							</Link>
+						))}
+					</Menu>
+				</>
 			)}
 		</Box>
 	);

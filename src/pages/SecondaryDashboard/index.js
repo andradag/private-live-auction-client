@@ -1,34 +1,17 @@
 import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import CardMedia from "@mui/material/CardMedia";
-import "./SecondaryDashboard.css";
-
-import * as React from "react";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-
-import Button from "@mui/material/Button";
-
+import CardMedia from "@mui/material/CardMedia";
+import Fab from "@mui/material/Fab";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
 import {styled} from "@mui/material/styles";
 
-import Grid from "@mui/material/Grid";
-
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import Table from "@mui/material/Table";
-
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-
-import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import "./SecondaryDashboard.css";
 
 const Item = styled(Paper)(({theme}) => ({
 	backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -39,7 +22,6 @@ const Item = styled(Paper)(({theme}) => ({
 }));
 
 export const SecondaryDashboardPage = () => {
-	const [open, setOpen] = React.useState(false);
 	return (
 		<>
 			<Box sx={{margin: "15px"}}>
@@ -48,6 +30,7 @@ export const SecondaryDashboardPage = () => {
 						src="https://sothebys-com.brightspotcdn.com/dims4/default/5479944/2147483647/strip/true/crop/2880x660+0+0/resize/1440x330!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fdotcom%2F4a%2Fca%2F0058e35745d0877d192e869fa20c%2F22918200-de222x-karl-part-iii-webbanners-2880x660-02.jpg"
 						height="100%"
 						width="100%"
+						alt=""
 					/>
 
 					<div class="auction-text">

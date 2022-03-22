@@ -8,6 +8,7 @@ import {useAuth} from "../contexts/AppProvider";
 
 export const BiddingCard = ({bid}) => {
 	const {user} = useAuth();
+
 	return (
 		<>
 			<ListItem

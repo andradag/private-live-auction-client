@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 
@@ -22,7 +22,9 @@ export const SignUp = () => {
 		register,
 		handleSubmit,
 		formState: {errors},
+		getValues,
 	} = useForm();
+
 	const navigate = useNavigate();
 
 	const onSubmit = async ({firstName, lastName, username, email, password}) => {
@@ -34,7 +36,7 @@ export const SignUp = () => {
 						lastName: lastName.toLowerCase().trim(),
 						username: username.toLowerCase().trim(),
 						email: email.toLowerCase().trim(),
-						imageUrl: uploadedImage.src,
+						// imageUrl: uploadedImage.src,
 						password,
 					},
 				},
@@ -83,17 +85,6 @@ export const SignUp = () => {
 			</Typography>
 			<TextField
 				margin="normal"
-				id="email"
-				label="Email"
-				name="email"
-				variant="outlined"
-				fullWidth
-				{...register("email", {required: true})}
-				error={!!errors.email}
-				disabled={loading}
-			/>
-			<TextField
-				margin="normal"
 				id="firstName"
 				label="First Name"
 				name="firstName"
@@ -116,6 +107,18 @@ export const SignUp = () => {
 			/>
 			<TextField
 				margin="normal"
+				id="email"
+				label="Email"
+				name="email"
+				variant="outlined"
+				fullWidth
+				{...register("email", {required: true})}
+				error={!!errors.email}
+				disabled={loading}
+			/>
+
+			<TextField
+				margin="normal"
 				id="username"
 				label="Username"
 				name="username"
@@ -133,14 +136,30 @@ export const SignUp = () => {
 				name="password"
 				variant="outlined"
 				fullWidth
-				{...register("password", {required: true})}
+				{...register("password", {required: true, min: 8})}
 				error={!!errors.password}
 				disabled={loading}
 			/>
-			<SingleImageUploader
+			<TextField
+				type="password"
+				margin="normal"
+				id="confirmPassword"
+				label="Confirm Password"
+				name="confirmPassword"
+				variant="outlined"
+				fullWidth
+				{...register("confirmPassword", {
+					required: true,
+					validate: (value) => getValues("password") === value,
+				})}
+				error={!!errors.confirmPassword}
+				helperText={!!errors.confirmPassword ? "Passwords do not match" : ""}
+				disabled={loading}
+			/>
+			{/* <SingleImageUploader
 				uploadedImage={uploadedImage}
 				setUploadedImage={setUploadedImage}
-			/>
+			/> */}
 			<LoadingButton
 				sx={{backgroundColor: "#045ee0", width: "250px", margin: "20px"}}
 				loading={loading}

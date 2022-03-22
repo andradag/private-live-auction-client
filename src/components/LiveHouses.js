@@ -1,14 +1,10 @@
 import Grid from "@mui/material/Grid";
-import { GET_LISTINGS, GET_USER } from "../queries";
+import { GET_LISTINGS } from "../queries";
 import { useQuery } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AppProvider";
 import { HouseCard } from "./HouseCard";
 
 // Will accept "auction" prop which will include title, image etc
 export const LiveHouses = () => {
-  const { user } = useAuth();
-
   const {
     data: listingData,
     loading: listingLoading,
@@ -21,8 +17,6 @@ export const LiveHouses = () => {
       paddingBottom: 3,
     },
   };
-
-  const navigate = useNavigate();
 
   if (listingError && !listingLoading) {
     return <h1>Error loading listings</h1>;

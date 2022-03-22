@@ -16,7 +16,6 @@ import { AppProvider } from "./contexts/AppProvider";
 import { Navbar } from "./components/Navbar";
 
 // import { AppRoutes } from "./AppRoutes.js";
-import { HowToBid } from "./components/pages/HowToBid";
 import "./reset.css";
 import "./styles.css";
 
@@ -65,7 +64,6 @@ export const App = () => {
         <BrowserRouter>
           <Navbar />
           {/* <AppRoutes /> */}
-          <HowToBid />
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

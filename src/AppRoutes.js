@@ -6,7 +6,7 @@ import {Login} from "./pages/Login";
 import {SignUp} from "./pages/SignUp";
 import {AuctionPage} from "./pages/AuctionPage";
 import {CreateAuctionForm} from "./pages/CreateAuction";
-import {SecondaryDashboardPage} from "./components/pages/SecondaryDashboard";
+import {SecondaryDashboardPage} from "./pages/SecondaryDashboard";
 
 export const AppRoutes = () => {
 	return (

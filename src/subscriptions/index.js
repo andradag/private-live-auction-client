@@ -14,3 +14,4 @@ export const AUCTION_BID_SUBSCRIPTION = gql`
 		}
 	}
 `;
+ 

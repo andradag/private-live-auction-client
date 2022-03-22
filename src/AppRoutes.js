@@ -11,16 +11,16 @@ import {HowToBid} from "./pages/HowToBid";
 
 export const AppRoutes = () => {
 	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/dashboard" element={<Dashboard />} />
-			{/* <Route path="/dashboard" element={<SecondaryDashboardPage />} /> */}
-			<Route path="/login" element={<Login />} />
-			<Route path="/signup" element={<SignUp />} />
-			<Route path="/auction/:id" element={<AuctionPage />} />
-			<Route path="/how-to-bid" element={<HowToBid />} />
-			<Route path="/create-auction" element={<CreateAuctionForm />} />
-			<Route path="*" element={<Home />} />
-		</Routes>
-	);
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/secondary-dashboard" element={<SecondaryDashboardPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/auction/:id" element={<AuctionPage />} />
+      <Route path="/how-to-bid" element={<HowToBid />} />
+      <Route path="/create-auction" element={<CreateAuctionForm />} />
+      <Route path="*" element={<Home />} />
+    </Routes>
+  );
 };

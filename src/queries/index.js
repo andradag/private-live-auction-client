@@ -34,16 +34,50 @@ export const GET_USER = gql`
 `;
 
 export const GET_LISTINGS = gql`
-	query Query($status: String, $category: ID) {
-		getListings(status: $status, category: $category) {
-			_id
-			title
-			description
-			reserveAmount
-			startingBid
-			status
-		}
-	}
+  query GetListings($status: String) {
+    getListings(status: $status) {
+      _id
+      title
+      description
+      propertyType
+      reserveAmount
+      startingBid
+      status
+      bedrooms
+      bathrooms
+      createdBy {
+        username
+        id
+      }
+      createdAt
+      updatedAt
+      googleMapUrl
+      keyFeatures
+      images
+      currentBid {
+        amount
+        user {
+          id
+          firstName
+          lastName
+          imageUrl
+          username
+        }
+        listingId
+      }
+      bids {
+        amount
+        user {
+          username
+          id
+          lastName
+          firstName
+          imageUrl
+        }
+        listingId
+      }
+    }
+  }
 `;
 
 export const GET_SINGLE_LISTING = gql`

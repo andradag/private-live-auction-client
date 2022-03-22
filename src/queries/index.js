@@ -13,68 +13,68 @@ export const DASHBOARD = gql`
 `;
 
 export const GET_USER = gql`
-  query Query($userId: ID!) {
-    getSingleUser(userId: $userId) {
-      id
-      username
-      firstName
-      lastName
-      email
-      isAdmin
-      savedListings {
-        _id
-        title
-        description
-        startingBid
-        reserveAmount
-        status
-      }
-    }
-  }
+	query Query($userId: ID!) {
+		getSingleUser(userId: $userId) {
+			id
+			username
+			firstName
+			lastName
+			email
+			isAdmin
+			savedListings {
+				_id
+				title
+				description
+				startingBid
+				reserveAmount
+				status
+			}
+		}
+	}
 `;
 
 export const GET_LISTINGS = gql`
-  query Query($status: String, $category: ID) {
-    getListings(status: $status, category: $category) {
-      _id
-      title
-      description
-      reserveAmount
-      startingBid
-      status
-    }
-  }
+	query Query($status: String, $category: ID) {
+		getListings(status: $status, category: $category) {
+			_id
+			title
+			description
+			reserveAmount
+			startingBid
+			status
+		}
+	}
 `;
 
 export const GET_SINGLE_LISTING = gql`
-  query Query($id: ID!) {
-    getSingleListing(_id: $id) {
-      _id
-      title
-      description
-      reserveAmount
-      startingBid
-      status
-      bids {
-        amount
-        # listingId
-        user {
-          firstName
-          lastName
-          username
-        }
-      }
-      currentBid {
-        amount
-        # listingId
-        user {
-          firstName
-          lastName
-          username
-        }
-      }
-    }
-  }
+	query Query($id: ID!) {
+		getSingleListing(_id: $id) {
+			_id
+			title
+			description
+			reserveAmount
+			startingBid
+			status
+			bids {
+				amount
+				# listingId
+				user {
+					firstName
+					lastName
+					username
+				}
+			}
+			currentBid {
+				amount
+				# listingId
+				user {
+					firstName
+					lastName
+					username
+				}
+			}
+		}
+	}
 `;
 
 export const CATEGORY = gql`

@@ -1,16 +1,16 @@
 import Modal from "@mui/material/Modal";
 import { DeleteListingForm } from "./DeleteListingForm";
 
-export const DeleteListingModal = ({ open, onClose, listingId }) => {
+export const DeleteListingModal = ({ open, onClose, deleteAuctionId }) => {
   return (
     <Modal
       open={open}
       onClose={onClose}
-      listingId={listingId}
+      deleteAuctionId={deleteAuctionId}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <DeleteListingForm deleteAuctionId={listingId} onClose={onClose} />
+      <DeleteListingForm deleteAuctionId={deleteAuctionId} onClose={onClose} />
     </Modal>
   );
 };

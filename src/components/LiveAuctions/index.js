@@ -1,4 +1,7 @@
-import * as React from "react";
+import {useNavigate} from "react-router-dom";
+
+import {useQuery} from "@apollo/client";
+
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardActions from "@mui/material/CardActions";
@@ -6,13 +9,13 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+
+import {GET_LISTINGS} from "../../queries";
+
 import "./LiveAuction.css";
-import {GET_LISTINGS} from "../../../queries";
-import {useQuery} from "@apollo/client";
-import {useNavigate} from "react-router-dom";
 
 // Will accept "auction" prop which will inclue title, image etc
-export default function LiveAuctions() {
+export const LiveAuctions = () => {
 	const {
 		data: listingData,
 		loading: listingLoading,
@@ -85,4 +88,4 @@ export default function LiveAuctions() {
 		);
 	}
 	return <h1>No Listings</h1>;
-}
+};

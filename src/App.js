@@ -14,7 +14,6 @@ import {createClient} from "graphql-ws";
 import {AppProvider} from "./contexts/AppProvider";
 
 import {Navbar} from "./components/Navbar";
-
 import {AppRoutes} from "./AppRoutes.js";
 
 import "./reset.css";

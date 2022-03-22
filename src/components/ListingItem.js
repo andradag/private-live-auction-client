@@ -17,11 +17,11 @@ import {useAuth} from "../contexts/AppProvider";
 export const ListingItem = ({listingId, data, currentBid}) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const {
-		data: listingData,
-		loading: listingLoading,
-		error: listingError,
-	} = useQuery(GET_SINGLE_LISTING, {variables: {id: listingId}});
+	// const {
+	// 	data: listingData,
+	// 	loading: listingLoading,
+	// 	error: listingError,
+	// } = useQuery(GET_SINGLE_LISTING, {variables: {id: listingId}});
 
 	const {user} = useAuth();
 
@@ -76,7 +76,7 @@ export const ListingItem = ({listingId, data, currentBid}) => {
 							{data.getSingleListing.title}
 						</Typography>
 						<Typography gutterBottom variant="h7" component="div">
-							{data.getSingleListing.category.title}
+							{/* {data.getSingleListing.category.title} */}
 						</Typography>
 						<Typography variant="body2" color="text.secondary">
 							{data.getSingleListing.description}
@@ -86,7 +86,7 @@ export const ListingItem = ({listingId, data, currentBid}) => {
 			</Card>
 			<Card sx={styles.listingCard}>
 				<CardContent sx={{display: "inline-flex", alignItems: "center", p: 0}}>
-					{listingData.getSingleListing.status === "Live" ? (
+					{data.getSingleListing.status === "Live" ? (
 						<>
 							<Typography variant="h6" component="div" sx={{mr: 2}}>
 								Current bid:
@@ -107,7 +107,7 @@ export const ListingItem = ({listingId, data, currentBid}) => {
 						</Typography>
 					)}
 				</CardContent>
-				{listingData.getSingleListing.status === "Live" && (
+				{data.getSingleListing.status === "Live" && (
 					<CardActions sx={styles.listingCardAction}>
 						{user.isAdmin ? (
 							<Button sx={styles.listingButtons} variant="contained">

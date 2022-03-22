@@ -63,6 +63,8 @@ export const AuctionPage = () => {
 
 	if (error || loading) return <h1>Error</h1>;
 
+	console.log(data);
+
 	return (
 		data?.getSingleListing && (
 			<>

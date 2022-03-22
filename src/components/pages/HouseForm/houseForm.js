@@ -15,7 +15,7 @@ import { ApolloError, useMutation } from "@apollo/client";
 import { CREATE_HOUSE } from "../../../mutations";
 import { useNavigate } from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Button } from "@mui/material";
+import HelpIcon from "@mui/icons-material/Help";
 
 export const HouseForm = () => {
   const [uploadedImage, setUploadedImage] = useState();
@@ -173,6 +173,7 @@ export const HouseForm = () => {
           </Grid>
           {/* STARTING BID */}
           <Grid item xs={12} sm={6}>
+            <HelpIcon />
             <FormControl fullWidth>
               <InputLabel htmlFor="outlined-adornment-amount">
                 Starting Bid

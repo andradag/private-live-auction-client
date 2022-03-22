@@ -9,58 +9,43 @@ export const FooterStyling = () => {
     <footer>
       <Box
         sx={{
-          backgroundColor: "black",
+          backgroundColor: "#E08604",
           border: "solid",
+          borderColor: "black",
           color: "white",
-          padding: "20px",
-          display: "flex",
-          flexDirection: "flex-end",
-          borderRadius: "25px",
-          marginTop: "10px",
+          padding: "10px",
+          marginTop: "15px",
+          alignContent: "center",
+          position: "fixed",
+          left: 0,
+          bottom: 1,
+          right: 0,
         }}
       >
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid item sm={3}>
-              <Box sx={{ marginTop: "25px", fontSize: "23px" }}>
-                Project name © 2022
+        <Container>
+          <Grid container spacing={1}>
+            <Grid item sm={6}>
+              <Box sx={{ marginTop: "20px", fontSize: "23px" }}>
+                Brought to you by: Project name © 2022
               </Box>
             </Grid>
+
+            <Grid
+              sx={{ marginTop: "15px", fontSize: "20px" }}
+              item
+              xs={12}
+              sm={3}
+            ></Grid>
 
             <Grid
               sx={{ marginTop: "25px", fontSize: "20px" }}
               item
               xs={12}
-              sm={2}
-            >
-              <Box borderBottom={1}>CONTACTS</Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Phone
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Email
-                </Link>
-              </Box>
-
-              <Box>
-                <Link href="/" color="inherit">
-                  LinkedIn
-                </Link>
-              </Box>
-            </Grid>
-
-            <Grid
-              sx={{ marginTop: "25px", fontSize: "20px" }}
-              item
-              xs={12}
-              sm={2}
+              sm={3}
             >
               <Box borderBottom={1}>PROFILE</Box>
               <Box>
-                <Link href="/" color="inherit">
+                <Link href="http://localhost:3000/login" color="inherit">
                   Login
                 </Link>
               </Box>
@@ -71,7 +56,7 @@ export const FooterStyling = () => {
               </Box>
 
               <Box>
-                <Link href="/" color="inherit">
+                <Link href="http://localhost:3000/signup" color="inherit">
                   Register
                 </Link>
               </Box>

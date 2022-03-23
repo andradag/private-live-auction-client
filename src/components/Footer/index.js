@@ -9,10 +9,8 @@ export const FooterStyling = () => {
     <footer>
       <Box
         sx={{
-          backgroundColor: "#E08604",
           border: "solid",
-          borderColor: "black",
-          color: "white",
+          color: "#E08604",
           padding: "10px",
           marginTop: "15px",
           alignContent: "center",
@@ -26,7 +24,7 @@ export const FooterStyling = () => {
           <Grid container spacing={1}>
             <Grid item sm={6}>
               <Box sx={{ marginTop: "20px", fontSize: "23px" }}>
-                Brought to you by: Project name © 2022
+                2022 © Project name
               </Box>
             </Grid>
 
@@ -38,7 +36,7 @@ export const FooterStyling = () => {
             ></Grid>
 
             <Grid
-              sx={{ marginTop: "25px", fontSize: "20px" }}
+              sx={{ marginTop: "25px", fontSize: "30px" }}
               item
               xs={12}
               sm={3}

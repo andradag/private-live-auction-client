@@ -21,8 +21,8 @@ const Input = styled("input")({
   display: "none",
 });
 
-export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
-  const [image, setImage] = useState();
+export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
+  const [images, setImages] = useState();
   const [uploadComplete, setUploadComplete] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -42,45 +42,85 @@ export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
     },
   };
 
-  const uploadImage = async () => {
-    setLoading(true);
+  const uploadImages = async () => {
+    // setLoading(true);
 
-    aws.config.update({
-      accessKeyId: process.env.REACT_APP_ACCESS_KEY,
-      secretAccessKey: process.env.REACT_APP_ACCESS_ID,
-      region: process.env.REACT_APP_REGION,
-      signatureVersion: "v4",
-    });
+    // aws.config.update({
+    //   accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+    //   secretAccessKey: process.env.REACT_APP_ACCESS_ID,
+    //   region: process.env.REACT_APP_REGION,
+    //   signatureVersion: "v4",
+    // });
 
-    const s3 = new aws.S3();
+    // const s3 = new aws.S3();
 
-    image.uuid = uuidv4();
+    let arrayOfImages = [];
 
-    const { url, fields } = await s3.createPresignedPost({
-      Bucket: process.env.REACT_APP_BUCKET_NAME,
-      Fields: { key: `images/${image.uuid}` },
-      Expires: 60,
-    });
+    for (let i = 0; i < images.length; i++) {
+      setLoading(true);
 
-    const formData = new FormData();
-
-    Object.entries({ ...fields, file: image }).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
-    const upload = await fetch(url, { method: "POST", body: formData });
-
-    if (upload.ok) {
-      setUploadComplete(true);
-      setImage();
-      setUploadedImage({
-        src: `${upload.url}/images/${image.uuid}`,
-        fileName: `images/${image.uuid}`,
+      aws.config.update({
+        accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+        secretAccessKey: process.env.REACT_APP_ACCESS_ID,
+        region: process.env.REACT_APP_REGION,
+        signatureVersion: "v4",
       });
-      setLoading(false);
-    } else {
-      console.log("Failed to upload");
+
+      const s3 = new aws.S3();
+
+      images[i].uuid = uuidv4();
+
+      const { url, fields } = s3.createPresignedPost({
+        Bucket: process.env.REACT_APP_BUCKET_NAME,
+        Fields: { key: `images/${images[i].uuid}` },
+        Expires: 60,
+      });
+
+      const formData = new FormData();
+
+      Object.entries({ ...fields, file: images[i] }).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
+      const upload = await fetch(url, { method: "POST", body: formData });
+
+      if (upload.ok) {
+        setUploadComplete(true);
+        setImages();
+        arrayOfImages.push(`${upload.url}/images/${images[i].uuid}`);
+        console.log(arrayOfImages);
+        setUploadedImages(arrayOfImages);
+        setLoading(false);
+      } else {
+        console.log("Failed to upload");
+      }
     }
+
+    // const { url, fields } = await s3.createPresignedPost({
+    //   Bucket: process.env.REACT_APP_BUCKET_NAME,
+    //   Fields: { key: `images/${images.uuid}` },
+    //   Expires: 60,
+    // });
+
+    // const formData = new FormData();
+
+    // Object.entries({ ...fields, file: images }).forEach(([key, value]) => {
+    //   formData.append(key, value);
+    // });
+
+    // const upload = await fetch(url, { method: "POST", body: formData });
+
+    // if (upload.ok) {
+    //   setUploadComplete(true);
+    //   setImages();
+    //   setUploadedImages({
+    //     src: `${upload.url}/images/${images.uuid}`,
+    //     fileName: `images/${images.uuid}`,
+    //   });
+    //   setLoading(false);
+    // } else {
+    //   console.log("Failed to upload");
+    // }
   };
 
   return (
@@ -90,28 +130,28 @@ export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
           accept="image/*"
           id="image-uploader"
           type="file"
+          multiple
           onChange={(event) => {
-            console.log(event.target.files[0]);
-            setImage(event.target.files[0]);
+            setImages(event.target.files);
           }}
         />
         <Button variant="contained" component="span">
           Add Image
         </Button>
       </label>
-      {image && (
+      {images && (
         <LoadingButton
           loading={loading}
           loadingPosition="start"
           startIcon={<UploadIcon />}
           variant="contained"
-          onClick={uploadImage}
+          onClick={uploadImages}
         >
           Upload Image
         </LoadingButton>
       )}
 
-      {image && (
+      {images && (
         <>
           <Typography
             variant="subtitle"
@@ -120,7 +160,7 @@ export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
             align="center"
             sx={styles.header}
           >
-            Image to Upload
+            Images to Upload
           </Typography>
           <ImageList>
             <ImageListItem cols={2} rows={1}>
@@ -129,12 +169,12 @@ export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
                   maxWidth: 250,
                   objectFit: "contain",
                 }}
-                src={URL.createObjectURL(image)}
+                src={URL.createObjectURL(images[0])}
                 loading="lazy"
               />
               <ImageListItemBar
-                title={image.name}
-                subtitle={`${Math.floor(image.size / 10) / 100} KB`}
+                title={images[0].name}
+                subtitle={`${Math.floor(images[0].size / 10) / 100} KB`}
                 actionIcon={
                   loading ? (
                     <CircularProgress sx={{ color: "#fff", mr: 2 }} size={20} />
@@ -142,7 +182,7 @@ export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
                     <IconButton
                       sx={{ color: "#d32f2f" }}
                       onClick={() => {
-                        setImage();
+                        setImages();
                       }}
                     >
                       <DeleteIcon />
@@ -155,7 +195,7 @@ export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
         </>
       )}
 
-      {uploadedImage && (
+      {uploadedImages && (
         <>
           <Typography
             variant="subtitle"
@@ -164,13 +204,13 @@ export const SingleImageUploader = ({ uploadedImage, setUploadedImage }) => {
             align="center"
             sx={styles.header}
           >
-            Uploaded Image
+            Uploaded Images
           </Typography>
           <ImageList>
             <ImageListItem cols={2} rows={1}>
               <img
                 style={{ maxWidth: 250, objectFit: "contain" }}
-                src={uploadedImage.src}
+                src={uploadedImages.src}
                 loading="lazy"
               />
               <ImageListItemBar

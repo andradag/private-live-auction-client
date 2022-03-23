@@ -22,7 +22,7 @@ import Popover from "@mui/material/Popover";
 import { MultiImageUploader } from "../../components/MultiImageUploader";
 
 export const HouseForm = () => {
-  const [uploadedImage, setUploadedImage] = useState();
+  const [uploadedImages, setUploadedImages] = useState();
   const [propType, setPropType] = useState();
 
   const handlePropTypeChange = (event) => {
@@ -75,6 +75,7 @@ export const HouseForm = () => {
     images,
   }) => {
     try {
+      console.log(uploadedImages);
       const { data } = await executeCreateHouse({
         variables: {
           input: {
@@ -87,7 +88,7 @@ export const HouseForm = () => {
             bathrooms: parseInt(bathrooms),
             googleMapUrl,
             keyFeatures,
-            images: uploadedImage.src,
+            images: uploadedImages,
           },
         },
       });
@@ -330,8 +331,8 @@ export const HouseForm = () => {
               error={!!errors.images}
             /> */}
             <MultiImageUploader
-              uploadedImage={uploadedImage}
-              setUploadedImage={setUploadedImage}
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
             />
           </Grid>
 

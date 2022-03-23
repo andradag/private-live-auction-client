@@ -8,9 +8,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 const publicRoutes = [
-	{title: "Home", path: "/"},
-	{title: "Login", path: "login"},
-	{title: "Signup", path: "signup"},
+	{id: "home", title: "Home", path: "/"},
+	{id: "login", title: "Login", path: "login"},
+	{id: "signup", title: "Signup", path: "signup"},
 ];
 
 export const PublicHamburgerMenu = () => {
@@ -60,7 +60,7 @@ export const PublicHamburgerMenu = () => {
 						textAlign="center"
 						className="dropdown-btn"
 					>
-						<MenuItem key={i} onClick={handleCloseNavMenu}>
+						<MenuItem id={page.id} onClick={handleCloseNavMenu}>
 							{page.title}
 						</MenuItem>
 					</Link>

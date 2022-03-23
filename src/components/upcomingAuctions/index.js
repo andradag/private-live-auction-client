@@ -14,14 +14,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../contexts/AppProvider";
 import { GET_USER } from "../../queries";
-import "./upcomingAuctions.css";
+import "./UpcomingAuctions.css";
 import { DeleteListingModal } from "../DeleteListingModal";
 
-// Will accept "auction" prop which will inclue title, image etc
-export default function UpcomingAuctions() {
+// Will accept "auction" prop which will include title, image etc
+export const UpcomingAuctions = () => {
   const { user } = useAuth();
 
-  // // Get user admin status
   const {
     data: userData,
     loading: userLoading,
@@ -67,7 +66,7 @@ export default function UpcomingAuctions() {
       <>
         <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
           {listingData.getListings.map((auction) => (
-            <Grid key={auction} item className="upcomingCard">
+            <Grid key={auction._id} item className="upcomingCard">
               {userData.getSingleUser.isAdmin && (
                 <FontAwesomeIcon
                   onClick={() => {
@@ -135,4 +134,4 @@ export default function UpcomingAuctions() {
     );
   }
   return <h1>No listings</h1>;
-}
+};

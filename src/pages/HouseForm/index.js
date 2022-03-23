@@ -19,7 +19,7 @@ import HelpIcon from "@mui/icons-material/Help";
 import "./houseForm.css";
 import Popover from "@mui/material/Popover";
 
-import { SingleImageUploader } from "../../components/SingleImageUploader";
+import { MultiImageUploader } from "../../components/MultiImageUploader";
 
 export const HouseForm = () => {
   const [uploadedImage, setUploadedImage] = useState();
@@ -329,7 +329,7 @@ export const HouseForm = () => {
               {...register("images", { required: true })}
               error={!!errors.images}
             /> */}
-            <SingleImageUploader
+            <MultiImageUploader
               uploadedImage={uploadedImage}
               setUploadedImage={setUploadedImage}
             />

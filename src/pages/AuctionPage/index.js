@@ -18,6 +18,7 @@ import {ListingItem} from "../../components/ListingItem";
 export const AuctionPage = () => {
 	const {id} = useParams();
 	const [currentBid, setCurrentBid] = useState({});
+	const [status, setStatus] = useState("Upcoming");
 	const [auctionData, setAuctionData] = useState([]);
 
 	const {data, error, loading} = useQuery(GET_SINGLE_LISTING, {
@@ -38,10 +39,12 @@ export const AuctionPage = () => {
 		}
 
 		if (subscriptionData) {
-			setAuctionData([...auctionData, subscriptionData.auctionBid]);
-			setCurrentBid(subscriptionData.auctionBid);
+			setAuctionData([...auctionData, subscriptionData?.auctionBid?.bid]);
+			setCurrentBid(subscriptionData?.auctionBid?.bid);
+			setStatus(subscriptionData?.auctionBid?.status);
+			console.log(subscriptionData);
 		}
-	}, [subscriptionData, data]);
+	}, [subscriptionData, data, auctionData]);
 
 	const styles = {
 		divider: {
@@ -63,8 +66,7 @@ export const AuctionPage = () => {
 
 	if (error || loading) return <h1>Error</h1>;
 
-	console.log(data);
-
+	console.log(subscriptionData);
 	return (
 		data?.getSingleListing && (
 			<>

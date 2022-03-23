@@ -14,7 +14,6 @@ export const FooterStyling = () => {
           padding: "10px",
           marginTop: "15px",
           alignContent: "center",
-          position: "fixed",
           left: 0,
           bottom: 1,
           right: 0,

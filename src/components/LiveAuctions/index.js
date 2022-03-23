@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardActions from "@mui/material/CardActions";
@@ -6,13 +5,25 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+
 import "./LiveAuction.css";
-import {GET_LISTINGS} from "../../../queries";
+import {GET_LISTINGS, GET_USER} from "../../queries";
 import {useQuery} from "@apollo/client";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../contexts/AppProvider";
 
 // Will accept "auction" prop which will inclue title, image etc
-export default function LiveAuctions() {
+export const LiveAuctions = () => {
+	const {user} = useAuth();
+
+	const {
+		data: userData,
+		loading: userLoading,
+		error: userError,
+	} = useQuery(GET_USER, {
+		variables: {userId: user.id},
+	});
+
 	const {
 		data: listingData,
 		loading: listingLoading,
@@ -59,17 +70,34 @@ export default function LiveAuctions() {
 								</Typography>
 							</CardContent>
 							<CardActions>
-								<Button
-									size="small"
-									variant="outlined"
-									className="liveButton"
-									sx={{
-										border: "none",
-										cursor: "default",
-									}}
-								>
-									Live
-								</Button>
+								{/* if user admin, live button should allow toggle */}
+								{userData.getSingleUser.isAdmin && (
+									<Button
+										size="small"
+										variant="outlined"
+										className="liveButton"
+										sx={{
+											border: "none",
+											cursor: "default",
+										}}
+									>
+										TOGGLE
+									</Button>
+								)}
+								{!userData.getSingleUser.isAdmin && (
+									<Button
+										size="small"
+										variant="outlined"
+										className="liveButton"
+										sx={{
+											border: "none",
+											cursor: "default",
+										}}
+									>
+										Live
+									</Button>
+								)}
+
 								<Button
 									size="small"
 									variant="contained"
@@ -85,4 +113,4 @@ export default function LiveAuctions() {
 		);
 	}
 	return <h1>No Listings</h1>;
-}
+};

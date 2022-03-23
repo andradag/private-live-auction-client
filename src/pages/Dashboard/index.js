@@ -1,14 +1,19 @@
-import UpcomingAuctions from "../../upcomingAuctions/UpcomingAuctions";
-import LiveAuctions from "../LiveAuctions/LiveAuctions";
+import { useNavigate } from "react-router-dom";
+
+import { useQuery } from "@apollo/client";
+
+import { useAuth } from "../../contexts/AppProvider";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { useAuth } from "../../../contexts/AppProvider";
-import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../../queries";
-import { Stack } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+
+import { GET_USER } from "../../queries";
+
+import { UpcomingAuctions } from "../../components/UpcomingAuctions";
+import { LiveAuctions } from "../../components/LiveAuctions";
 
 export const Dashboard = () => {
   const { user } = useAuth();
@@ -65,6 +70,16 @@ export const Dashboard = () => {
         )}
         {/* Live Auctions */}
         <Box>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Live Auctions
+          </Typography>
+          <Divider />
           <LiveAuctions />
         </Box>
 

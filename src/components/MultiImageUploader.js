@@ -26,6 +26,8 @@ export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
   const [uploadComplete, setUploadComplete] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  let imageListArray = [];
+
   const styles = {
     container: {
       backgroundColor: "#fff",
@@ -43,17 +45,6 @@ export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
   };
 
   const uploadImages = async () => {
-    // setLoading(true);
-
-    // aws.config.update({
-    //   accessKeyId: process.env.REACT_APP_ACCESS_KEY,
-    //   secretAccessKey: process.env.REACT_APP_ACCESS_ID,
-    //   region: process.env.REACT_APP_REGION,
-    //   signatureVersion: "v4",
-    // });
-
-    // const s3 = new aws.S3();
-
     let arrayOfImages = [];
 
     for (let i = 0; i < images.length; i++) {
@@ -88,39 +79,12 @@ export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
         setUploadComplete(true);
         setImages();
         arrayOfImages.push(`${upload.url}/images/${images[i].uuid}`);
-        console.log(arrayOfImages);
         setUploadedImages(arrayOfImages);
         setLoading(false);
       } else {
         console.log("Failed to upload");
       }
     }
-
-    // const { url, fields } = await s3.createPresignedPost({
-    //   Bucket: process.env.REACT_APP_BUCKET_NAME,
-    //   Fields: { key: `images/${images.uuid}` },
-    //   Expires: 60,
-    // });
-
-    // const formData = new FormData();
-
-    // Object.entries({ ...fields, file: images }).forEach(([key, value]) => {
-    //   formData.append(key, value);
-    // });
-
-    // const upload = await fetch(url, { method: "POST", body: formData });
-
-    // if (upload.ok) {
-    //   setUploadComplete(true);
-    //   setImages();
-    //   setUploadedImages({
-    //     src: `${upload.url}/images/${images.uuid}`,
-    //     fileName: `images/${images.uuid}`,
-    //   });
-    //   setLoading(false);
-    // } else {
-    //   console.log("Failed to upload");
-    // }
   };
 
   return (
@@ -136,7 +100,7 @@ export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
           }}
         />
         <Button variant="contained" component="span">
-          Add Image
+          Add Images
         </Button>
       </label>
       {images && (
@@ -147,7 +111,7 @@ export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
           variant="contained"
           onClick={uploadImages}
         >
-          Upload Image
+          Upload Images
         </LoadingButton>
       )}
 
@@ -163,34 +127,39 @@ export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
             Images to Upload
           </Typography>
           <ImageList>
-            <ImageListItem cols={2} rows={1}>
-              <img
-                style={{
-                  maxWidth: 250,
-                  objectFit: "contain",
-                }}
-                src={URL.createObjectURL(images[0])}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                title={images[0].name}
-                subtitle={`${Math.floor(images[0].size / 10) / 100} KB`}
-                actionIcon={
-                  loading ? (
-                    <CircularProgress sx={{ color: "#fff", mr: 2 }} size={20} />
-                  ) : (
-                    <IconButton
-                      sx={{ color: "#d32f2f" }}
-                      onClick={() => {
-                        setImages();
-                      }}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  )
-                }
-              />
-            </ImageListItem>
+            {Array.from(images).map((image) => (
+              <ImageListItem cols={2} rows={1}>
+                <img
+                  style={{
+                    maxWidth: 250,
+                    objectFit: "contain",
+                  }}
+                  src={URL.createObjectURL(image)}
+                  loading="lazy"
+                />
+                <ImageListItemBar
+                  title={image.name}
+                  subtitle={`${Math.floor(image.size / 10) / 100} KB`}
+                  actionIcon={
+                    loading ? (
+                      <CircularProgress
+                        sx={{ color: "#fff", mr: 2 }}
+                        size={20}
+                      />
+                    ) : (
+                      <IconButton
+                        sx={{ color: "#d32f2f" }}
+                        onClick={() => {
+                          setImages();
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    )
+                  }
+                />
+              </ImageListItem>
+            ))}
           </ImageList>
         </>
       )}

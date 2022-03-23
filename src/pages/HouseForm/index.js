@@ -19,6 +19,8 @@ import HelpIcon from "@mui/icons-material/Help";
 import "./houseForm.css";
 import Popover from "@mui/material/Popover";
 
+import { SingleImageUploader } from "../../components/SingleImageUploader";
+
 export const HouseForm = () => {
   const [uploadedImage, setUploadedImage] = useState();
   const [propType, setPropType] = useState();
@@ -85,12 +87,10 @@ export const HouseForm = () => {
             bathrooms: parseInt(bathrooms),
             googleMapUrl,
             keyFeatures,
-            images,
+            images: uploadedImage.src,
           },
         },
       });
-
-      console.log(data);
 
       if (data.addListing) {
         navigate("/dashboard", { replace: true });
@@ -318,7 +318,7 @@ export const HouseForm = () => {
 
           {/* IMAGES */}
           <Grid item xs={12} sm={12}>
-            <TextField
+            {/* <TextField
               required
               id="images"
               name="images"
@@ -328,6 +328,10 @@ export const HouseForm = () => {
               variant="outlined"
               {...register("images", { required: true })}
               error={!!errors.images}
+            /> */}
+            <SingleImageUploader
+              uploadedImage={uploadedImage}
+              setUploadedImage={setUploadedImage}
             />
           </Grid>
 

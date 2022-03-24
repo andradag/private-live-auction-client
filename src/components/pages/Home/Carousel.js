@@ -3,6 +3,9 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
+
+import { SecondaryDashboardPage } from "../../../pages/SecondaryDashboard";
 
 const images = [
   {
@@ -128,6 +131,8 @@ export default function ButtonBases() {
     >
       {images.map((image) => (
         <ImageButton
+          component={Link}
+          to="/SecondaryDashboardPage"
           focusRipple
           key={image.title}
           style={{

@@ -10,9 +10,8 @@ export const Home = () => {
   // Put auction cards here as well
   return (
     <>
-      <Typography>
-        <h1>Forbiddin' House</h1>
-      </Typography>
+      <h1>Forbiddin' House</h1>
+
       <Carousel />
 
       <Box>

@@ -16,7 +16,7 @@ import { useAuth } from "../../contexts/AppProvider";
 import { GET_USER } from "../../queries";
 import { DeleteListingModal } from "../DeleteListingModal";
 
-// Will accept "auction" prop which will inclue title, image etc
+// Will accept "auction" prop which will include title, image etc
 export const UpcomingAuctions = () => {
   const { user } = useAuth();
 
@@ -66,7 +66,7 @@ export const UpcomingAuctions = () => {
       <>
         <Grid container justifyContent="center" spacing={3} sx={styles.grid}>
           {listingData.getListings.map((auction) => (
-            <Grid key={auction} item className="upcomingCard">
+            <Grid key={auction._id} item className="upcomingCard">
               {userData.getSingleUser.isAdmin && (
                 <FontAwesomeIcon
                   onClick={() => {

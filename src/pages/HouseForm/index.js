@@ -107,13 +107,15 @@ export const HouseForm = () => {
 
   const styles = {
     container: {
+      backgroundColor: "#FFFFFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
       mx: "auto",
       width: 700,
-      border: "solid",
+      boxShadow: 4,
+      borderRadius: "20px",
       mt: "30px",
     },
 
@@ -132,7 +134,7 @@ export const HouseForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <React.Fragment>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           House Form
         </Typography>
         <Grid container spacing={3}>
@@ -171,18 +173,7 @@ export const HouseForm = () => {
             </FormControl>
           </Grid>
           {/* DESCRIPTION  */}
-          <Grid item xs={12} sm={12}>
-            <TextField
-              required
-              fullWidth
-              id="description"
-              label="Description"
-              multiline
-              rows={5}
-              {...register("description", { required: true })}
-              error={!!errors.description}
-            />
-          </Grid>
+
           {/* STARTING BID */}
           <Grid item xs={12} sm={6} className="relativeForm">
             <HelpIcon className="helperIcon" onClick={handleClick} />
@@ -301,6 +292,19 @@ export const HouseForm = () => {
             />
           </Grid>
 
+          <Grid item xs={12} sm={12}>
+            <TextField
+              required
+              fullWidth
+              id="description"
+              label="Description"
+              multiline
+              rows={5}
+              {...register("description", { required: true })}
+              error={!!errors.description}
+            />
+          </Grid>
+
           {/* KEY FEATURES */}
           <Grid item xs={12} sm={12}>
             <TextField
@@ -338,17 +342,22 @@ export const HouseForm = () => {
 
           <Grid item xs={12} sm={12}>
             {/* SUBMIT BUTTON */}
-            <LoadingButton
-              loadingIndicator="Loading..."
-              loading={loading}
-              variant="contained"
-              fullWidth
-              type="submit"
-              sx={styles.loadingButton}
-            >
-              Submit
-            </LoadingButton>
           </Grid>
+          <LoadingButton
+            sx={{
+              backgroundColor: "#045ee0",
+              width: "250px",
+              margin: "20px",
+            }}
+            loadingIndicator="Loading..."
+            loading={loading}
+            variant="contained"
+            fullWidth
+            type="submit"
+            sx={styles.loadingButton}
+          >
+            Submit
+          </LoadingButton>
         </Grid>
       </React.Fragment>
     </Box>

@@ -9,16 +9,19 @@ const images = [
     url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/hbz-karl-lagerfeld-home-hamburg-germany-index2-1530037821.jpg?crop=1.00xw:1.00xh;0,0&resize=980:*",
     title: "Villa Jako, Germany",
     width: "40%",
+    height: 100,
   },
   {
     url: "https://www.monaco-tribune.com/wp-content/uploads/2021/01/karl-lagerfeld-villa-monaco-1024x569.jpg",
     title: "Pearl White, Monaco",
     width: "30%",
+    height: "60%",
   },
   {
     url: "https://media.admagazine.fr/photos/60c75d2fd9ccb5da855d6d9c/master/w_2240%2Cc_limit/07_2008_kl_voltaire_044bleucouve_jpg_5994_north_655x492_transparent_jpg_7630.jpg",
     title: "Quai Voltaire, Paris",
     width: "30%",
+    height: "60%",
   },
 ];
 
@@ -62,6 +65,7 @@ const Image = styled("span")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+
   color: theme.palette.common.white,
 }));
 
@@ -73,6 +77,7 @@ const ImageBackdrop = styled("span")(({ theme }) => ({
   bottom: 0,
   backgroundColor: theme.palette.common.black,
   opacity: 0.4,
+
   transition: theme.transitions.create("opacity"),
 }));
 

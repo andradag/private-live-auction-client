@@ -1,67 +1,35 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import {Typography} from "@mui/material";
 
 export const FooterStyling = () => {
-  return (
-    <footer>
-      <Box
-        sx={{
-          border: "solid",
-          backgroundColor: "#E08604",
-          color: "white",
-          padding: "10px",
-          marginTop: "15px",
-          alignContent: "center",
-          left: 0,
-          bottom: 1,
-          right: 0,
-        }}
-      >
-        <Container>
-          <Grid container spacing={1}>
-            <Grid item sm={6}>
-              <Box sx={{ marginTop: "20px", fontSize: "23px" }}>
-                ©Project name 2022
-              </Box>
-            </Grid>
-
-            <Grid
-              sx={{ marginTop: "15px", fontSize: "20px" }}
-              item
-              xs={12}
-              sm={3}
-            ></Grid>
-
-            <Grid
-              sx={{ marginTop: "25px", fontSize: "30px" }}
-              item
-              xs={12}
-              sm={3}
-            >
-              <Box borderBottom={1}>PROFILE</Box>
-              <Box>
-                <Link href="http://localhost:3000/login" color="inherit">
-                  Login
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Logout
-                </Link>
-              </Box>
-
-              <Box>
-                <Link href="http://localhost:3000/signup" color="inherit">
-                  Register
-                </Link>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-    </footer>
-  );
+	return (
+		<footer>
+			<Box
+				sx={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					position: "fixed",
+					backgroundColor: "#E08604",
+					color: "white",
+					padding: "10px",
+					height: "3rem",
+					left: 0,
+					bottom: 0,
+					right: 0,
+				}}
+			>
+				<Container>
+					<Grid item>
+						<Typography sx={{textAlign: "center", fontSize: "20px"}}>
+							©Project name 2022
+						</Typography>
+					</Grid>
+				</Container>
+			</Box>
+		</footer>
+	);
 };

@@ -17,7 +17,7 @@ import { GET_USER } from "../../queries";
 import "./UpcomingAuctions.css";
 import { DeleteListingModal } from "../DeleteListingModal";
 
-// Will accept "auction" prop which will inclue title, image etc
+// Will accept "auction" prop which will include title, image etc
 export const UpcomingAuctions = () => {
   const { user } = useAuth();
 

@@ -14,13 +14,9 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import createTheme from "@mui/material/styles/createTheme";
 
 import {SIGNUP} from "../../mutations";
 import {SingleImageUploader} from "../../components/SingleImageUploader";
-
-const theme = createTheme();
 
 export const SignUpSide = () => {
 	const [uploadedImage, setUploadedImage] = useState();
@@ -67,146 +63,144 @@ export const SignUpSide = () => {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Grid container component="main" sx={{height: "100vh"}}>
-				<CssBaseline />
-				<Grid
-					item
-					xs={false}
-					sm={4}
-					md={7}
+		<Grid container component="main" sx={{height: "100vh"}}>
+			<CssBaseline />
+			<Grid
+				item
+				xs={false}
+				sm={4}
+				md={7}
+				sx={{
+					backgroundImage: "url(https://source.unsplash.com/random)",
+					backgroundRepeat: "no-repeat",
+					backgroundColor: (t) =>
+						t.palette.mode === "light"
+							? t.palette.grey[50]
+							: t.palette.grey[900],
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+				}}
+			/>
+			<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+				<Box
 					sx={{
-						backgroundImage: "url(https://source.unsplash.com/random)",
-						backgroundRepeat: "no-repeat",
-						backgroundColor: (t) =>
-							t.palette.mode === "light"
-								? t.palette.grey[50]
-								: t.palette.grey[900],
-						backgroundSize: "cover",
-						backgroundPosition: "center",
+						my: 8,
+						mx: 4,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
 					}}
-				/>
-				<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+				>
+					<Avatar sx={{m: 1, bgcolor: "primary.main"}}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						Sign Up
+					</Typography>
 					<Box
-						sx={{
-							my: 8,
-							mx: 4,
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "center",
-						}}
+						component="form"
+						noValidate
+						onSubmit={handleSubmit(onSubmit)}
+						sx={{mt: 1}}
 					>
-						<Avatar sx={{m: 1, bgcolor: "primary.main"}}>
-							<LockOutlinedIcon />
-						</Avatar>
-						<Typography component="h1" variant="h5">
-							Sign Up
-						</Typography>
-						<Box
-							component="form"
-							noValidate
-							onSubmit={handleSubmit(onSubmit)}
-							sx={{mt: 1}}
-						>
-							<TextField
-								margin="normal"
-								id="firstName"
-								label="First Name"
-								name="firstName"
-								variant="outlined"
-								fullWidth
-								autoFocus
-								{...register("firstName", {required: true})}
-								error={!!errors.firstName}
-								disabled={loading}
-							/>
-							<TextField
-								margin="normal"
-								id="lastName"
-								label="Last Name"
-								name="lastName"
-								variant="outlined"
-								fullWidth
-								{...register("lastName", {required: true})}
-								error={!!errors.lastName}
-								disabled={loading}
-							/>
-							<TextField
-								margin="normal"
-								id="email"
-								label="Email"
-								name="email"
-								variant="outlined"
-								fullWidth
-								{...register("email", {required: true})}
-								error={!!errors.email}
-								disabled={loading}
-							/>
+						<TextField
+							margin="normal"
+							id="firstName"
+							label="First Name"
+							name="firstName"
+							variant="outlined"
+							fullWidth
+							autoFocus
+							{...register("firstName", {required: true})}
+							error={!!errors.firstName}
+							disabled={loading}
+						/>
+						<TextField
+							margin="normal"
+							id="lastName"
+							label="Last Name"
+							name="lastName"
+							variant="outlined"
+							fullWidth
+							{...register("lastName", {required: true})}
+							error={!!errors.lastName}
+							disabled={loading}
+						/>
+						<TextField
+							margin="normal"
+							id="email"
+							label="Email"
+							name="email"
+							variant="outlined"
+							fullWidth
+							{...register("email", {required: true})}
+							error={!!errors.email}
+							disabled={loading}
+						/>
 
-							<TextField
-								margin="normal"
-								id="username"
-								label="Username"
-								name="username"
-								variant="outlined"
-								fullWidth
-								{...register("username", {required: true})}
-								error={!!errors.username}
-								disabled={loading}
-							/>
-							<TextField
-								type="password"
-								margin="normal"
-								id="password"
-								label="Password"
-								name="password"
-								variant="outlined"
-								fullWidth
-								{...register("password", {required: true, min: 8})}
-								error={!!errors.password}
-								disabled={loading}
-							/>
-							<TextField
-								type="password"
-								margin="normal"
-								id="confirmPassword"
-								label="Confirm Password"
-								name="confirmPassword"
-								variant="outlined"
-								fullWidth
-								{...register("confirmPassword", {
-									required: true,
-									validate: (value) => getValues("password") === value,
-								})}
-								error={!!errors.confirmPassword}
-								helperText={
-									!!errors.confirmPassword ? "Passwords do not match" : ""
-								}
-								disabled={loading}
-							/>
-							{/* <SingleImageUploader
+						<TextField
+							margin="normal"
+							id="username"
+							label="Username"
+							name="username"
+							variant="outlined"
+							fullWidth
+							{...register("username", {required: true})}
+							error={!!errors.username}
+							disabled={loading}
+						/>
+						<TextField
+							type="password"
+							margin="normal"
+							id="password"
+							label="Password"
+							name="password"
+							variant="outlined"
+							fullWidth
+							{...register("password", {required: true, min: 8})}
+							error={!!errors.password}
+							disabled={loading}
+						/>
+						<TextField
+							type="password"
+							margin="normal"
+							id="confirmPassword"
+							label="Confirm Password"
+							name="confirmPassword"
+							variant="outlined"
+							fullWidth
+							{...register("confirmPassword", {
+								required: true,
+								validate: (value) => getValues("password") === value,
+							})}
+							error={!!errors.confirmPassword}
+							helperText={
+								!!errors.confirmPassword ? "Passwords do not match" : ""
+							}
+							disabled={loading}
+						/>
+						{/* <SingleImageUploader
 								uploadedImage={uploadedImage}
 								setUploadedImage={setUploadedImage}
 							/> */}
-							<Button
-								type="submit"
-								fullWidth
-								variant="contained"
-								sx={{mt: 3, mb: 2}}
-							>
-								Sign In
-							</Button>
-							<Grid container sx={{justifyContent: "center"}}>
-								<Grid item>
-									<Link href="#" variant="body2">
-										{"Don't have an account? Sign Up"}
-									</Link>
-								</Grid>
+						<Button
+							type="submit"
+							fullWidth
+							variant="contained"
+							sx={{mt: 3, mb: 2}}
+						>
+							Sign In
+						</Button>
+						<Grid container sx={{justifyContent: "center"}}>
+							<Grid item>
+								<Link href="#" variant="body2">
+									{"Don't have an account? Sign Up"}
+								</Link>
 							</Grid>
-						</Box>
+						</Grid>
 					</Box>
-				</Grid>
+				</Box>
 			</Grid>
-		</ThemeProvider>
+		</Grid>
 	);
 };

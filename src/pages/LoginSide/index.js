@@ -13,12 +13,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import createTheme from "@mui/material/styles/createTheme";
 
 import {LOGIN} from "../../mutations";
-
-const theme = createTheme();
 
 export const LoginSide = () => {
 	const {setIsLoggedIn, setUser} = useAuth();
@@ -55,90 +51,88 @@ export const LoginSide = () => {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Grid container component="main" sx={{height: "100vh"}}>
-				<CssBaseline />
-				<Grid
-					item
-					xs={false}
-					sm={4}
-					md={7}
+		<Grid container component="main" sx={{height: "100vh"}}>
+			<CssBaseline />
+			<Grid
+				item
+				xs={false}
+				sm={4}
+				md={7}
+				sx={{
+					backgroundImage: "url(https://source.unsplash.com/random)",
+					backgroundRepeat: "no-repeat",
+					backgroundColor: (t) =>
+						t.palette.mode === "light"
+							? t.palette.grey[50]
+							: t.palette.grey[900],
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+				}}
+			/>
+			<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+				<Box
 					sx={{
-						backgroundImage: "url(https://source.unsplash.com/random)",
-						backgroundRepeat: "no-repeat",
-						backgroundColor: (t) =>
-							t.palette.mode === "light"
-								? t.palette.grey[50]
-								: t.palette.grey[900],
-						backgroundSize: "cover",
-						backgroundPosition: "center",
+						my: 8,
+						mx: 4,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
 					}}
-				/>
-				<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+				>
+					<Avatar sx={{m: 1, bgcolor: "primary.main"}}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component="h1" variant="h5">
+						Login
+					</Typography>
 					<Box
-						sx={{
-							my: 8,
-							mx: 4,
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "center",
-						}}
+						component="form"
+						noValidate
+						onSubmit={handleSubmit(onSubmit)}
+						sx={{mt: 1}}
 					>
-						<Avatar sx={{m: 1, bgcolor: "primary.main"}}>
-							<LockOutlinedIcon />
-						</Avatar>
-						<Typography component="h1" variant="h5">
-							Login
-						</Typography>
-						<Box
-							component="form"
-							noValidate
-							onSubmit={handleSubmit(onSubmit)}
-							sx={{mt: 1}}
+						<TextField
+							margin="normal"
+							id="email"
+							label="Email"
+							name="email"
+							variant="outlined"
+							fullWidth
+							{...register("email", {required: true})}
+							error={!!errors.email}
+							disabled={loading}
+							autoFocus
+						/>
+						<TextField
+							type="password"
+							margin="normal"
+							id="password"
+							label="Password"
+							name="password"
+							variant="outlined"
+							fullWidth
+							{...register("password", {required: true})}
+							error={!!errors.password}
+							disabled={loading}
+						/>
+						<Button
+							type="submit"
+							fullWidth
+							variant="contained"
+							sx={{mt: 3, mb: 2}}
 						>
-							<TextField
-								margin="normal"
-								id="email"
-								label="Email"
-								name="email"
-								variant="outlined"
-								fullWidth
-								{...register("email", {required: true})}
-								error={!!errors.email}
-								disabled={loading}
-								autoFocus
-							/>
-							<TextField
-								type="password"
-								margin="normal"
-								id="password"
-								label="Password"
-								name="password"
-								variant="outlined"
-								fullWidth
-								{...register("password", {required: true})}
-								error={!!errors.password}
-								disabled={loading}
-							/>
-							<Button
-								type="submit"
-								fullWidth
-								variant="contained"
-								sx={{mt: 3, mb: 2}}
-							>
-								Sign In
-							</Button>
-							<Grid container sx={{justifyContent: "center"}}>
-								<Grid item>
-									<Link href="#" variant="body2">
-										{"Don't have an account? Sign Up"}
-									</Link>
-								</Grid>
+							Sign In
+						</Button>
+						<Grid container sx={{justifyContent: "center"}}>
+							<Grid item>
+								<Link href="#" variant="body2">
+									{"Don't have an account? Sign Up"}
+								</Link>
 							</Grid>
-						</Box>
+						</Grid>
 					</Box>
-				</Grid>
+				</Box>
 			</Grid>
-		</ThemeProvider>
+		</Grid>
 	);
 };

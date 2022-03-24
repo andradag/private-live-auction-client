@@ -19,8 +19,10 @@ import HelpIcon from "@mui/icons-material/Help";
 import "./houseForm.css";
 import Popover from "@mui/material/Popover";
 
+import { MultiImageUploader } from "../../components/MultiImageUploader";
+
 export const HouseForm = () => {
-  const [uploadedImage, setUploadedImage] = useState();
+  const [uploadedImages, setUploadedImages] = useState();
   const [propType, setPropType] = useState();
 
   const handlePropTypeChange = (event) => {
@@ -73,6 +75,7 @@ export const HouseForm = () => {
     images,
   }) => {
     try {
+      console.log(uploadedImages);
       const { data } = await executeCreateHouse({
         variables: {
           input: {
@@ -85,12 +88,10 @@ export const HouseForm = () => {
             bathrooms: parseInt(bathrooms),
             googleMapUrl,
             keyFeatures,
-            images,
+            images: uploadedImages,
           },
         },
       });
-
-      console.log(data);
 
       if (data.addListing) {
         navigate("/dashboard", { replace: true });
@@ -318,7 +319,7 @@ export const HouseForm = () => {
 
           {/* IMAGES */}
           <Grid item xs={12} sm={12}>
-            <TextField
+            {/* <TextField
               required
               id="images"
               name="images"
@@ -328,6 +329,10 @@ export const HouseForm = () => {
               variant="outlined"
               {...register("images", { required: true })}
               error={!!errors.images}
+            /> */}
+            <MultiImageUploader
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
             />
           </Grid>
 

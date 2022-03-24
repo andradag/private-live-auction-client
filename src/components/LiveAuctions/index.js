@@ -51,7 +51,7 @@ export const LiveAuctions = () => {
 		return (
 			<Grid container justifyContent="center" spacing={3} sx={styles.grid}>
 				{listingData.getListings.map((auction) => (
-					<Grid key={auction} item>
+					<Grid key={auction._id} item>
 						<Card sx={{width: 345, height: 345}}>
 							<CardMedia
 								component="img"

@@ -78,7 +78,7 @@ export const SignUp = () => {
 			width: "80%",
 			flexGrow: 1,
 		},
-		loadingButton: {marginTop: 3, marginBottom: 2},
+		loadingButton: {backgroundColor: "#045ee0", pr: 2, pl: 2, mt: 3, mb: 2},
 		errorContainer: {
 			marginTop: 2,
 			color: "#d32f2f",
@@ -170,16 +170,15 @@ export const SignUp = () => {
 				setUploadedImage={setUploadedImage}
 			/> */}
 				<LoadingButton
-					sx={{backgroundColor: "#045ee0", width: "250px", margin: "20px"}}
+					sx={styles.loadingButton}
 					loading={loading}
 					loadingIndicator="Loading..."
 					variant="contained"
-					fullWidth
 					type="submit"
 					startIcon={error && <ErrorIcon />}
 					color={error ? "error" : "primary"}
 				>
-					Click here to proceed
+					Create an Account
 				</LoadingButton>
 
 				<Link

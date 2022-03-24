@@ -88,7 +88,7 @@ export const Login = () => {
 					label="Email"
 					name="email"
 					variant="outlined"
-					fullWidth
+					sx={styles.textField}
 					{...register("email", {required: true})}
 					error={!!errors.email}
 					disabled={loading}
@@ -101,7 +101,7 @@ export const Login = () => {
 					label="Password"
 					name="password"
 					variant="outlined"
-					fullWidth
+					sx={styles.textField}
 					{...register("password", {required: true})}
 					error={!!errors.password}
 					disabled={loading}

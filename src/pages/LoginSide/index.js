@@ -1,6 +1,6 @@
 import {useAuth} from "../../contexts/AppProvider";
 import {useMutation} from "@apollo/client";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link as RouterLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
 
 import Avatar from "@mui/material/Avatar";
@@ -125,7 +125,7 @@ export const LoginSide = () => {
 						</Button>
 						<Grid container sx={{justifyContent: "center"}}>
 							<Grid item>
-								<Link href="#" variant="body2">
+								<Link component={RouterLink} to="/signup" variant="body2">
 									{"Don't have an account? Sign Up"}
 								</Link>
 							</Grid>

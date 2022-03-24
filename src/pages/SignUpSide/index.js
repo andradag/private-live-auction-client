@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link as RouterLink} from "react-router-dom";
 import {useForm} from "react-hook-form";
 
 import {ApolloError, useMutation} from "@apollo/client";
@@ -193,7 +193,7 @@ export const SignUpSide = () => {
 						</Button>
 						<Grid container sx={{justifyContent: "center"}}>
 							<Grid item>
-								<Link href="#" variant="body2">
+								<Link component={RouterLink} to="/login" variant="body2">
 									{"Don't have an account? Sign Up"}
 								</Link>
 							</Grid>

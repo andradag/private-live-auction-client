@@ -14,6 +14,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 import {SingleImageUploader} from "../../components/SingleImageUploader";
 
 import {SIGNUP} from "../../mutations";
+import {Container} from "@mui/material";
 
 export const SignUp = () => {
 	const [uploadedImage, setUploadedImage] = useState();
@@ -63,15 +64,20 @@ export const SignUp = () => {
 			backgroundColor: "#FFFFFF",
 			display: "flex",
 			flexDirection: "column",
+			textAlign: "center",
 			alignItems: "center",
 			padding: 4,
-			marginTop: "30px",
+			mt: "4rem",
+			mb: "7rem",
 			mx: "auto",
-			width: 700,
-			border: "solid",
-			borderRadius: "20px",
+			maxWidth: 700,
+			borderRadius: "0.7rem",
+			boxShadow: 4,
 		},
-
+		textField: {
+			width: "80%",
+			flexGrow: 1,
+		},
 		loadingButton: {marginTop: 3, marginBottom: 2},
 		errorContainer: {
 			marginTop: 2,
@@ -81,114 +87,121 @@ export const SignUp = () => {
 	};
 
 	return (
-		<Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
-			<Typography variant="h4" gutterBottom>
-				Signup Form
-			</Typography>
-			<TextField
-				margin="normal"
-				id="firstName"
-				label="First Name"
-				name="firstName"
-				variant="outlined"
-				fullWidth
-				{...register("firstName", {required: true})}
-				error={!!errors.firstName}
-				disabled={loading}
-			/>
-			<TextField
-				margin="normal"
-				id="lastName"
-				label="Last Name"
-				name="lastName"
-				variant="outlined"
-				fullWidth
-				{...register("lastName", {required: true})}
-				error={!!errors.lastName}
-				disabled={loading}
-			/>
-			<TextField
-				margin="normal"
-				id="email"
-				label="Email"
-				name="email"
-				variant="outlined"
-				fullWidth
-				{...register("email", {required: true})}
-				error={!!errors.email}
-				disabled={loading}
-			/>
+		<Container>
+			<Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+				<Typography variant="h4" gutterBottom>
+					Signup Form
+				</Typography>
+				<TextField
+					margin="normal"
+					id="firstName"
+					label="First Name"
+					name="firstName"
+					variant="outlined"
+					sx={styles.textField}
+					{...register("firstName", {required: true})}
+					error={!!errors.firstName}
+					disabled={loading}
+				/>
+				<TextField
+					margin="normal"
+					id="lastName"
+					label="Last Name"
+					name="lastName"
+					variant="outlined"
+					sx={styles.textField}
+					{...register("lastName", {required: true})}
+					error={!!errors.lastName}
+					disabled={loading}
+				/>
+				<TextField
+					margin="normal"
+					id="email"
+					label="Email"
+					name="email"
+					variant="outlined"
+					sx={styles.textField}
+					{...register("email", {required: true})}
+					error={!!errors.email}
+					disabled={loading}
+				/>
 
-			<TextField
-				margin="normal"
-				id="username"
-				label="Username"
-				name="username"
-				variant="outlined"
-				fullWidth
-				{...register("username", {required: true})}
-				error={!!errors.username}
-				disabled={loading}
-			/>
-			<TextField
-				type="password"
-				margin="normal"
-				id="password"
-				label="Password"
-				name="password"
-				variant="outlined"
-				fullWidth
-				{...register("password", {required: true, min: 8})}
-				error={!!errors.password}
-				disabled={loading}
-			/>
-			<TextField
-				type="password"
-				margin="normal"
-				id="confirmPassword"
-				label="Confirm Password"
-				name="confirmPassword"
-				variant="outlined"
-				fullWidth
-				{...register("confirmPassword", {
-					required: true,
-					validate: (value) => getValues("password") === value,
-				})}
-				error={!!errors.confirmPassword}
-				helperText={!!errors.confirmPassword ? "Passwords do not match" : ""}
-				disabled={loading}
-			/>
-			{/* <SingleImageUploader
+				<TextField
+					margin="normal"
+					id="username"
+					label="Username"
+					name="username"
+					variant="outlined"
+					sx={styles.textField}
+					{...register("username", {required: true})}
+					error={!!errors.username}
+					disabled={loading}
+				/>
+				<TextField
+					type="password"
+					margin="normal"
+					id="password"
+					label="Password"
+					name="password"
+					variant="outlined"
+					sx={styles.textField}
+					{...register("password", {required: true, min: 8})}
+					error={!!errors.password}
+					disabled={loading}
+				/>
+				<TextField
+					type="password"
+					margin="normal"
+					id="confirmPassword"
+					label="Confirm Password"
+					name="confirmPassword"
+					variant="outlined"
+					sx={styles.textField}
+					{...register("confirmPassword", {
+						required: true,
+						validate: (value) => getValues("password") === value,
+					})}
+					error={!!errors.confirmPassword}
+					helperText={!!errors.confirmPassword ? "Passwords do not match" : ""}
+					disabled={loading}
+				/>
+				{/* <SingleImageUploader
 				uploadedImage={uploadedImage}
 				setUploadedImage={setUploadedImage}
 			/> */}
-			<LoadingButton
-				sx={{backgroundColor: "#045ee0", width: "250px", margin: "20px"}}
-				loading={loading}
-				loadingIndicator="Loading..."
-				variant="contained"
-				fullWidth
-				type="submit"
-				startIcon={error && <ErrorIcon />}
-				color={error ? "error" : "primary"}
-			>
-				Click here to proceed
-			</LoadingButton>
-
-			<Link component={RouterLink} to="/login" variant="body2" underline="none">
-				Already have an account? Login
-			</Link>
-			{error && (
-				<Typography
-					variant="subtitle2"
-					gutterBottom
-					component="div"
-					sx={styles.errorContainer}
+				<LoadingButton
+					sx={{backgroundColor: "#045ee0", width: "250px", margin: "20px"}}
+					loading={loading}
+					loadingIndicator="Loading..."
+					variant="contained"
+					fullWidth
+					type="submit"
+					startIcon={error && <ErrorIcon />}
+					color={error ? "error" : "primary"}
 				>
-					Failed to sign up, please make sure you enter the correct details or
-					try again later.
-				</Typography>
-			)}
-		</Box>
+					Click here to proceed
+				</LoadingButton>
+
+				<Link
+					component={RouterLink}
+					to="/login"
+					variant="body2"
+					underline="none"
+				>
+					Already have an account? Login
+				</Link>
+				{error && (
+					<Typography
+						variant="subtitle2"
+						gutterBottom
+						component="div"
+						sx={styles.errorContainer}
+					>
+						Failed to sign up, please make sure you enter the correct details or
+						try again later.
+					</Typography>
+				)}
+			</Box>
+		</Container>
 	);
 };

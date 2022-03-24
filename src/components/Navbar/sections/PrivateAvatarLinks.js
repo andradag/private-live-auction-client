@@ -75,7 +75,7 @@ export const PrivateAvatarLinks = ({handleLogout}) => {
 								<MenuItem
 									id={setting.id}
 									onClick={handleLogout}
-									textAlign="center"
+									style={{textAlign: "center"}}
 								>
 									{setting.title}
 								</MenuItem>
@@ -108,7 +108,7 @@ export const PrivateAvatarLinks = ({handleLogout}) => {
 								<MenuItem
 									id={setting.id}
 									onClick={handleLogout}
-									textAlign="center"
+									style={{textAlign: "center"}}
 								>
 									{setting.title}
 								</MenuItem>
@@ -144,7 +144,7 @@ export const PrivateAvatarLinks = ({handleLogout}) => {
 								<MenuItem
 									id={setting.id}
 									onClick={handleLogout}
-									textAlign="center"
+									style={{textAlign: "center"}}
 								>
 									{setting.title}
 								</MenuItem>
@@ -177,7 +177,7 @@ export const PrivateAvatarLinks = ({handleLogout}) => {
 								<MenuItem
 									id={setting.id}
 									onClick={handleLogout}
-									textAlign="center"
+									style={{textAlign: "center"}}
 								>
 									{setting.title}
 								</MenuItem>

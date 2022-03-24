@@ -57,7 +57,7 @@ export const PublicHamburgerMenu = () => {
 					<Link
 						key={i}
 						to={page.path}
-						textAlign="center"
+						style={{textAlign: "center"}}
 						className="dropdown-btn"
 					>
 						<MenuItem id={page.id} onClick={handleCloseNavMenu}>

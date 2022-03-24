@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -22,11 +23,9 @@ const Input = styled("input")({
 });
 
 export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
-  const [images, setImages] = useState();
+  const [images, setImages] = useState([]);
   const [uploadComplete, setUploadComplete] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  let imageListArray = [];
 
   const styles = {
     container: {
@@ -40,159 +39,183 @@ export const MultiImageUploader = ({ uploadedImages, setUploadedImages }) => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      padding: 4,
     },
   };
 
   const uploadImages = async () => {
-    let arrayOfImages = [];
+    setLoading(true);
+    aws.config.update({
+      accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_ACCESS_ID,
+      region: process.env.REACT_APP_REGION,
+      signatureVersion: "v4",
+    });
 
-    for (let i = 0; i < images.length; i++) {
-      setLoading(true);
+    const s3 = new aws.S3();
 
-      aws.config.update({
-        accessKeyId: process.env.REACT_APP_ACCESS_KEY,
-        secretAccessKey: process.env.REACT_APP_ACCESS_ID,
-        region: process.env.REACT_APP_REGION,
-        signatureVersion: "v4",
-      });
+    images.forEach((image) => {
+      image.uuid = uuidv4();
+    });
 
-      const s3 = new aws.S3();
-
-      images[i].uuid = uuidv4();
-
-      const { url, fields } = s3.createPresignedPost({
+    const preCheckPromises = images.map((image) =>
+      s3.createPresignedPost({
         Bucket: process.env.REACT_APP_BUCKET_NAME,
-        Fields: { key: `images/${images[i].uuid}` },
+        Fields: { key: `images/${image.uuid}` },
         Expires: 60,
-      });
+      })
+    );
 
+    const preChecks = await Promise.all(preCheckPromises);
+
+    const uploadPromises = preChecks.map(({ url, fields }, index) => {
       const formData = new FormData();
 
-      Object.entries({ ...fields, file: images[i] }).forEach(([key, value]) => {
-        formData.append(key, value);
+      Object.entries({ ...fields, file: images[index] }).forEach(
+        ([key, value]) => {
+          formData.append(key, value);
+        }
+      );
+
+      return fetch(url, {
+        method: "POST",
+        body: formData,
       });
+    });
 
-      const upload = await fetch(url, { method: "POST", body: formData });
+    const uploads = await Promise.all(uploadPromises);
 
-      if (upload.ok) {
-        setUploadComplete(true);
-        setImages();
-        arrayOfImages.push(`${upload.url}/images/${images[i].uuid}`);
-        setUploadedImages(arrayOfImages);
-        setLoading(false);
-      } else {
-        console.log("Failed to upload");
-      }
+    const uploadsComplete = uploads.every((upload) => {
+      return upload.ok;
+    });
+
+    if (uploadsComplete) {
+      setUploadComplete(true);
+      setImages([]);
+      setUploadedImages([
+        ...uploadedImages,
+        ...uploads.map(
+          ({ url }, index) => `${url}/images/${images[index].uuid}`
+        ),
+      ]);
+      setLoading(false);
+    } else {
+      console.log("Failed to upload");
     }
   };
 
   return (
-    <Stack spacing={2} alignItems="center">
-      <label htmlFor="image-uploader">
-        <Input
-          accept="image/*"
-          id="image-uploader"
-          type="file"
-          multiple
-          onChange={(event) => {
-            setImages(event.target.files);
-          }}
-        />
-        <Button variant="contained" component="span">
-          Add Images
-        </Button>
-      </label>
-      {images && (
-        <LoadingButton
-          loading={loading}
-          loadingPosition="start"
-          startIcon={<UploadIcon />}
-          variant="contained"
-          onClick={uploadImages}
-        >
-          Upload Images
-        </LoadingButton>
-      )}
-
-      {images && (
-        <>
-          <Typography
-            variant="subtitle"
-            gutterBottom
-            component="h3"
-            align="center"
-            sx={styles.header}
+    <Box component="form" sx={styles.form}>
+      <Stack spacing={2} alignItems="center">
+        <label htmlFor="image-uploader">
+          <Input
+            accept="image/*"
+            id="image-uploader"
+            multiple
+            type="file"
+            onChange={(event) => {
+              setImages([...images, ...event.target.files]);
+            }}
+          />
+          <Button variant="contained" component="span">
+            Add Images
+          </Button>
+        </label>
+        {images.length !== 0 && (
+          <LoadingButton
+            loading={loading}
+            loadingPosition="start"
+            startIcon={<UploadIcon />}
+            variant="contained"
+            onClick={uploadImages}
           >
-            Images to Upload
-          </Typography>
-          <ImageList>
-            {Array.from(images).map((image) => (
-              <ImageListItem cols={2} rows={1}>
-                <img
-                  style={{
-                    maxWidth: 250,
-                    objectFit: "contain",
-                  }}
-                  src={URL.createObjectURL(image)}
-                  loading="lazy"
-                />
-                <ImageListItemBar
-                  title={image.name}
-                  subtitle={`${Math.floor(image.size / 10) / 100} KB`}
-                  actionIcon={
-                    loading ? (
-                      <CircularProgress
-                        sx={{ color: "#fff", mr: 2 }}
-                        size={20}
-                      />
-                    ) : (
-                      <IconButton
-                        sx={{ color: "#d32f2f" }}
-                        onClick={() => {
-                          setImages();
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    )
-                  }
-                />
-              </ImageListItem>
-            ))}
-          </ImageList>
-        </>
-      )}
+            Upload Images
+          </LoadingButton>
+        )}
 
-      {uploadedImages && (
-        <>
-          <Typography
-            variant="subtitle"
-            gutterBottom
-            component="h3"
-            align="center"
-            sx={styles.header}
-          >
-            Uploaded Images
-          </Typography>
-          <ImageList>
-            <ImageListItem cols={2} rows={1}>
-              <img
-                style={{ maxWidth: 250, objectFit: "contain" }}
-                src={uploadedImages.src}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                actionIcon={<CheckCircleIcon sx={{ mr: 2, color: "#fff" }} />}
-              />
-            </ImageListItem>
-          </ImageList>
-        </>
-      )}
+        {images.length !== 0 && (
+          <>
+            <Typography
+              variant="subtitle"
+              gutterBottom
+              component="h3"
+              align="center"
+              sx={styles.header}
+            >
+              Images to Upload
+            </Typography>
+            <ImageList>
+              {images.map((image, index) => (
+                <ImageListItem key={index}>
+                  <img
+                    style={{ objectFit: "contain" }}
+                    src={URL.createObjectURL(image)}
+                    loading="lazy"
+                  />
+                  <ImageListItemBar
+                    title={image.name}
+                    subtitle={`${Math.floor(image.size / 10) / 100} KB`}
+                    actionIcon={
+                      loading ? (
+                        <CircularProgress
+                          sx={{ color: "#fff", mr: 2 }}
+                          size={20}
+                        />
+                      ) : (
+                        <IconButton
+                          sx={{ color: "#d32f2f" }}
+                          onClick={() => {
+                            setImages(
+                              images.filter((each) => each.name !== image.name)
+                            );
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      )
+                    }
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </>
+        )}
 
-      {uploadComplete && !loading && (
-        <Alert severity="success">Successfully uploaded image</Alert>
-      )}
-    </Stack>
+        {uploadedImages.length !== 0 && (
+          <>
+            <Typography
+              variant="subtitle"
+              gutterBottom
+              component="h3"
+              align="center"
+              sx={styles.header}
+            >
+              Uploaded Images
+            </Typography>
+            <ImageList>
+              {uploadedImages.map(({ src }, index) => (
+                <ImageListItem key={index}>
+                  <img
+                    style={{ objectFit: "contain" }}
+                    src={src}
+                    loading="lazy"
+                  />
+                  <ImageListItemBar
+                    actionIcon={
+                      <CheckCircleIcon sx={{ mr: 2, color: "#fff" }} />
+                    }
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </>
+        )}
+
+        {uploadComplete && !loading && (
+          <Alert severity="success">
+            Successfully uploaded {uploadedImages.length} images
+          </Alert>
+        )}
+      </Stack>
+    </Box>
   );
 };

@@ -1,7 +1,8 @@
-import {useAuth} from "../../contexts/AppProvider";
-import {useMutation} from "@apollo/client";
+import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
+
+import {ApolloError, useMutation} from "@apollo/client";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -18,41 +19,53 @@ import Typography from "@mui/material/Typography";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import createTheme from "@mui/material/styles/createTheme";
 
-import {LOGIN} from "../../mutations";
+import {useAuth} from "../../contexts/AppProvider";
+
+import {SIGNUP} from "../../mutations";
 
 const theme = createTheme();
 
-export const LoginSide = () => {
-	const {setIsLoggedIn, setUser} = useAuth();
-	const [executeLogin, {loading, error}] = useMutation(LOGIN);
+export const SignUpSide = () => {
+	const [uploadedImage, setUploadedImage] = useState();
+	const [executeSignUp, {loading, error}] = useMutation(SIGNUP);
 
 	const navigate = useNavigate();
 
 	const {
 		register,
 		handleSubmit,
+		getValues,
 		formState: {errors},
 	} = useForm();
 
-	const onSubmit = async ({email, password}) => {
-		const {data} = await executeLogin({
-			variables: {
-				loginInput: {
-					email: email.toLowerCase().trim(),
-					password,
+	const onSubmit = async ({firstName, lastName, username, email, password}) => {
+		try {
+			const {data} = await executeSignUp({
+				variables: {
+					userInput: {
+						firstName:
+							firstName.charAt(0).toUpperCase() + firstName.slice(1).trim(),
+						lastName:
+							lastName.charAt(0).toUpperCase() + lastName.slice(1).trim(),
+						username: username.trim(),
+						email: email.toLowerCase().trim(),
+						// imageUrl: uploadedImage.src,
+						password,
+					},
 				},
-			},
-		});
-		if (data) {
-			const {token, user} = data.login;
+			});
 
-			localStorage.setItem("token", token);
-			localStorage.setItem("user", JSON.stringify(user));
+			if (data.addUser) {
+				navigate("/login", {replace: true});
+			}
 
-			setIsLoggedIn(true);
-			setUser(user);
-
-			navigate("/dashboard", {replace: true});
+			if (data.addUser === null) {
+				throw new ApolloError(
+					"Failed to create account, please try again later"
+				);
+			}
+		} catch (err) {
+			console.log(err);
 		}
 	};
 
@@ -100,6 +113,29 @@ export const LoginSide = () => {
 						>
 							<TextField
 								margin="normal"
+								id="firstName"
+								label="First Name"
+								name="firstName"
+								variant="outlined"
+								fullWidth
+								autoFocus
+								{...register("firstName", {required: true})}
+								error={!!errors.firstName}
+								disabled={loading}
+							/>
+							<TextField
+								margin="normal"
+								id="lastName"
+								label="Last Name"
+								name="lastName"
+								variant="outlined"
+								fullWidth
+								{...register("lastName", {required: true})}
+								error={!!errors.lastName}
+								disabled={loading}
+							/>
+							<TextField
+								margin="normal"
 								id="email"
 								label="Email"
 								name="email"
@@ -108,7 +144,18 @@ export const LoginSide = () => {
 								{...register("email", {required: true})}
 								error={!!errors.email}
 								disabled={loading}
-								autoFocus
+							/>
+
+							<TextField
+								margin="normal"
+								id="username"
+								label="Username"
+								name="username"
+								variant="outlined"
+								fullWidth
+								{...register("username", {required: true})}
+								error={!!errors.username}
+								disabled={loading}
 							/>
 							<TextField
 								type="password"
@@ -118,8 +165,26 @@ export const LoginSide = () => {
 								name="password"
 								variant="outlined"
 								fullWidth
-								{...register("password", {required: true})}
+								{...register("password", {required: true, min: 8})}
 								error={!!errors.password}
+								disabled={loading}
+							/>
+							<TextField
+								type="password"
+								margin="normal"
+								id="confirmPassword"
+								label="Confirm Password"
+								name="confirmPassword"
+								variant="outlined"
+								fullWidth
+								{...register("confirmPassword", {
+									required: true,
+									validate: (value) => getValues("password") === value,
+								})}
+								error={!!errors.confirmPassword}
+								helperText={
+									!!errors.confirmPassword ? "Passwords do not match" : ""
+								}
 								disabled={loading}
 							/>
 							<Button

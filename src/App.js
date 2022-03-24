@@ -14,8 +14,7 @@ import { createClient } from "graphql-ws";
 import { AppProvider } from "./contexts/AppProvider";
 
 import { Navbar } from "./components/Navbar";
-import { FooterStyling } from "./components/Footer";
-// import { SignUp } from "./pages/SignUp";
+import { StickyFooter } from "./components/Footer";
 
 import { AppRoutes } from "./AppRoutes.js";
 
@@ -67,7 +66,7 @@ export const App = () => {
         <BrowserRouter>
           <Navbar />
           <AppRoutes />
-          <FooterStyling />
+          <StickyFooter />
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

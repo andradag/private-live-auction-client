@@ -14,6 +14,7 @@ import { createClient } from "graphql-ws";
 import { AppProvider } from "./contexts/AppProvider";
 
 import { Navbar } from "./components/Navbar";
+import HowToBid from "./components/pages/HowToBid";
 
 // import { AppRoutes } from "./AppRoutes.js";
 import "./reset.css";
@@ -62,7 +63,7 @@ export const App = () => {
     <ApolloProvider client={client}>
       <AppProvider>
         <BrowserRouter>
-          <Navbar />
+          <HowToBid />
           {/* <AppRoutes /> */}
         </BrowserRouter>
       </AppProvider>

@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../contexts/AppProvider";
 import { GET_USER } from "../../queries";
-import "./UpcomingAuctions.css";
 import { DeleteListingModal } from "../DeleteListingModal";
 
 // Will accept "auction" prop which will inclue title, image etc

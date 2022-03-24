@@ -17,7 +17,7 @@ export const AppRoutes = () => {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/auction/:id" element={<AuctionPage />} />
       <Route path="/create-auction" element={<CreateAuctionForm />} />
-      <Route path="/How-to-bid" element={<HowToBid />} />
+      <Route path="/how-to-bid" element={<HowToBid />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

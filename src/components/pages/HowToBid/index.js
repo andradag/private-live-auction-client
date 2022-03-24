@@ -7,9 +7,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import LiveAuctions from "../LiveAuctions/LiveAuctions";
 
-export default function toBid() {
+export const HowToBid = () => {
   return (
-    <Card sx={{ maxWidth: 700, mt: 20, ml: 20 }}>
+    <Card sx={{ my: 5, ml: 20, mr: 20 }}>
       <CardContent>
         <Typography gutterBottom variant="h2" component="div">
           How To Bid
@@ -77,4 +77,4 @@ export default function toBid() {
       </CardActions>
     </Card>
   );
-}
+};

@@ -3,6 +3,8 @@ import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/300.css";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
 
 export const Home = () => {
   // Put auction cards here as well
@@ -10,24 +12,33 @@ export const Home = () => {
     <>
       <h1>Home Page</h1>
       <Carousel />
+
       <Box>
-        <Card
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            height: 500,
-            marginBottom: "20px",
-            marginLeft: "800px",
-            marginRight: "20px",
-          }}
-        >
-          <h4>
-            <Typography
-              component="div"
-              textAlign="center"
-              marginLeft="40%"
-              marginRight="40%"
-            >
+        <Card sx={{ display: "flex", flexDirection: "row", marginTop: "10px" }}>
+          <CardMedia
+            sx={{
+              height: 500,
+              width: 700,
+              marginRight: "30px",
+              marginLeft: "20px",
+              marginTop: "20px",
+            }}
+            image="https://images.rics.org/publishedmedia/ihoyjek49pynihgcvp6d/RICS-Professional_Renewal.jpg"
+          />
+
+          <CardContent
+            sx={{
+              border: "solid",
+              padding: "20px",
+              height: 200,
+              width: 800,
+              textAlign: "center",
+              marginRight: "30px",
+              marginLeft: "20px",
+              marginTop: "70px",
+            }}
+          >
+            <Typography>
               Established in 1744, Sotheby’s is the world’s largest, most
               trusted and dynamic marketplace for art and luxury. We empower our
               international community of collectors and connoisseurs to
@@ -42,26 +53,7 @@ export const Home = () => {
               items available for immediate purchase via both digital and
               physical shopping experiences as well as private sales.{" "}
             </Typography>
-          </h4>
-        </Card>
-
-        <Card
-          sx={{
-            margin: "15px",
-            display: "flex",
-            flexDirection: "row",
-            height: 500,
-            marginBottom: "20px",
-            marginRight: "800px",
-            marginLeft: "20px",
-          }}
-        >
-          <img
-            src="https://images.rics.org/publishedmedia/ihoyjek49pynihgcvp6d/RICS-Professional_Renewal.jpg"
-            height="100%"
-            width="100%"
-            alt=""
-          />
+          </CardContent>
         </Card>
       </Box>
     </>

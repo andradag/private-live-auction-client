@@ -85,6 +85,7 @@ export const Login = () => {
 				{...register("email", {required: true})}
 				error={!!errors.email}
 				disabled={loading}
+				autoFocus
 			/>
 
 			<TextField

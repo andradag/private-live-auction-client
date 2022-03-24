@@ -4,17 +4,17 @@ import {useForm} from "react-hook-form";
 
 import {ApolloError, useMutation} from "@apollo/client";
 
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
+import ErrorIcon from "@mui/icons-material/Error";
 import Link from "@mui/material/Link";
 import LoadingButton from "@mui/lab/LoadingButton";
-import ErrorIcon from "@mui/icons-material/Error";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 
 import {SingleImageUploader} from "../../components/SingleImageUploader";
 
 import {SIGNUP} from "../../mutations";
-import {Container} from "@mui/material";
 
 export const SignUp = () => {
 	const [uploadedImage, setUploadedImage] = useState();

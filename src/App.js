@@ -15,7 +15,6 @@ import { AppProvider } from "./contexts/AppProvider";
 
 import { Navbar } from "./components/Navbar";
 import { StickyFooter } from "./components/Footer";
-// import { SignUp } from "./pages/SignUp";
 
 import { AppRoutes } from "./AppRoutes.js";
 
@@ -66,7 +65,6 @@ export const App = () => {
       <AppProvider>
         <BrowserRouter>
           <Navbar />
-          {/* <SignUp /> */}
           <AppRoutes />
           <StickyFooter />
         </BrowserRouter>

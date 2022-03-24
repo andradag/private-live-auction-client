@@ -66,7 +66,6 @@ export const App = () => {
       <AppProvider>
         <BrowserRouter>
           <Navbar />
-          {/* <SignUp /> */}
           <AppRoutes />
           <FooterStyling />
         </BrowserRouter>

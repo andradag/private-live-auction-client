@@ -33,33 +33,33 @@ export const SIGNUP = gql`
 `;
 
 export const CREATE_HOUSE = gql`
-  mutation Mutation($input: ListingInput!) {
-    addListing(input: $input) {
-      _id
-      title
-      description
-      propertyType
-      reserveAmount
-      startingBid
-      status
-      bedrooms
-      bathrooms
-      createdBy {
-        id
-        username
-        firstName
-        lastName
-        imageUrl
-        email
-        isAdmin
-      }
-      createdAt
-      updatedAt
-      googleMapUrl
-      keyFeatures
-      images
-    }
-  }
+	mutation Mutation($input: ListingInput!) {
+		addListing(input: $input) {
+			_id
+			title
+			description
+			propertyType
+			reserveAmount
+			startingBid
+			status
+			bedrooms
+			bathrooms
+			createdBy {
+				id
+				username
+				firstName
+				lastName
+				imageUrl
+				email
+				isAdmin
+			}
+			createdAt
+			updatedAt
+			googleMapUrl
+			keyFeatures
+			images
+		}
+	}
 `;
 
 export const CREATE_LISTING = gql`
@@ -86,9 +86,9 @@ export const SAVELISTING = gql`
 `;
 
 export const DELETE_LISTING = gql`
-  mutation Mutation($input: ID!) {
-    deleteListing(input: $input)
-  }
+	mutation Mutation($input: ID!) {
+		deleteListing(input: $input)
+	}
 `;
 
 export const ADD_BID = gql`
@@ -104,3 +104,17 @@ export const ADD_BID = gql`
 	}
 `;
 
+export const UPDATE_PROFILE = gql`
+	mutation Mutation($input: UpdateProfileInput!) {
+		updateProfile(input: $input) {
+			token
+			user {
+				id
+				username
+				firstName
+				lastName
+				email
+			}
+		}
+	}
+`;

@@ -5,6 +5,7 @@ import {Dashboard} from "./pages/Dashboard";
 import {LoginSide} from "./pages/LoginSide";
 // import {SignUp} from "./pages/SignUp";
 import {SignUpSide} from "./pages/SignUpSide";
+import {Account} from "./pages/Account";
 import {AuctionPage} from "./pages/AuctionPage";
 import {CreateAuctionForm} from "./pages/CreateAuction";
 import {SecondaryDashboardPage} from "./pages/SecondaryDashboard";
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
 			{/* <Route path="/dashboard" element={<SecondaryDashboardPage />} /> */}
 			<Route path="/login" element={<LoginSide />} />
 			<Route path="/signup" element={<SignUpSide />} />
+			<Route path="/profile" element={<Account />} />
 			<Route path="/auction/:id" element={<AuctionPage />} />
 			<Route path="/how-to-bid" element={<HowToBid />} />
 			<Route path="/create-auction" element={<CreateAuctionForm />} />

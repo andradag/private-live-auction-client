@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useState} from "react";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 
@@ -32,9 +32,11 @@ export const SignUp = () => {
 			const {data} = await executeSignUp({
 				variables: {
 					userInput: {
-						firstName: firstName.toLowerCase().trim(),
-						lastName: lastName.toLowerCase().trim(),
-						username: username.toLowerCase().trim(),
+						firstName:
+							firstName.charAt(0).toUpperCase() + firstName.slice(1).trim(),
+						lastName:
+							lastName.charAt(0).toUpperCase() + lastName.slice(1).trim(),
+						username: username.trim(),
 						email: email.toLowerCase().trim(),
 						// imageUrl: uploadedImage.src,
 						password,
@@ -52,7 +54,7 @@ export const SignUp = () => {
 				);
 			}
 		} catch (err) {
-			console.log(err);
+			console.log(`[ERROR]: Failed to create User || ${err.message}`);
 		}
 	};
 

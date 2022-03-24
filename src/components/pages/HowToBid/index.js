@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import LiveAuctions from "../LiveAuctions/LiveAuctions";
+import { Link } from "react-router-dom";
 
 export const HowToBid = () => {
   return (
@@ -71,7 +72,15 @@ export const HowToBid = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={LiveAuctions} size="medium" variant="contained">
+        {/* <Button onClick={LiveAuctions} size="medium" variant="contained">
+          View Live Auctions
+        </Button> */}
+        <Button
+          component={Link}
+          to="/LiveAuctions"
+          size="medium"
+          variant="contained"
+        >
           View Live Auctions
         </Button>
       </CardActions>

@@ -9,7 +9,6 @@ export const FooterStyling = () => {
     <footer>
       <Box
         sx={{
-          border: "solid",
           backgroundColor: "#E08604",
           color: "white",
           padding: "10px",

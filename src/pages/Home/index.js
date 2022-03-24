@@ -1,5 +1,4 @@
 import Carousel from "../../components/pages/Home/Carousel";
-import Footer from "../../components/pages/Home/Footer";
 import Typography from "@mui/material/Typography";
 import "@fontsource/roboto/300.css";
 import Card from "@mui/material/Card";
@@ -65,8 +64,6 @@ export const Home = () => {
           />
         </Card>
       </Box>
-
-      <Footer />
     </>
   );
 };

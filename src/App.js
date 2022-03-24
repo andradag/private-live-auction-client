@@ -15,9 +15,9 @@ import { AppProvider } from "./contexts/AppProvider";
 
 import { Navbar } from "./components/Navbar";
 import { FooterStyling } from "./components/Footer";
-import { SignUp } from "./pages/SignUp";
+// import { SignUp } from "./pages/SignUp";
 
-// import { AppRoutes } from "./AppRoutes.js";
+import { AppRoutes } from "./AppRoutes.js";
 
 import "./reset.css";
 import "./styles.css";
@@ -66,8 +66,8 @@ export const App = () => {
       <AppProvider>
         <BrowserRouter>
           <Navbar />
-          <SignUp />
-          {/* <AppRoutes /> */}
+          {/* <SignUp /> */}
+          <AppRoutes />
           <FooterStyling />
         </BrowserRouter>
       </AppProvider>

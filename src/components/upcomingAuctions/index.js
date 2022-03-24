@@ -21,6 +21,7 @@ import { DeleteListingModal } from "../DeleteListingModal";
 export const UpcomingAuctions = () => {
   const { user } = useAuth();
 
+  // // Get user admin status
   const {
     data: userData,
     loading: userLoading,

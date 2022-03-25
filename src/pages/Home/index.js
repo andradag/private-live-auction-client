@@ -5,14 +5,47 @@ import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Inspiration, cursive",
+  },
+});
 
 export const Home = () => {
   // Put auction cards here as well
   return (
     <>
-      <h1>Forbiddin' House</h1>
+      <ThemeProvider theme={theme}>
+        <Typography
+          sx={{ fontFamily: "Inspiration, cursive" }}
+          align="center"
+          variant="h2"
+          color="black"
+          weight="normal"
+          boxShadow="5"
+          marginTop="10px"
+          marginBottom="10px"
+        >
+          Forbiddin' House
+        </Typography>
+      </ThemeProvider>
 
       <Carousel />
+
+      <Typography
+        sx={{ fontFamily: "Inspiration, cursive" }}
+        align="center"
+        variant="h2"
+        color="black"
+        weight="bold"
+        boxShadow="5"
+        marginTop="10px"
+        marginBottom="10px"
+      >
+        Auction: Turing cash into assets
+      </Typography>
 
       <Box>
         <Card sx={{ display: "flex", flexDirection: "row", marginTop: "10px" }}>

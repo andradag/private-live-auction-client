@@ -15,11 +15,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Container from "@mui/material/Container";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
+import { Navigate } from "react-router-dom";
 
 import { CREATE_HOUSE } from "../../mutations";
 import { MultiImageUploader } from "../../components/MultiImageUploader";
 
-export const HouseForm = () => {
+export const HouseForm = ({ user }) => {
   const [executeCreateHouse, { loading, error }] = useMutation(CREATE_HOUSE);
 
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -88,6 +89,11 @@ export const HouseForm = () => {
       textAlign: "center",
     },
   };
+
+  if (!user.isLoggedIn) {
+    console.log("not logged in");
+    return <Navigate to="/signup" replace />;
+  }
 
   return (
     <Container maxWidth="md" sx={{ my: 4 }}>

@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useSubscription } from "@apollo/client";
 
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AppProvider";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -17,7 +20,7 @@ import { BiddingCard } from "../../components/BiddingCard";
 import { ListingItem } from "../../components/ListingItem";
 import { Container, ImageList, ImageListItem } from "@mui/material";
 
-export const AuctionPage = () => {
+export const AuctionPage = ({ user }) => {
   const { id } = useParams();
   const [currentBid, setCurrentBid] = useState({});
   const [status, setStatus] = useState("Upcoming");
@@ -85,78 +88,81 @@ export const AuctionPage = () => {
 
   if (error || loading) return <h1>Error</h1>;
 
-  console.log(data);
-
-  return (
-    data?.getSingleListing && (
-      <>
-        <Box className="page-container">
-          <Box className="listing-container">
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              sx={styles.biddingTitle}
-            >
-              Listing Details
-            </Typography>
-            <ListingItem
-              listingId={id}
-              data={data}
-              currentBid={currentBid}
-              status={status}
-            />
-            <Divider />
-            <Typography sx={styles.biddingTitle} variant="h5">
-              Images
-            </Typography>
-            <Box sx={styles.imagesContainer}>
-              <ImageList cols={2} gap={10}>
-                {data.getSingleListing.images.map((item) => (
-                  <ImageListItem key={item.img}>
-                    <img
-                      src={`${item}?w=248&fit=crop&auto=format`}
-                      srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                      alt={item}
-                      loading="lazy"
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-            </Box>
-          </Box>
-          {/* <Divider sx={styles.divider} /> */}
-          <Box className="bidding-container">
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              sx={styles.biddingTitle}
-            >
-              Bidding Activity
-            </Typography>
-            <Box sx={styles.biddingContainer}>
-              <List
-                sx={{
-                  width: "100%",
-                  maxWidth: 550,
-                  bgcolor: "background.paper",
-                  display: "flex",
-                  flexDirection: "column-reverse",
-                  borderRadius: 2,
-                  boxShadow: 4,
-                }}
-                disablePadding
+  if (!user.isLoggedIn) {
+    console.log("not logged in");
+    return <Navigate to="/signup" replace />;
+  } else {
+    return (
+      data?.getSingleListing && (
+        <>
+          <Box className="page-container">
+            <Box className="listing-container">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={styles.biddingTitle}
               >
-                {auctionData &&
-                  auctionData.map((bid) => (
-                    <BiddingCard bid={bid} sx={{ marginBottom: 2 }} />
+                Listing Details
+              </Typography>
+              <ListingItem
+                listingId={id}
+                data={data}
+                currentBid={currentBid}
+                status={status}
+              />
+              <Divider />
+              <Typography sx={styles.biddingTitle} variant="h5">
+                Images
+              </Typography>
+              <Box sx={styles.imagesContainer}>
+                <ImageList cols={2} gap={10}>
+                  {data.getSingleListing.images.map((item) => (
+                    <ImageListItem key={item.img}>
+                      <img
+                        src={`${item}?w=248&fit=crop&auto=format`}
+                        srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                        alt={item}
+                        loading="lazy"
+                      />
+                    </ImageListItem>
                   ))}
-              </List>
+                </ImageList>
+              </Box>
+            </Box>
+            {/* <Divider sx={styles.divider} /> */}
+            <Box className="bidding-container">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={styles.biddingTitle}
+              >
+                Bidding Activity
+              </Typography>
+              <Box sx={styles.biddingContainer}>
+                <List
+                  sx={{
+                    width: "100%",
+                    maxWidth: 550,
+                    bgcolor: "background.paper",
+                    display: "flex",
+                    flexDirection: "column-reverse",
+                    borderRadius: 2,
+                    boxShadow: 4,
+                  }}
+                  disablePadding
+                >
+                  {auctionData &&
+                    auctionData.map((bid) => (
+                      <BiddingCard bid={bid} sx={{ marginBottom: 2 }} />
+                    ))}
+                </List>
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </>
-    )
-  );
+        </>
+      )
+    );
+  }
 };

@@ -51,7 +51,7 @@ export const Home = () => {
         <Card sx={{ display: "flex", flexDirection: "row", marginTop: "10px" }}>
           <CardMedia
             sx={{
-              height: 550,
+              height: 540,
               width: 700,
               boxShadow: "7",
               marginRight: "60px",

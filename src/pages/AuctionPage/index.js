@@ -69,12 +69,16 @@ export const AuctionPage = () => {
 		imagesContainer: {
 			display: "flex",
 			height: 450,
-			maxWidth: 800,
+			maxWidth: 1000,
 			overflowY: "scroll",
 			flexWrap: "wrap",
+			padding: 3,
 			marginBottom: 3,
 			mx: "auto",
 			justifyContent: "center",
+			backgroundColor: "white",
+			boxShadow: 4,
+			borderRadius: "10px",
 		},
 	};
 
@@ -97,7 +101,7 @@ export const AuctionPage = () => {
 						Images
 					</Typography>
 					<Box sx={styles.imagesContainer}>
-						<ImageList variant="masonry" cols={3} gap={8}>
+						<ImageList cols={2} gap={10}>
 							{data.getSingleListing.images.map((item) => (
 								<ImageListItem key={item.img}>
 									<img

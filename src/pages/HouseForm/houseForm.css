@@ -1,0 +1,11 @@
+.relativeForm {
+  position: relative;
+}
+
+.helperIcon {
+  position: absolute;
+  right: 0;
+  top: 15%;
+  cursor: pointer;
+  z-index: 5000;
+}

@@ -1,5 +1,8 @@
+import { useRef, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
+import { ApolloError, useMutation } from "@apollo/client";
 
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -8,18 +11,18 @@ import Link from "@mui/material/Link";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 
-import { ApolloError, useMutation } from "@apollo/client";
+import { SingleImageUploader } from "../../components/SingleImageUploader";
 
-import { SIGNUP } from "../mutations";
+import { SIGNUP } from "../../mutations";
 
-export const SignUpForm = () => {
+export const SignUp = () => {
+  const [uploadedImage, setUploadedImage] = useState();
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP);
-  console.log(error);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
 
   const navigate = useNavigate();
@@ -39,6 +42,7 @@ export const SignUpForm = () => {
             lastName: lastName.toLowerCase().trim(),
             username: username.toLowerCase().trim(),
             email: email.toLowerCase().trim(),
+            imageUrl: uploadedImage.src,
             password,
           },
         },
@@ -59,17 +63,17 @@ export const SignUpForm = () => {
   };
 
   const styles = {
-    container: {
-      backgroundColor: "#fff",
-    },
-
     form: {
+      backgroundColor: "#FFFFFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      marginTop: "30px",
       mx: "auto",
       width: 700,
+      border: "solid",
+      borderRadius: "20px",
     },
 
     loadingButton: { marginTop: 3, marginBottom: 2 },
@@ -82,18 +86,9 @@ export const SignUpForm = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        margin="normal"
-        id="email"
-        label="Email"
-        name="email"
-        variant="outlined"
-        fullWidth
-        {...register("email", { required: true })}
-        error={!!errors.email}
-        disabled={loading}
-      />
-
+      <Typography variant="h4" gutterBottom>
+        Signup Form
+      </Typography>
       <TextField
         margin="normal"
         id="firstName"
@@ -118,6 +113,18 @@ export const SignUpForm = () => {
       />
       <TextField
         margin="normal"
+        id="email"
+        label="Email"
+        name="email"
+        variant="outlined"
+        fullWidth
+        {...register("email", { required: true })}
+        error={!!errors.email}
+        disabled={loading}
+      />
+
+      <TextField
+        margin="normal"
         id="username"
         label="Username"
         name="username"
@@ -135,18 +142,37 @@ export const SignUpForm = () => {
         name="password"
         variant="outlined"
         fullWidth
-        {...register("password", { required: true })}
+        {...register("password", { required: true, min: 8 })}
         error={!!errors.password}
         disabled={loading}
       />
-
+      <TextField
+        type="password"
+        margin="normal"
+        id="confirmPassword"
+        label="Confirm Password"
+        name="confirmPassword"
+        variant="outlined"
+        fullWidth
+        {...register("confirmPassword", {
+          required: true,
+          validate: (value) => getValues("password") === value,
+        })}
+        error={!!errors.confirmPassword}
+        helperText={!!errors.confirmPassword ? "Passwords do not match" : ""}
+        disabled={loading}
+      />
+      <SingleImageUploader
+        uploadedImage={uploadedImage}
+        setUploadedImage={setUploadedImage}
+      />
       <LoadingButton
+        sx={{ backgroundColor: "#045ee0", width: "250px", margin: "20px" }}
         loading={loading}
         loadingIndicator="Loading..."
         variant="contained"
         fullWidth
         type="submit"
-        sx={styles.loadingButton}
         startIcon={error && <ErrorIcon />}
         color={error ? "error" : "primary"}
       >

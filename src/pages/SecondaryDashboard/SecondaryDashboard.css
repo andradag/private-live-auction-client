@@ -1,0 +1,112 @@
+body,
+html {
+	height: 30%;
+}
+
+/* The auction image */
+.auction-image {
+	/* Use "linear-gradient" to add a darken background effect to the image. This will make the text easier to read */
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+
+	/* Position and center the image to scale nicely on all screens */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+
+/* Place text in the middle of the image */
+.auction-text {
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
+
+.react-rotating-text-cursor {
+	animation: blinking-cursor 1s cubic-bezier(0.68, 0.01, 0.01, 0.99) 0s infinite;
+}
+
+@keyframes blinking-cursor {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes glowing {
+	0% {
+		box-shadow: 0 0 2px #a80505;
+		color: #a80505;
+	}
+	25% {
+		box-shadow: 0 0 4px #a80505;
+	}
+	50% {
+		box-shadow: 0 0 6px #e81919;
+		color: #e81919;
+	}
+	75% {
+		box-shadow: 0 0 4px #a80505;
+	}
+	100% {
+		box-shadow: 0 0 2px #a80505;
+		color: #a80505;
+	}
+}
+.liveButton {
+	animation: glowing 1100ms infinite;
+}
+
+.card {
+	display: flex;
+	flex-direction: row;
+	height: max-content;
+	margin-bottom: 2rem;
+}
+
+.card-image {
+	max-width: 300px;
+	max-height: 500px;
+}
+
+.card-content {
+	width: 50%;
+}
+
+.card-actions {
+	width: 25%;
+	justify-content: center;
+}
+
+@media all and (max-width: 800px) {
+	.card {
+		flex-direction: column;
+		align-items: center;
+	}
+	.card-image {
+		max-width: 700px;
+	}
+	.card-content {
+		width: 100%;
+		margin-top: 1rem;
+		padding: unset !important;
+	}
+	.card-actions {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+	.card-title {
+		font-size: 20px;
+	}
+	.card-text {
+		font-size: 13px;
+	}
+}

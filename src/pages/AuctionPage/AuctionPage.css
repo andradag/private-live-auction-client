@@ -1,0 +1,30 @@
+.page-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	max-width: 1400px;
+	margin: auto;
+	padding: 3rem;
+	gap: 2rem;
+	/* background-color: rgb(240, 240, 240); */
+}
+
+.listing-container {
+	width: 60%;
+}
+
+.bidding-container {
+	width: 40%;
+}
+
+@media all and (max-width: 1140px) {
+	.page-container {
+		flex-direction: column;
+	}
+	.listing-container {
+		width: 100%;
+	}
+	.bidding-container {
+		width: 100%;
+	}
+}

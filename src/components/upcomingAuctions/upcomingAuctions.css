@@ -1,0 +1,13 @@
+.upcomingCard {
+  position: relative;
+}
+
+.deleteButton {
+  position: absolute;
+  top: +20px;
+  right: 0;
+  transform: scale(2);
+  z-index: 5000;
+  color: black;
+  cursor: pointer;
+}

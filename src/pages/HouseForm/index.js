@@ -1,66 +1,36 @@
-import * as React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { ApolloError, useMutation } from "@apollo/client";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import LoadingButton from "@mui/lab/LoadingButton";
-import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import Box from "@mui/material/Box";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Container from "@mui/material/Container";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import { useState } from "react";
-import { ApolloError, useMutation } from "@apollo/client";
-import { CREATE_HOUSE } from "../../mutations";
-import { useNavigate } from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
-import HelpIcon from "@mui/icons-material/Help";
-import "./houseForm.css";
-import Popover from "@mui/material/Popover";
 
+import { CREATE_HOUSE } from "../../mutations";
 import { MultiImageUploader } from "../../components/MultiImageUploader";
 
 export const HouseForm = () => {
-  const [uploadedImages, setUploadedImages] = useState();
-  const [propType, setPropType] = useState();
-
-  const handlePropTypeChange = (event) => {
-    setPropType(event.target.value);
-  };
-
-  const [bedrooms, setBedrooms] = useState();
-  const handleBedroomsChange = (event) => {
-    setBedrooms(event.target.value);
-  };
-
-  const [bathrooms, setBathrooms] = useState();
-  const handleBathroomsChange = (event) => {
-    setBathrooms(event.target.value);
-  };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
   const [executeCreateHouse, { loading, error }] = useMutation(CREATE_HOUSE);
+
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const navigate = useNavigate();
 
   const onSubmit = async ({
     title,
@@ -72,10 +42,8 @@ export const HouseForm = () => {
     bathrooms,
     googleMapUrl,
     keyFeatures,
-    images,
   }) => {
     try {
-      console.log(uploadedImages);
       const { data } = await executeCreateHouse({
         variables: {
           input: {
@@ -93,12 +61,12 @@ export const HouseForm = () => {
         },
       });
 
-      if (data.addListing) {
-        navigate("/dashboard", { replace: true });
+      if (error) {
+        throw new ApolloError("Failed to create house, please try again later");
       }
 
-      if (data.addListing === null) {
-        throw new ApolloError("Failed to create house, please try again later");
+      if (data.addListing) {
+        navigate("/dashboard", { replace: true });
       }
     } catch (err) {
       console.log(err);
@@ -152,6 +120,7 @@ export const HouseForm = () => {
               error={!!errors.title}
             />
           </Grid>
+
           {/* PROPERTY TYPE */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
@@ -172,7 +141,6 @@ export const HouseForm = () => {
               </Select>
             </FormControl>
           </Grid>
-          {/* DESCRIPTION  */}
 
           {/* STARTING BID */}
           <Grid item xs={12} sm={6} className="relativeForm">
@@ -208,6 +176,7 @@ export const HouseForm = () => {
               />
             </FormControl>
           </Grid>
+
           {/* RESERVE AMOUNT */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
@@ -225,6 +194,7 @@ export const HouseForm = () => {
               />
             </FormControl>
           </Grid>
+
           {/* BEDROOMS */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
@@ -292,6 +262,7 @@ export const HouseForm = () => {
             />
           </Grid>
 
+          {/* DESCRIPTION  */}
           <Grid item xs={12} sm={12}>
             <TextField
               required

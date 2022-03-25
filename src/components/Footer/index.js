@@ -20,17 +20,19 @@ export const StickyFooter = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh",
       }}
     >
       <Box
         component="footer"
         sx={{
-          py: 3,
-          px: 2,
-          mt: "auto",
-          backgroundColor: "#E08604",
-          color: "white",
+          border: "solid",
+          color: "#E08604",
+          padding: "10px",
+          marginTop: "15px",
+          alignContent: "center",
+          left: 0,
+          bottom: 1,
+          right: 0,
         }}
       >
         <Container maxWidth="sm">

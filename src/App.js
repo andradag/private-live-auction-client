@@ -66,7 +66,7 @@ export const App = () => {
         <BrowserRouter>
           <Navbar />
           <AppRoutes />
-          <StickyFooter />
+          {/* <StickyFooter /> */}
         </BrowserRouter>
       </AppProvider>
     </ApolloProvider>

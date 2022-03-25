@@ -31,7 +31,7 @@ export const Navbar = () => {
               display: { xs: "none", md: "flex" },
             }}
           >
-            Auction App
+            Forbiddin' House
           </Typography>
           {!user.isLoggedIn && <PublicHamburgerMenu />}
           <Typography
@@ -40,7 +40,7 @@ export const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            Auction App
+            Forbiddin' House
           </Typography>
           {!user.isLoggedIn ? <PublicRoutes /> : <PrivateRoutes />}
         </Toolbar>

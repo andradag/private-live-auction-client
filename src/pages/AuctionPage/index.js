@@ -16,6 +16,8 @@ import { BiddingCard } from "../../components/BiddingCard";
 import { ListingItem } from "../../components/ListingItem";
 import { Container, ImageList, ImageListItem } from "@mui/material";
 
+import { motion } from "framer-motion";
+
 import "./AuctionPage.css";
 
 export const AuctionPage = () => {
@@ -86,27 +88,31 @@ export const AuctionPage = () => {
 
   if (error || loading) return <h1>Error</h1>;
 
-  console.log(data);
-
   return (
     data?.getSingleListing && (
       <>
         <Box className="page-container">
           <Box className="listing-container">
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              sx={styles.biddingTitle}
+            <motion.div
+              initial={{ y: +150, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              Listing Details
-            </Typography>
-            <ListingItem
-              listingId={id}
-              data={data}
-              currentBid={currentBid}
-              status={status}
-            />
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={styles.biddingTitle}
+              >
+                Listing Details
+              </Typography>
+              <ListingItem
+                listingId={id}
+                data={data}
+                currentBid={currentBid}
+                status={status}
+              />
+            </motion.div>
             <Divider />
             <Typography sx={styles.biddingTitle} variant="h5">
               Images
@@ -126,7 +132,6 @@ export const AuctionPage = () => {
               </ImageList>
             </Box>
           </Box>
-          {/* <Divider sx={styles.divider} /> */}
           <Box className="bidding-container">
             <Typography
               gutterBottom

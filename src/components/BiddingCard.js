@@ -19,7 +19,11 @@ export const BiddingCard = ({ bid }) => {
 
   return (
     <>
-      <motion.div animate={{ y: +10 }}>
+      <motion.div
+        initial={{ y: +50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <ListItem
           sx={{
             justifyItems: "center",

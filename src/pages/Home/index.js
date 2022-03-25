@@ -85,7 +85,7 @@ export const Home = () => {
                 marginRight: "30px",
               }}
             >
-              Established in 1744, Sotheby’s is the world’s largest, most
+              Established in 1894, Forbiddin' House is the world’s largest, most
               trusted and dynamic marketplace for art and luxury. We empower our
               international community of collectors and connoisseurs to
               discover, acquire, finance and consign fine art and rare objects.

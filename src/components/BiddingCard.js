@@ -26,7 +26,7 @@ export const BiddingCard = ({ bid }) => {
         secondaryAction={<Typography>{bid.bidTime}</Typography>}
       >
         <ListItemAvatar>
-          <Avatar alt={user.username} src={user.imageUrl} />
+          <Avatar alt={bid.user.username} src={bid.user.imageUrl} />
         </ListItemAvatar>
         <ListItemText
           primary={

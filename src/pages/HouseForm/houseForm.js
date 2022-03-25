@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import { useState } from "react";
 import { ApolloError, useMutation } from "@apollo/client";
-import { CREATE_HOUSE } from "../../../mutations";
+import { CREATE_HOUSE } from "../../mutations";
 import { useNavigate } from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
 import HelpIcon from "@mui/icons-material/Help";

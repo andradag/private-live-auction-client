@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 
 import { GET_USER } from "../../queries";
 
-// import { UpcomingAuctions } from "../../components/UpcomingAuctions";
+import { UpcomingAuctions } from "../../components/UpcomingAuctions";
 import { LiveAuctions } from "../../components/LiveAuctions";
 
 export const Dashboard = () => {
@@ -95,7 +95,7 @@ export const Dashboard = () => {
             Upcoming Auctions
           </Typography>
           <Divider />
-          {/* <UpcomingAuctions /> */}
+          <UpcomingAuctions />
         </Box>
       </>
     );

@@ -1,3 +1,4 @@
+import "./AuctionPage.css";
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
@@ -89,54 +90,69 @@ export const AuctionPage = () => {
 	return (
 		data?.getSingleListing && (
 			<>
-				<Container>
-					<ListingItem
-						listingId={id}
-						data={data}
-						currentBid={currentBid}
-						status={status}
-					/>
-					<Divider />
-					<Typography sx={styles.biddingTitle} variant="h5">
-						Images
-					</Typography>
-					<Box sx={styles.imagesContainer}>
-						<ImageList cols={2} gap={10}>
-							{data.getSingleListing.images.map((item) => (
-								<ImageListItem key={item.img}>
-									<img
-										src={`${item}?w=248&fit=crop&auto=format`}
-										srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
-										alt={item}
-										loading="lazy"
-									/>
-								</ImageListItem>
-							))}
-						</ImageList>
+				<Box className="page-container">
+					<Box className="listing-container">
+						<Typography
+							gutterBottom
+							variant="h5"
+							component="div"
+							sx={styles.biddingTitle}
+						>
+							Listing Details
+						</Typography>
+						<ListingItem
+							listingId={id}
+							data={data}
+							currentBid={currentBid}
+							status={status}
+						/>
+						<Divider />
+						<Typography sx={styles.biddingTitle} variant="h5">
+							Images
+						</Typography>
+						<Box sx={styles.imagesContainer}>
+							<ImageList cols={2} gap={10}>
+								{data.getSingleListing.images.map((item) => (
+									<ImageListItem key={item.img}>
+										<img
+											src={`${item}?w=248&fit=crop&auto=format`}
+											srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
+											alt={item}
+											loading="lazy"
+										/>
+									</ImageListItem>
+								))}
+							</ImageList>
+						</Box>
 					</Box>
-				</Container>
-				<Divider sx={styles.divider} />
-				<Typography
-					gutterBottom
-					variant="h5"
-					component="div"
-					sx={styles.biddingTitle}
-				>
-					Bidding Activity
-				</Typography>
-				<Box sx={styles.biddingContainer}>
-					<List
-						sx={{
-							width: "100%",
-							maxWidth: 550,
-							bgcolor: "background.paper",
-							display: "flex",
-							flexDirection: "column-reverse",
-						}}
-						disablePadding
-					>
-						{auctionData && auctionData.map((bid) => <BiddingCard bid={bid} />)}
-					</List>
+					{/* <Divider sx={styles.divider} /> */}
+					<Box className="bidding-container">
+						<Typography
+							gutterBottom
+							variant="h5"
+							component="div"
+							sx={styles.biddingTitle}
+						>
+							Bidding Activity
+						</Typography>
+						<Box sx={styles.biddingContainer}>
+							<List
+								sx={{
+									width: "100%",
+									maxWidth: 550,
+									bgcolor: "background.paper",
+									display: "flex",
+									flexDirection: "column-reverse",
+									borderRadius: 2,
+									boxShadow: 4,
+								}}
+								disablePadding
+							>
+								{auctionData &&
+									auctionData.map((bid) => <BiddingCard bid={bid} />)}
+							</List>
+						</Box>
+					</Box>
 				</Box>
 			</>
 		)

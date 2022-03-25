@@ -57,7 +57,7 @@ export const ListingItem = ({listingId, data, currentBid, status}) => {
 			width: 500,
 			gap: "1rem",
 			borderRadius: "10px",
-			margin: "10px",
+			marginBottom: "10px",
 			padding: "10px",
 		},
 
@@ -88,7 +88,7 @@ export const ListingItem = ({listingId, data, currentBid, status}) => {
 				<CardActionArea sx={styles.listingCardArea}>
 					<CardMedia
 						component="img"
-						height="200"
+						height="300"
 						image={data.getSingleListing.images[0]}
 						alt="Macbook Air"
 					/>
@@ -109,7 +109,7 @@ export const ListingItem = ({listingId, data, currentBid, status}) => {
 				<CardContent sx={{display: "inline-flex", alignItems: "center", p: 0}}>
 					{status === "Live" ? (
 						<>
-							<Typography variant="h6" component="div" sx={{mr: 2}}>
+							<Typography variant="h6" component="div" sx={{mr: 2, p: 2}}>
 								Current bid:
 							</Typography>
 							{!currentBid ? (

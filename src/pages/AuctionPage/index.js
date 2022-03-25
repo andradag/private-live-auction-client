@@ -14,7 +14,7 @@ import {AUCTION_BID_SUBSCRIPTION} from "../../subscriptions";
 
 import {BiddingCard} from "../../components/BiddingCard";
 import {ListingItem} from "../../components/ListingItem";
-import {ImageList, ImageListItem} from "@mui/material";
+import {Container, ImageList, ImageListItem} from "@mui/material";
 
 export const AuctionPage = () => {
 	const {id} = useParams();
@@ -68,9 +68,13 @@ export const AuctionPage = () => {
 		},
 		imagesContainer: {
 			display: "flex",
-
 			height: 450,
+			maxWidth: 800,
 			overflowY: "scroll",
+			flexWrap: "wrap",
+			marginBottom: 3,
+			mx: "auto",
+			justifyContent: "center",
 		},
 	};
 
@@ -81,15 +85,19 @@ export const AuctionPage = () => {
 	return (
 		data?.getSingleListing && (
 			<>
-				<Box sx={styles.container}>
+				<Container>
 					<ListingItem
 						listingId={id}
 						data={data}
 						currentBid={currentBid}
 						status={status}
 					/>
-					<Box sx={styles.imagesContainer} style={{marginRight: "auto"}}>
-						<ImageList variant="masonry" cols={2} gap={8}>
+					<Divider />
+					<Typography sx={styles.biddingTitle} variant="h5">
+						Images
+					</Typography>
+					<Box sx={styles.imagesContainer}>
+						<ImageList variant="masonry" cols={3} gap={8}>
 							{data.getSingleListing.images.map((item) => (
 								<ImageListItem key={item.img}>
 									<img
@@ -102,7 +110,7 @@ export const AuctionPage = () => {
 							))}
 						</ImageList>
 					</Box>
-				</Box>
+				</Container>
 				<Divider sx={styles.divider} />
 				<Typography
 					gutterBottom

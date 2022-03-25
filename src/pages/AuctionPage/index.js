@@ -1,4 +1,3 @@
-import "./AuctionPage.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -16,6 +15,8 @@ import { AUCTION_BID_SUBSCRIPTION } from "../../subscriptions";
 import { BiddingCard } from "../../components/BiddingCard";
 import { ListingItem } from "../../components/ListingItem";
 import { Container, ImageList, ImageListItem } from "@mui/material";
+
+import "./AuctionPage.css";
 
 export const AuctionPage = () => {
   const { id } = useParams();
@@ -149,9 +150,7 @@ export const AuctionPage = () => {
                 disablePadding
               >
                 {auctionData &&
-                  auctionData.map((bid) => (
-                    <BiddingCard bid={bid} sx={{ marginBottom: 2 }} />
-                  ))}
+                  auctionData.map((bid) => <BiddingCard bid={bid} />)}
               </List>
             </Box>
           </Box>

@@ -4,6 +4,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 
+import { Divider } from "@mui/material";
+
 import { useAuth } from "../contexts/AppProvider";
 
 import { motion } from "framer-motion";
@@ -56,6 +58,7 @@ export const BiddingCard = ({ bid }) => {
           />
         </ListItem>
       </motion.div>
+      <Divider />
     </>
   );
 };

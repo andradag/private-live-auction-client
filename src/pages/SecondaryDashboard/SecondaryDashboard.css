@@ -95,11 +95,18 @@ html {
 		max-width: 700px;
 	}
 	.card-content {
+		width: 100%;
 		margin-top: 1rem;
 		padding: unset !important;
 	}
 	.card-actions {
 		margin-top: 1rem;
 		margin-bottom: 1rem;
+	}
+	.card-title {
+		font-size: 20px;
+	}
+	.card-text {
+		font-size: 13px;
 	}
 }

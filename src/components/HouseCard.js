@@ -33,9 +33,10 @@ export const HouseCard = ({house}) => {
 			<CardContent className="card-content">
 				<Typography
 					gutterBottom
-					variant="h3"
+					variant="h4"
 					component="div"
 					textAlign="center"
+					className="card-title"
 				>
 					{house.title}
 				</Typography>
@@ -43,20 +44,20 @@ export const HouseCard = ({house}) => {
 				{/* <Typography sx={{ fontSize: "20px" }}>
           Description: {house.description}
         </Typography> */}
-				<Typography sx={{fontSize: "20px"}}>
+				<Typography className="card-text">
 					Property Type: {house.propertyType}
 				</Typography>
-				<Typography sx={{fontSize: "20px"}}>
+				<Typography className="card-text">
 					Amount of Bedrooms: {house.bedrooms}
 				</Typography>
-				<Typography sx={{fontSize: "20px"}}>
+				<Typography className="card-text">
 					Amount of Bathrooms/WC: {house.bathrooms}
 				</Typography>
 				{/* <Typography sx={{ fontSize: "20px" }}>Status:</Typography> */}
-				<Typography sx={{fontSize: "20px"}}>
+				<Typography className="card-text">
 					Starting Bid: {house.startingBid}
 				</Typography>
-				<Typography sx={{fontSize: "20px"}}>
+				<Typography className="card-text">
 					Created By: {house.createdBy.username}
 				</Typography>
 

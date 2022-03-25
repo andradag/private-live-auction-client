@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useSubscription } from "@apollo/client";
 
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AppProvider";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -20,7 +23,7 @@ import { motion } from "framer-motion";
 
 import "./AuctionPage.css";
 
-export const AuctionPage = () => {
+export const AuctionPage = ({ user }) => {
   const { id } = useParams();
   const [currentBid, setCurrentBid] = useState({});
   const [status, setStatus] = useState("Upcoming");
@@ -88,6 +91,10 @@ export const AuctionPage = () => {
 
   if (error || loading) return <h1>Error</h1>;
 
+  if (!user.isLoggedIn) {
+    console.log("not logged in");
+    return <Navigate to="/signup" replace />;
+  }
   return (
     data?.getSingleListing && (
       <>
@@ -132,6 +139,8 @@ export const AuctionPage = () => {
               </ImageList>
             </Box>
           </Box>
+
+          {/* <Divider sx={styles.divider} /> */}
           <Box className="bidding-container">
             <Typography
               gutterBottom
@@ -155,7 +164,9 @@ export const AuctionPage = () => {
                 disablePadding
               >
                 {auctionData &&
-                  auctionData.map((bid) => <BiddingCard bid={bid} />)}
+                  auctionData.map((bid) => (
+                    <BiddingCard bid={bid} sx={{ marginBottom: 2 }} />
+                  ))}
               </List>
             </Box>
           </Box>

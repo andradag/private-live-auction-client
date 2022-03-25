@@ -3,14 +3,15 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 import "./SecondaryDashboard.css";
 
-import {LiveHouses} from "../../components/LiveHouses";
+import { LiveHouses } from "../../components/LiveHouses";
 
-import {UpcomingHouses} from "../../components/UpcomingHouses";
+import { UpcomingHouses } from "../../components/UpcomingHouses";
 import { Box, Typography } from "@mui/material";
+import { Navigate } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,7 +22,11 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export const SecondaryDashboardPage = () => {
+export const SecondaryDashboardPage = ({ user }) => {
+  if (!user.isLoggedIn) {
+    console.log("not logged in");
+    return <Navigate to="/signup" replace />;
+  }
   return (
     <>
       <Box>

@@ -4,6 +4,7 @@ import "@fontsource/roboto/300.css";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import "./index.css";
@@ -48,14 +49,17 @@ export const Home = () => {
         Auction: Turing cash into assets
       </Typography>
 
-      <Container
-        className="gjfj"
+      <Card
         sx={{
           maxWidth: "90%",
           my: 3,
           mx: "auto",
           display: "flex",
           flexDirection: "row",
+          ["@media (max-width:600px)"]: {
+            // eslint-disable-line no-useless-computed-key
+            flexDirection: "column",
+          },
         }}
       >
         <CardMedia
@@ -64,6 +68,11 @@ export const Home = () => {
             width: 700,
             my: 3,
             boxShadow: "5",
+            ["@media (max-width:600px)"]: {
+              // eslint-disable-line no-useless-computed-key
+              width: "100%",
+              heigth: "50%",
+            },
           }}
           image="https://images.rics.org/publishedmedia/ihoyjek49pynihgcvp6d/RICS-Professional_Renewal.jpg"
         />
@@ -75,6 +84,11 @@ export const Home = () => {
             my: 3,
             boxShadow: "5",
             width: 700,
+            ["@media (max-width:600px)"]: {
+              // eslint-disable-line no-useless-computed-key
+              width: "90%",
+              my: 0,
+            },
           }}
         >
           <Typography
@@ -82,6 +96,11 @@ export const Home = () => {
               fontFamily: "Ramaraja, serif",
               fontSize: 20,
               my: 2,
+              ["@media (max-width:600px)"]: {
+                // eslint-disable-line no-useless-computed-key
+                width: "100%",
+                my: 0,
+              },
             }}
           >
             Established in 1894, Forbiddin' House is the world’s largest, most
@@ -99,7 +118,7 @@ export const Home = () => {
             shopping experiences as well as private sales.{" "}
           </Typography>
         </CardContent>
-      </Container>
+      </Card>
     </>
   );
 };

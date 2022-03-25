@@ -51,28 +51,38 @@ export const Home = () => {
         <Card sx={{ display: "flex", flexDirection: "row", marginTop: "10px" }}>
           <CardMedia
             sx={{
-              height: 500,
+              height: 550,
               width: 700,
-              marginRight: "30px",
-              marginLeft: "20px",
-              marginTop: "20px",
+              boxShadow: "7",
+              marginRight: "60px",
+              marginLeft: "100px",
+              marginTop: "60px",
+              marginBottom: "40px",
             }}
             image="https://images.rics.org/publishedmedia/ihoyjek49pynihgcvp6d/RICS-Professional_Renewal.jpg"
           />
 
           <CardContent
             sx={{
-              border: "solid",
-              padding: "20px",
-              height: 200,
-              width: 800,
+              // border: "solid",
               textAlign: "center",
-              marginRight: "30px",
-              marginLeft: "20px",
-              marginTop: "70px",
+              boxShadow: "7",
+              fontWeight: "medium",
+              height: 500,
+              width: 700,
+              marginRight: "100px",
+              marginLeft: "60px",
+              marginTop: "60px",
+              marginBottom: "40px",
             }}
           >
-            <Typography>
+            <Typography
+              sx={{
+                fontFamily: "Ramaraja, serif",
+                fontSize: 22,
+                marginTop: "10px",
+              }}
+            >
               Established in 1744, Sotheby’s is the world’s largest, most
               trusted and dynamic marketplace for art and luxury. We empower our
               international community of collectors and connoisseurs to

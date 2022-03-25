@@ -42,8 +42,6 @@ export const ListingItem = ({listingId, data, currentBid, status}) => {
 		listingContainer: {
 			display: "flex",
 			flexWrap: "wrap",
-			padding: 3,
-			margin: 1,
 			mx: "auto",
 			justifyContent: "center",
 		},

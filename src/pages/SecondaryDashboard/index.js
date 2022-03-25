@@ -37,22 +37,6 @@ export const SecondaryDashboardPage = ({ user }) => {
             width="100%"
             alt=""
           />
-
-          <div class="auction-text">
-            <h1>KARL LAGERFELD</h1>
-            <h1>Live Auction House</h1>
-            <p>26 March 2022</p>
-
-            <Fab
-              sx={{ backgroundColor: "#E08604" }}
-              variant="extended"
-              size="medium"
-              aria-label="add"
-              text="strong"
-            >
-              Register To Bid
-            </Fab>
-          </div>
         </div>
       </Box>
 

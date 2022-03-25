@@ -79,8 +79,10 @@ export const Home = () => {
             <Typography
               sx={{
                 fontFamily: "Ramaraja, serif",
-                fontSize: 22,
-                marginTop: "10px",
+                fontSize: 20,
+                marginTop: "20px",
+                marginLeft: "30px",
+                marginRight: "30px",
               }}
             >
               Established in 1744, Sotheby’s is the world’s largest, most

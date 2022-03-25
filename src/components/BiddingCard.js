@@ -4,6 +4,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 
+import { Divider } from "@mui/material";
+
 import { useAuth } from "../contexts/AppProvider";
 
 import { motion } from "framer-motion";
@@ -17,7 +19,11 @@ export const BiddingCard = ({ bid }) => {
 
   return (
     <>
-      <motion.div animate={{ y: +10 }}>
+      <motion.div
+        initial={{ y: +50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <ListItem
           sx={{
             justifyItems: "center",
@@ -56,6 +62,7 @@ export const BiddingCard = ({ bid }) => {
           />
         </ListItem>
       </motion.div>
+      <Divider />
     </>
   );
 };

@@ -45,29 +45,39 @@ export const ListingItem = ({ listingId, data, currentBid, status }) => {
       padding: 3,
       margin: 1,
       mx: "auto",
-      width: "75%",
+      width: "100%",
+      justifyContent: "center",
     },
+
     listingCard: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
       boxShadow: 4,
-      width: "50%",
+      width: 500,
       gap: "1rem",
+      borderRadius: "10px",
+      margin: "10px",
+      padding: "10px",
     },
+
     listingCardArea: {
       height: 1,
     },
+
     listingCardAction: {
       justifyContent: "center",
       width: 1,
     },
+
     listingButtons: {
       display: "flex",
       flexDirection: "column",
       width: "150px",
       height: "50px",
+      borderRadius: "10px",
+      backgroundColor: "#045EE0",
     },
   };
 

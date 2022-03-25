@@ -3,11 +3,12 @@ import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home/";
 import { Dashboard } from "./pages/Dashboard";
 import { LoginSide } from "./pages/LoginSide";
+// import {SignUp} from "./pages/SignUp";
 import { SignUpSide } from "./pages/SignUpSide";
 import { AuctionPage } from "./pages/AuctionPage";
-import { HouseForm } from "./pages/HouseForm";
 import { SecondaryDashboardPage } from "./pages/SecondaryDashboard";
 import { HowToBid } from "./pages/HowToBid";
+import { HouseForm } from "./pages/HouseForm";
 
 export const AppRoutes = () => {
   return (

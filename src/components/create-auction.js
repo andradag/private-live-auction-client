@@ -55,13 +55,18 @@ export const CreateAuctionForm = () => {
 
   const styles = {
     form: {
+      backgroundColor: "#FFFFFF",
+      border: "solid",
+      borderRadius: "20px",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      marginTop: "30px",
       padding: 4,
       mx: "auto",
       width: 700,
     },
+
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
       marginTop: 2,
@@ -72,6 +77,9 @@ export const CreateAuctionForm = () => {
 
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Typography variant="h4" gutterBottom>
+        Create an Auction
+      </Typography>
       <TextField
         margin="normal"
         id="title"

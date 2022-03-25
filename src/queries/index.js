@@ -34,79 +34,99 @@ export const GET_USER = gql`
 `;
 
 export const GET_LISTINGS = gql`
-  query GetListings($status: String) {
-    getListings(status: $status) {
-      _id
-      title
-      description
-      propertyType
-      reserveAmount
-      startingBid
-      status
-      bedrooms
-      bathrooms
-      createdBy {
-        username
-        id
-      }
-      createdAt
-      updatedAt
-      googleMapUrl
-      keyFeatures
-      images
-      currentBid {
-        amount
-        user {
-          id
-          firstName
-          lastName
-          imageUrl
-          username
-        }
-        listingId
-      }
-      bids {
-        amount
-        user {
-          username
-          id
-          lastName
-          firstName
-          imageUrl
-        }
-        listingId
-      }
-    }
-  }
+	query GetListings($status: String) {
+		getListings(status: $status) {
+			_id
+			title
+			description
+			propertyType
+			reserveAmount
+			startingBid
+			status
+			bedrooms
+			bathrooms
+			createdBy {
+				username
+				id
+			}
+			createdAt
+			updatedAt
+			googleMapUrl
+			keyFeatures
+			images
+			currentBid {
+				amount
+				user {
+					id
+					firstName
+					lastName
+					imageUrl
+					username
+				}
+				listingId
+			}
+			bids {
+				amount
+				user {
+					username
+					id
+					lastName
+					firstName
+					imageUrl
+				}
+				listingId
+			}
+		}
+	}
 `;
 
 export const GET_SINGLE_LISTING = gql`
-	query Query($id: ID!) {
+	query GetSingleListing($id: ID!) {
 		getSingleListing(_id: $id) {
 			_id
 			title
 			description
+			propertyType
 			reserveAmount
 			startingBid
 			status
-			bids {
-				amount
-				bidTime
-				# listingId
-				user {
-					firstName
-					lastName
-					username
-				}
+			bedrooms
+			bathrooms
+			createdBy {
+				id
+				username
+				firstName
+				lastName
 			}
+			createdAt
+			updatedAt
+			googleMapUrl
+			keyFeatures
+			images
 			currentBid {
 				amount
-				# listingId
 				user {
+					id
+					username
 					firstName
 					lastName
-					username
+					imageUrl
+					email
 				}
+				bidTime
+			}
+			bids {
+				amount
+				user {
+					id
+					username
+					firstName
+					lastName
+					imageUrl
+					email
+				}
+				listingId
+				bidTime
 			}
 		}
 	}
